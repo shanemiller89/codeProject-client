@@ -12,35 +12,35 @@ import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
 
 export const ListItems = (
   <div>
-    <ListItem button>
-      <ListItemIcon>
-        <Link to="/">
+    <Link to="/">
+      <ListItem button>
+        <ListItemIcon>
           <DashboardIcon fontSize="large" />
-        </Link>
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <Link to="/projects">
+        </ListItemIcon>
+        <ListItemText primary="Dashboard" />
+      </ListItem>
+    </Link>
+    <Link to="/projects">
+      <ListItem button>
+        <ListItemIcon>
           <EmojiObjectsIcon fontSize="large" />
-        </Link>
-      </ListItemIcon>
-      <ListItemText primary="Projects" />
-    </ListItem>
+        </ListItemIcon>
+        <ListItemText primary="Projects" />
+      </ListItem>
+    </Link>
     <ListItem button>
       <ListItemIcon>
         <MailIcon fontSize="large" />
       </ListItemIcon>
       <ListItemText primary="Invites" />
     </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <Link to="/profile">
+    <Link to="/profile">
+      <ListItem button>
+        <ListItemIcon>
           <AccountCircleIcon fontSize="large" />
-        </Link>
-      </ListItemIcon>
-      <ListItemText primary="Profile" />
-    </ListItem>
+        </ListItemIcon>
+        <ListItemText primary="Profile" />
+      </ListItem>
+    </Link>
   </div>
 );
