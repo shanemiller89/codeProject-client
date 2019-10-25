@@ -45,7 +45,6 @@ const useStyles = makeStyles(theme => ({
     lineHeight: '1000px',   
   },
   background: {
-    // backgroundImage: 'url(https://source.unsplash.com/random)',
     background: 'black',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -69,8 +68,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
-export default function Login() {
+const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login, isAuthenticated } = useSimpleAuth();
@@ -83,13 +81,8 @@ export default function Login() {
       username: username,
       password: password
     };
-    login(credentials).then(() => {
-      if (isAuthenticated()) {
-        // props.history.push({
-        //   pathname: "/home"
-        // });
-        window.location.reload(true);
-      } else {
+    login(credentials, props.setIsLoggedIn).then(() => {
+      if (!isAuthenticated()) {
         alert("Wrong Username or Password");
       }
     });
@@ -169,7 +162,7 @@ export default function Login() {
                 </Link>
               </Grid>
               <Grid item>
-                  <Registration/>
+                  <Registration setIsLoggedIn={props.setIsLoggedIn}/>
               </Grid>
             </Grid>
             <Box mt={5}>
@@ -181,3 +174,5 @@ export default function Login() {
     </Grid>
   );
 }
+
+export default Login

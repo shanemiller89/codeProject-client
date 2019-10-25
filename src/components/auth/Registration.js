@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import useSimpleAuth from "../../hooks/useSimpleAuth";
-// import * as firebase from "firebase/app";
+import * as firebase from "firebase/app";
+import "firebase/storage";
 
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -13,7 +14,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-const Registration = () => {
+const Registration = props => {
   const [open, setOpen] = useState(false);
   const [checked, setIsChecked] = useState(false);
   const [disabled, setIsDisabled] = useState(true);
@@ -31,46 +32,41 @@ const Registration = () => {
 
   const { register } = useSimpleAuth();
 
-  // const checkedToggle = () => {
-  //   setIsChecked(!checked);
-  //   setIsDisabled(!disabled);
-  // };
+  const checkedToggle = () => {
+    setIsChecked(!checked);
+    setIsDisabled(!disabled);
+  };
 
-  // const storageRef = firebase.storage().ref("profile_picture");
+  const storageRef = firebase.storage().ref("profile_images");
 
-  // const submitWithImage = () => {
-  //   const ref = storageRef.child(detail.username);
+  const submitWithImage = () => {
+    const ref = storageRef.child(username);
 
-  //   return ref
-  //     .put(profile_image)
-  //     .then(data => data.ref.getDownloadURL())
-  //     .then(imageUrl => {
-  //       if (detail.password !== detail.verifyPassword) {
-  //         alert("Your passwords do not match. Please check your passwords.");
-  //       } else {
-  //         const user = {
-  //           username: detail.username,
-  //           email: detail.email,
-  //           password: detail.password,
-  //           first_name: detail.firstName,
-  //           last_name: detail.lastName,
-  //           profile_image: imageUrl
-  //         };
-  //         register(user)
-  //           .catch(error => {
-  //             alert("Username or email already in use!");
-  //           })
-  //           .then(() => {
-  //             props.history.push({
-  //               pathname: "/home"
-  //             })
-  //             window.location.reload(true);
-  //           });
-  //       }
-  //     });
-  // };
+    return ref
+      .put(profile_image)
+      .then(data => data.ref.getDownloadURL())
+      .then(imageUrl => {
+        if (password !== verify_password) {
+          alert("Your passwords do not match. Please check your passwords.");
+        } else {
+          const user = {
+            username: username,
+            email: email,
+            password: password,
+            first_name: first_name,
+            last_name: last_name,
+            primary_language: primary_language,
+            github: github,
+            profile_image: imageUrl
+          };
+          register(user, props.setIsLoggedIn).catch(error => {
+            alert("Username or email already in use!");
+          });
+        }
+      });
+  };
 
-  const submit = props => {
+  const submit = () => {
     if (password !== verify_password) {
       alert("Your passwords do not match. Please check your passwords.");
     } else {
@@ -84,16 +80,9 @@ const Registration = () => {
         github: github,
         profile_image: profile_image
       };
-      console.log(user);
-      register(user).catch(error => {
+      register(user, props.setIsLoggedIn).catch(error => {
         alert("Username or Email is already in use!");
       });
-      // .then(() => {
-      //   props.history.push({
-      //     pathname: "/home"
-      //   })
-      //   window.location.reload(true);
-      // });
     }
   };
 
@@ -138,7 +127,6 @@ const Registration = () => {
             label="Last Name"
             name="lastName"
             onChange={e => setLastName(e.target.value)}
-
           />
           <TextField
             variant="outlined"
@@ -150,7 +138,6 @@ const Registration = () => {
             name="username"
             autoComplete="username"
             onChange={e => setUsername(e.target.value)}
-
           />
           <TextField
             variant="outlined"
@@ -163,7 +150,6 @@ const Registration = () => {
             name="email"
             autoComplete="email"
             onChange={e => setEmail(e.target.value)}
-
           />
           <TextField
             variant="outlined"
@@ -175,7 +161,6 @@ const Registration = () => {
             label="Password"
             name="password"
             onChange={e => setPassword(e.target.value)}
-
           />
           <TextField
             variant="outlined"
@@ -187,7 +172,6 @@ const Registration = () => {
             label="Verify Password"
             name="verifyPassword"
             onChange={e => setVerifyPassword(e.target.value)}
-
           />
           <br />
           <br />
@@ -200,7 +184,6 @@ const Registration = () => {
             label="Primary Language"
             name="primaryLanguage"
             onChange={e => setPrimaryLanguage(e.target.value)}
-
           />
           <TextField
             variant="outlined"
@@ -210,14 +193,13 @@ const Registration = () => {
             label="Github Account"
             name="githubAccount"
             onChange={e => setGithub(e.target.value)}
-
           />
           <FormControlLabel
             control={
               <Checkbox
-                // checked={state.checkedB}
-                // onChange={handleChange("checkedB")}
-                value="checkedB"
+                checked={checked}
+                onChange={checkedToggle}
+                value="checked"
                 color="primary"
               />
             }
@@ -230,7 +212,8 @@ const Registration = () => {
             fullWidth
             id="profileImage"
             type="file"
-            // label="Verify Password"
+            disabled={disabled}
+            onChange={e => setProfileImage(e.target.files[0])}
             name="profileImage"
           />
         </DialogContent>
@@ -238,7 +221,7 @@ const Registration = () => {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={submit} color="primary">
+          <Button onClick={disabled ? submit : submitWithImage} color="primary">
             Register
           </Button>
         </DialogActions>

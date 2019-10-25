@@ -1,5 +1,6 @@
 
 import React from 'react';
+
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,11 +11,15 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import Button from "@material-ui/core/Button";
 import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import useSimpleAuth from "../../hooks/useSimpleAuth"
 import { ListItems } from "./ListItems"
+import Dashboard from '../dashboard/Dashboard';
+import ApplicationViews from '../../ApplicationViews';
 
 
 const drawerWidth = 240;
@@ -98,7 +103,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function NavBar() {
+const NavBar = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -107,7 +112,12 @@ export default function NavBar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const { logout } = useSimpleAuth();
+
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  //Neccesary for if a User refreshes the page 
+  props.setIsLoggedIn(true)
 
   return (
     <div className={classes.root}>
@@ -126,12 +136,11 @@ export default function NavBar() {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             code.Project
           </Typography>
-          <IconButton color="inherit">
+          {/* <IconButton color="inherit"> */}
             {/* <Badge badgeContent={4} color="secondary"> */}
-              <NotificationsIcon />
-              LOGOUT!
+              <Button color="inherit" onClick={() => logout(props.setIsLoggedIn)}>Logout</Button>
             {/* </Badge> */}
-          </IconButton>
+          {/* </IconButton> */}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -151,8 +160,10 @@ export default function NavBar() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <h1>INSERT CONTENT HERE</h1>
+        <ApplicationViews/>
       </main>
     </div>
   );
 }
+
+export default NavBar

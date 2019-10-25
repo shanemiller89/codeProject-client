@@ -1,24 +1,24 @@
-import React from "react";
-import useSimpleAuth from "./hooks/useSimpleAuth"
-import NavBar from "./components/ui/NavBar"
+import React, { useState } from "react";
+import useSimpleAuth from "./hooks/useSimpleAuth";
+import NavBar from "./components/ui/NavBar";
 import Login from "./components/auth/Login";
 
 const CodeProject = () => {
   const { isAuthenticated } = useSimpleAuth();
+  const [loggedIn, setIsLoggedIn] = useState(false);
 
-  if (isAuthenticated()) 
+  if (isAuthenticated())
     return (
-      <React.Fragment>
-          <NavBar></NavBar>
-      </React.Fragment>
+      <>
+        <NavBar setIsLoggedIn={setIsLoggedIn} />
+      </>
     );
-   else 
+  else
     return (
-      <React.Fragment>
-        <Login/>
-      </React.Fragment>
+      <>
+        <Login setIsLoggedIn={setIsLoggedIn} />
+      </>
     );
-  
 };
 
 export default CodeProject;

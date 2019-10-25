@@ -1,24 +1,30 @@
-import React from 'react';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import MailIcon from "@material-ui/icons/Mail";
+
+import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
 
 export const ListItems = (
   <div>
     <ListItem button>
       <ListItemIcon>
-        <DashboardIcon fontSize="large" />
+        <Link to="/">
+          <DashboardIcon fontSize="large" />
+        </Link>
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <EmojiObjectsIcon fontSize="large" />
+        <Link to="/projects">
+          <EmojiObjectsIcon fontSize="large" />
+        </Link>
       </ListItemIcon>
       <ListItemText primary="Projects" />
     </ListItem>
@@ -30,7 +36,9 @@ export const ListItems = (
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <AccountCircleIcon fontSize="large" />
+        <Link to="/profile">
+          <AccountCircleIcon fontSize="large" />
+        </Link>
       </ListItemIcon>
       <ListItemText primary="Profile" />
     </ListItem>

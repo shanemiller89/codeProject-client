@@ -7,7 +7,7 @@ const useSimpleAuth = () => {
     const isAuthenticated = () =>
         loggedIn || localStorage.getItem("codeproject_token") !== null
 
-    const register = userInfo => {
+    const register = (userInfo, setIsLoggedIn) => {
         return fetch("http://127.0.0.1:8000/register", {
             method: "POST",
             headers: {
@@ -18,15 +18,15 @@ const useSimpleAuth = () => {
         })
             .then(res => res.json())
             .then(res => {
-                console.log("response", res)
                 if ("token" in res) {
                     localStorage.setItem( "codeproject_token", res.token )
-                    setIsLoggedIn(true)
                 } 
+            }).then(() => {
+                setIsLoggedIn(true)
             })
     }
 
-    const login = credentials => {
+    const login = (credentials, setIsLoggedIn) => {
         return fetch("http://127.0.0.1:8000/login", {
             method: "POST",
             headers: {
@@ -41,14 +41,10 @@ const useSimpleAuth = () => {
                     localStorage.setItem( "codeproject_token", res.token )
                     setIsLoggedIn(true)
                 }
-                else {
-                    alert("Sorry, the username or password was not valid. Try again.")
-                    return
-                }
             })
     }
 
-    const logout = () => {
+    const logout = (setIsLoggedIn) => {
         setIsLoggedIn(false)
         localStorage.removeItem("codeproject_token")
     }
