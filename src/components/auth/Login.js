@@ -1,4 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
+import useSimpleAuth from "../../hooks/useSimpleAuth";
+
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -67,8 +70,30 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignInSide() {
+export default function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { login, isAuthenticated } = useSimpleAuth();
+  
   const classes = useStyles();
+  
+  const submit = (event) => {
+    event.preventDefault()
+    const credentials = {
+      username: username,
+      password: password
+    };
+    login(credentials).then(() => {
+      if (isAuthenticated()) {
+        // props.history.push({
+        //   pathname: "/home"
+        // });
+        window.location.reload(true);
+      } else {
+        alert("Wrong Username or Password");
+      }
+    });
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -90,11 +115,12 @@ export default function SignInSide() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
               autoFocus
+              onChange={e => setUsername(e.target.value)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -113,6 +139,7 @@ export default function SignInSide() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={e => setPassword(e.target.value)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -130,6 +157,7 @@ export default function SignInSide() {
               fullWidth
               variant="contained"
               color="primary"
+              onClick={submit}
               className={classes.submit}
             >
               Sign In
