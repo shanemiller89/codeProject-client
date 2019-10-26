@@ -1,9 +1,11 @@
 import React from "react";
+import Button from "@material-ui/core/Button";
 
 const ProjectList = () => {
   return (
     <>
-    <p>Hello, I am ProjectList</p>
+    <h1>Projects</h1>
+    <Button variant="contained" color="primary">Create New Project</Button>
     </>
   );
 };

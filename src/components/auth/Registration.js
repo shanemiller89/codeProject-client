@@ -105,11 +105,12 @@ const Registration = props => {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">Register</DialogTitle>
+          <form onSubmit={disabled ? submit : submitWithImage}>
         <DialogContent>
           <DialogContentText>Register a New Account</DialogContentText>
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             required
             fullWidth
             id="firstName"
@@ -120,7 +121,7 @@ const Registration = props => {
           />
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             required
             fullWidth
             id="lastName"
@@ -130,7 +131,7 @@ const Registration = props => {
           />
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             required
             fullWidth
             id="username"
@@ -141,7 +142,7 @@ const Registration = props => {
           />
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             required
             fullWidth
             id="email"
@@ -153,7 +154,7 @@ const Registration = props => {
           />
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             required
             fullWidth
             id="password"
@@ -164,7 +165,7 @@ const Registration = props => {
           />
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             required
             fullWidth
             id="verifyPassword"
@@ -178,7 +179,7 @@ const Registration = props => {
           <DialogContentText>Optional:</DialogContentText>
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             id="primaryLanguage"
             label="Primary Language"
@@ -187,7 +188,7 @@ const Registration = props => {
           />
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             id="githubAccount"
             label="Github Account"
@@ -221,10 +222,11 @@ const Registration = props => {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={disabled ? submit : submitWithImage} color="primary">
+          <Button type="submit" color="primary">
             Register
           </Button>
         </DialogActions>
+          </form>
       </Dialog>
     </div>
   );

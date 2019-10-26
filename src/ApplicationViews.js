@@ -3,6 +3,7 @@ import { Route, withRouter } from "react-router-dom";
 import Dashboard from "./components/dashboard/Dashboard";
 import Profile from "./components/profile/Profile";
 import ProjectList from "./components/project/ProjectList";
+import ProjectForm from "./components/project/ProjectForm";
 
 const ApplicationViews = () => {
   return (
@@ -26,6 +27,13 @@ const ApplicationViews = () => {
         path="/projects"
         render={props => {
           return <ProjectList {...props} />;
+        }}
+      />
+      <Route
+        exact
+        path="/projects/new-form"
+        render={props => {
+          return <ProjectForm {...props} />;
         }}
       />
     </>
