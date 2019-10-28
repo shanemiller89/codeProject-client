@@ -3,6 +3,8 @@ import { Route, withRouter } from "react-router-dom";
 import Dashboard from "./components/dashboard/Dashboard";
 import Profile from "./components/profile/Profile";
 import ProjectList from "./components/project/ProjectList";
+import Project from "./components/project/Project";
+
 import ProjectForm from "./components/project/ProjectForm";
 
 const ApplicationViews = () => {
@@ -27,6 +29,24 @@ const ApplicationViews = () => {
         path="/projects"
         render={props => {
           return <ProjectList {...props} />;
+        }}
+      />
+              <Route
+          exact
+          path="/project/:projectId(\d+)"
+          render={props => {
+            return (
+              <Project
+                {...props}
+              />
+            );
+          }}
+        />
+      <Route
+        exact
+        path="/project"
+        render={props => {
+          return <Project {...props} />;
         }}
       />
       <Route

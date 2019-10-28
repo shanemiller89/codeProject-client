@@ -31,10 +31,10 @@ const ProjectList = () => {
         </Button>
       </Link>
       <h3>My Projects</h3>
-      <Grid container spacing={5} style={{marginLeft: "3em", overflowX: "hidden"}}>
+      <Grid container spacing={5} style={{marginLeft: "3em"}}>
         {myProjects.map(project => (
-          <Grid item xs={4} spacing={5} style={{overflowX: "hidden"}}>
-            <ProjectCard project={project} style={{overflowX: "hidden"}}/>
+          <Grid item xs={4} spacing={5}>
+            <ProjectCard key={project.id} project={project}/>
           </Grid>
         ))}
       </Grid>

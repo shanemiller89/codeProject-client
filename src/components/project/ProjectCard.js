@@ -1,74 +1,109 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Chip from '@material-ui/core/Chip';
-import Code from '@material-ui/icons/Code';
+import React from "react";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import Chip from "@material-ui/core/Chip";
+import Code from "@material-ui/icons/Code";
+import DeveloperBoard from "@material-ui/icons/DeveloperBoard";
 
-
-
-
-import './projects.css'
-import { flexbox } from '@material-ui/system';
+import "./projects.css";
+import { flexbox } from "@material-ui/system";
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 445,
-
+    maxWidth: 445
   },
   media: {
     height: 300,
     objectFit: "scale-down",
     textAlign: "center"
-  },
+  }
 });
 
-const ProjectCard = (props) => {
+const ProjectCard = props => {
   const classes = useStyles();
 
   return (
     <Card className={classes.card}>
       {/* <CardActionArea> */}
-        {/* <CardMedia
+      {/* <CardMedia
           className={classes.media}
           image={props.project.project_image}
           title={props.project.title}
         /> */}
-        <div style={{display: "flex", justifyContent: "center"}}>
-        <img src={props.project.project_image} alt={props.project.title} className={classes.media}/>
+      {props.project.project_image === "" ? (
+        <div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <DeveloperBoard fontSize="large" style={{ fontSize: "19em" }} />
+          </div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Typography
+              component="h1"
+              variant="h5"
+              color="inherit"
+              noWrap
+              className={classes.title}
+            >
+              Personal Project
+            </Typography>
+          </div>
         </div>
-        <CardContent>
-          <Typography gutterBottom variant="h4" component="h2">
-            {props.project.title}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p" style={{maxHeight: 75, overflow: "hidden", textOverflow: "ellipsis"}}>
-              {props.project.overview}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+      ) : (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <img
+            src={props.project.project_image}
+            alt={props.project.title}
+            className={classes.media}
+          />
+        </div>
+      )}
+      <CardContent>
+        <Typography gutterBottom variant="h4" component="h2">
+          {props.project.title}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          component="p"
+          style={{
+            maxHeight: 75,
+            overflow: "hidden",
+            textOverflow: "ellipsis"
+          }}
+        >
+          {props.project.overview}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
           ...
-          </Typography>
-          <br/>
-          <Typography variant="h6"  component="h4">
-              Primary Technology: <Chip color="primary" size="small" label={props.project.technologies[0].technology} icon={<Code />} />
-
-              
-              {/* <span className="primaryLanguage">{props.project.technologies[0].technology}</span> */}
-          </Typography>
-          
-        </CardContent>
+        </Typography>
+        <br />
+        <Typography variant="h6" component="h4">
+          Primary Technology:{" "}
+          <Chip
+            color="primary"
+            size="small"
+            label={props.project.technologies[0].technology}
+            icon={<Code />}
+          />
+          {/* <span className="primaryLanguage">{props.project.technologies[0].technology}</span> */}
+        </Typography>
+      </CardContent>
       {/* </CardActionArea> */}
       <CardActions>
-        <Button size="small" color="primary">
-          Detail Page
-        </Button>
+        <Link to={`/project/${props.project.id}`}>
+          <Button size="large" color="primary">
+            Project Details
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );
-}
+};
 
-export default ProjectCard
+export default ProjectCard;

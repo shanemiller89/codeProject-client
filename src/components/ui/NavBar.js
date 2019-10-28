@@ -18,6 +18,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import useSimpleAuth from "../../hooks/useSimpleAuth"
 import { ListItems } from "./ListItems"
 import Dashboard from '../dashboard/Dashboard';
+import DeveloperBoard from "@material-ui/icons/DeveloperBoard";
+
 import ApplicationViews from '../../ApplicationViews';
 
 
@@ -59,6 +61,7 @@ const useStyles = makeStyles(theme => ({
     display: 'none',
   },
   title: {
+    marginLeft: ".5em",
     flexGrow: 1,
   },
   drawerPaper: {
@@ -132,7 +135,9 @@ const NavBar = (props) => {
           >
             <MenuIcon />
           </IconButton>
+          <DeveloperBoard fontSize="large" />
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+
             code.Project
           </Typography>
           {/* <IconButton color="inherit"> */}
