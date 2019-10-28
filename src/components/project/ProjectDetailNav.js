@@ -85,7 +85,7 @@ const ProjectDetailNav = (props) => {
       </AppBar>
       <TabPanel value={value} index={0}>
           <h1>Overview</h1>
-        <ProjectOverview project={props.project}/>
+        <ProjectOverview project={props.project} technologies={props.technologies}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two
