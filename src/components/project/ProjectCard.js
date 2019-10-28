@@ -53,8 +53,8 @@ const ProjectCard = (props) => {
           ...
           </Typography>
           <br/>
-          <Typography variant="h5"  component="h4">
-              Language: <Chip color="primary" size="small" label={props.project.technologies[0].technology} icon={<Code />} />
+          <Typography variant="h6"  component="h4">
+              Primary Technology: <Chip color="primary" size="small" label={props.project.technologies[0].technology} icon={<Code />} />
 
               
               {/* <span className="primaryLanguage">{props.project.technologies[0].technology}</span> */}
