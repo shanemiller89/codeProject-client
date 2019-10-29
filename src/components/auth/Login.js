@@ -102,11 +102,11 @@ const Login = (props) => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={submit}>
             <TextField
               variant="outlined"
               margin="normal"
-              required
+              required={true}
               fullWidth
               id="username"
               label="Username"
@@ -150,7 +150,7 @@ const Login = (props) => {
               fullWidth
               variant="contained"
               color="primary"
-              onClick={submit}
+              // onClick={submit}
               className={classes.submit}
             >
               Sign In
