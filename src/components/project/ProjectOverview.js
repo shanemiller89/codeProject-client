@@ -3,12 +3,18 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
-import Code from "@material-ui/icons/Code";
+import Description from "@material-ui/icons/Description";
+import Computer from "@material-ui/icons/Computer";
 
+import Code from "@material-ui/icons/Code";
+import Group from "@material-ui/icons/Group";
+import { Button } from "@material-ui/core";
+import ProjectOverviewEdit from "./ProjectOverviewEdit";
 
 
 const ReactDOM = require("react-dom");
 const ReactMarkdown = require("react-markdown");
+const htmlParser = require("react-markdown/plugins/html-parser");
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,21 +41,35 @@ const useStyles = makeStyles(theme => ({
 const ProjectOverview = props => {
   const classes = useStyles();
 
+  const parseHtml = htmlParser({
+    isValidNode: node => node.type !== "script",
+    processingInstructions: [
+      /* ... */
+    ]
+  });
+
   return (
     <>
       <div style={{ display: "flex" }}>
         <div>
-          <h1>Overview</h1>
+          <h1><Description />Overview</h1>
           <Paper elevation={3} className={classes.overview}>
             {/* <Typography component="p">
           {props.project.overview}
         </Typography> */}
-            <ReactMarkdown source={props.project.overview} escapeHtml={false} />
+        <ProjectOverviewEdit project={props.project} editProjectOverview={props.editProjectOverview}/>
+            <div>
+              <ReactMarkdown
+                source={props.project.overview}
+                escapeHtml={false}
+                astPlugins={[parseHtml]}
+              />
+            </div>
           </Paper>
         </div>
         <div>
           <div>
-            <h1>Technologies</h1>
+            <h1><Computer />Technologies</h1>
             <Paper elevation={3} className={classes.technologies}>
               <Typography variant="h6" component="h5">
                 Primary Technology:
@@ -61,12 +81,13 @@ const ProjectOverview = props => {
                   )
                   .map(primary => (
                     <Chip
-                    className={classes.chips}
-                    color="primary"
-                    size="medium"
-                    label={primary.technology}
-                    icon={<Code />}
-                  />
+                      key={primary.id}
+                      className={classes.chips}
+                      color="primary"
+                      size="medium"
+                      label={primary.technology}
+                      icon={<Code />}
+                    />
                   ))}
               </Typography>
               <br />
@@ -80,18 +101,19 @@ const ProjectOverview = props => {
                   )
                   .map(primary => (
                     <Chip
-                    className={classes.chips}
-                    color="secondary"
-                    size="medium"
-                    label={primary.technology}
-                    icon={<Code />}
-                  />
+                      key={primary.id}
+                      className={classes.chips}
+                      color="secondary"
+                      size="medium"
+                      label={primary.technology}
+                      icon={<Code />}
+                    />
                   ))}
               </Typography>
             </Paper>
           </div>
           <div>
-            <h1>Collaborators</h1>
+            <h1><Group/>Collaborators</h1>
             <Paper elevation={3} className={classes.collaborators}>
               {/* <Typography component="p">
           {props.project.overview}

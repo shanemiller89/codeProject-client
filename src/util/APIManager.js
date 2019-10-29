@@ -47,7 +47,7 @@ export default {
     }).then(data => data.json());
   },
   put(database, editedItem) {
-    return fetch(`${remoteURL}/${database}/${editedItem.id}`, {
+    return fetch(`${remoteURL}/${database}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

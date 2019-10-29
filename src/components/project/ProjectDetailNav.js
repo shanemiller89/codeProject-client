@@ -6,18 +6,13 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-
 import ViewHeadline from "@material-ui/icons/ViewHeadline";
 import AccountTree from "@material-ui/icons/AccountTree";
 import Web from "@material-ui/icons/Web";
 import ListAlt from "@material-ui/icons/ListAlt";
 import AddBox from "@material-ui/icons/AddBox";
 import ProjectOverview from "./ProjectOverview";
-
-
-
-
-
+import ProjectERD from "./ProjectERD";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -57,7 +52,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProjectDetailNav = (props) => {
+const ProjectDetailNav = props => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -76,7 +71,7 @@ const ProjectDetailNav = (props) => {
           //   aria-label="scrollable auto tabs example"
           centered="true"
         >
-          <Tab icon={<ViewHeadline />}label="Overview" {...a11yProps(0)} />
+          <Tab icon={<ViewHeadline />} label="Overview" {...a11yProps(0)} />
           <Tab icon={<AccountTree />} label="E.R.D." {...a11yProps(1)} />
           <Tab icon={<Web />} label="Wireframe" {...a11yProps(2)} />
           <Tab icon={<ListAlt />} label="Tasks" {...a11yProps(3)} />
@@ -84,11 +79,15 @@ const ProjectDetailNav = (props) => {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-          <h1>Overview</h1>
-        <ProjectOverview project={props.project} technologies={props.technologies}/>
+        <ProjectOverview
+          project={props.project}
+          technologies={props.technologies}
+          editProjectOverview={props.editProjectOverview}
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <ProjectERD project={props.project} addERD={props.addERD}/>
+        <img alt="stuff" src={props.project.erd_image}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
