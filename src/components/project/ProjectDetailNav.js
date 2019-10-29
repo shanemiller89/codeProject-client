@@ -6,6 +6,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
+
 import ViewHeadline from "@material-ui/icons/ViewHeadline";
 import AccountTree from "@material-ui/icons/AccountTree";
 import Web from "@material-ui/icons/Web";
@@ -13,6 +15,7 @@ import ListAlt from "@material-ui/icons/ListAlt";
 import AddBox from "@material-ui/icons/AddBox";
 import ProjectOverview from "./ProjectOverview";
 import ProjectERD from "./ProjectERD";
+import ProjectWireframeForm from "./ProjectWireframeForm";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -86,11 +89,29 @@ const ProjectDetailNav = props => {
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ProjectERD project={props.project} addERD={props.addERD}/>
-        <img alt="stuff" src={props.project.erd_image}/>
+        <ProjectERD project={props.project} addERD={props.addERD} />
+        {props.project.erd_image === "" ? (
+          <Container
+            fullWidth
+            style={{
+              background: "#fff3cd",
+              borderRadius: ".25em",
+              padding: "1em",
+              color: "#856404",
+              textAlign: "center"
+            }}
+          >
+            You currently have no ERD associated with this Project.
+          </Container>
+        ) : (
+          <img
+            alt={`${props.project.title}-ERD`}
+            src={props.project.erd_image}
+          />
+        )}
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <ProjectWireframeForm />
       </TabPanel>
       <TabPanel value={value} index={3}>
         Item Four
