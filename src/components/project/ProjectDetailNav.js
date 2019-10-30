@@ -15,10 +15,10 @@ import ListAlt from "@material-ui/icons/ListAlt";
 import AddBox from "@material-ui/icons/AddBox";
 import ProjectOverview from "./ProjectOverview";
 import ProjectERD from "./ProjectERD";
-import ProjectWireframeForm from "./ProjectWireframeForm";
-import ProjectWireframeListItem from "./ProjectWireframeListItem";
+import ProjectWireframeForm from "./wireframes/ProjectWireframeForm";
+import ProjectWireframeListItem from "./wireframes/ProjectWireframeListItem";
 import { Grid, Button } from "@material-ui/core";
-import WireframeFormatMenu from "./WireframeFormatMenu";
+import WireframeFormatMenu from "./wireframes/WireframeFormatMenu";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -121,9 +121,16 @@ const ProjectDetailNav = props => {
         {/* <div style={{display: "flex", justifyContent: "space-around", flexWrap: "wrap"}}> */}
         <Grid container spacing={2}>
           {props.wireframes.map(wireframe => (
-            <Grid container item xs={3} >
+            <Grid container item xs={3}>
               <ProjectWireframeListItem wireframe={wireframe} />
-              <WireframeFormatMenu wireframe={wireframe} deleteWireframe={props.deleteWireframe}/>
+              <h4>{wireframe.wireframe_title}</h4>
+              <WireframeFormatMenu
+                project={props.project}
+                wireframe={wireframe}
+                deleteWireframe={props.deleteWireframe}
+                addWireframeTitle={props.addWireframeTitle}
+                editWireframeImage={props.editWireframeImage}
+              />
             </Grid>
           ))}
         </Grid>

@@ -26,6 +26,12 @@ const Project = props => {
     });
   };
 
+  const editWireframeImage = editedItem => {
+    APIManager.put("wireframes/updatewireframe", editedItem).then(() => {
+      getProject();
+    });
+  };
+
   const addERD= editedItem => {
     APIManager.put("projects/erd", editedItem).then(() => {
       getProject();
@@ -34,6 +40,12 @@ const Project = props => {
 
   const addWireframe= item => {
     APIManager.post("wireframes", item).then(() => {
+      getProject();
+    });
+  };
+
+  const addWireframeTitle= (item, id) => {
+    APIManager.put(`wireframes/${id}`, item).then(() => {
       getProject();
     });
   };
@@ -80,7 +92,9 @@ const Project = props => {
           editProjectOverview={editProjectOverview}
           addERD={addERD}
           addWireframe={addWireframe}
+          addWireframeTitle={addWireframeTitle}
           deleteWireframe={deleteWireframe}
+          editWireframeImage={editWireframeImage}
         />
       </div>
     </>

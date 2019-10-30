@@ -9,6 +9,8 @@ import MoreHoriz from "@material-ui/icons/MoreHoriz";
 import Add from "@material-ui/icons/Add";
 import Edit from "@material-ui/icons/Edit";
 import Delete from "@material-ui/icons/Delete";
+import ProjectWireframeTitleForm from './ProjectWireframeTitleForm';
+import ProjectWireframeEditForm from './ProjectWireframeEditForm';
 
 
 
@@ -40,22 +42,9 @@ const WireframeFormatMenu = (props) => {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
-      > {props.wireframe.wireframe_title === "" ?
-        <MenuItem onClick={handleClose}>
-        <ListItemIcon>
-            <Add fontSize="small" />
-          </ListItemIcon>
-          Add Title
-        </MenuItem>
-      :
-        <MenuItem onClick={handleClose}>
-        <ListItemIcon>
-            <Edit fontSize="small" />
-          </ListItemIcon>
-          Edit Title
-        </MenuItem>
-      
-      }
+      >         
+      <ProjectWireframeTitleForm wireframe={props.wireframe} addWireframeTitle={props.addWireframeTitle} handleClose={handleClose}/>
+      <ProjectWireframeEditForm editWireframeImage={props.editWireframeImage} project={props.project} wireframe={props.wireframe} handleClose={handleClose}/>
         <MenuItem onClick={() => props.deleteWireframe(props.wireframe.id)}>
         <ListItemIcon>
             <Delete fontSize="small" />
