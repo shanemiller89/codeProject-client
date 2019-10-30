@@ -23,6 +23,7 @@ const Project = props => {
       }
     );
   };
+// --EDIT FUNCTIONS -- //
 
   const editProjectOverview = editedItem => {
     APIManager.put("projects/overview", editedItem).then(() => {
@@ -35,6 +36,9 @@ const Project = props => {
       getProject();
     });
   };
+
+  // --ADD FUNCTIONS -- //
+
 
   const addERD= editedItem => {
     APIManager.put("projects/erd", editedItem).then(() => {
@@ -60,6 +64,9 @@ const Project = props => {
     });
   };
 
+  // --DELETE FUNCTIONS -- //
+
+
   const deleteProject = () => {
     APIManager.delete("projects", `${props.match.params.projectId}`).then(
       () => {
@@ -75,6 +82,13 @@ const Project = props => {
       getProject();
     });
   };
+
+  const deleteTask = id => {
+    APIManager.delete("tasks", id).then(() => {
+      getProject();
+    });
+  };
+
 
   useEffect(() => {
     getProject();
@@ -107,6 +121,7 @@ console.log("Technologies", technologies)
           addWireframe={addWireframe}
           addWireframeTitle={addWireframeTitle}
           deleteWireframe={deleteWireframe}
+          deleteTask={deleteTask}
           editWireframeImage={editWireframeImage}
           addTasks={addTasks}
         />

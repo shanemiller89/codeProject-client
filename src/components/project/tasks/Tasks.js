@@ -14,6 +14,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 import TasksForm from "./TasksForm";
 import { Container } from "@material-ui/core";
+import YellowAlert from "../../../widgets/YellowAlert";
+import ProjectTasksFormatMenu from "./ProjectTasksFormatMenu";
 
 const ReactMarkdown = require("react-markdown");
 
@@ -30,17 +32,7 @@ const Tasks = props => {
         <List>
           {props.tasks.filter(tasks => tasks.task_type_id === 1).length ===
           0 ? (
-            <Container
-              style={{
-                background: "#fff3cd",
-                borderRadius: ".25em",
-                padding: "1em",
-                color: "#856404",
-                textAlign: "center"
-              }}
-            >
-              You currently have no Incoming Tasks associated with this Project.
-            </Container>
+            <YellowAlert message="You currently have no Incoming Tasks associated with this Project." />
           ) : (
             props.tasks
               .filter(tasks => tasks.task_type_id === 1)
@@ -57,9 +49,7 @@ const Tasks = props => {
                     }
                   />
                   <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
-                      <MoreHoriz />
-                    </IconButton>
+                    <ProjectTasksFormatMenu task={task} deleteTask={props.deleteTask}/>
                   </ListItemSecondaryAction>
                 </ListItem>
               ))
@@ -73,17 +63,7 @@ const Tasks = props => {
         <List>
           {props.tasks.filter(tasks => tasks.task_type_id === 2).length ===
           0 ? (
-            <Container
-              style={{
-                background: "#fff3cd",
-                borderRadius: ".25em",
-                padding: "1em",
-                color: "#856404",
-                textAlign: "center"
-              }}
-            >
-              You currently have no In Progress Tasks associated with this Project.
-            </Container>
+            <YellowAlert message="You currently have no In Progress Tasks associated with this Project." />
           ) : (
             props.tasks
               .filter(tasks => tasks.task_type_id === 2)
@@ -116,17 +96,7 @@ const Tasks = props => {
         <List>
           {props.tasks.filter(tasks => tasks.task_type_id === 3).length ===
           0 ? (
-            <Container
-              style={{
-                background: "#fff3cd",
-                borderRadius: ".25em",
-                padding: "1em",
-                color: "#856404",
-                textAlign: "center"
-              }}
-            >
-              You currently have no In Review Tasks associated with this Project.
-            </Container>
+            <YellowAlert message="You currently have no In Review Tasks associated with this Project." />
           ) : (
             props.tasks
               .filter(tasks => tasks.task_type_id === 3)
@@ -159,17 +129,7 @@ const Tasks = props => {
         <List>
           {props.tasks.filter(tasks => tasks.task_type_id === 4).length ===
           0 ? (
-            <Container
-              style={{
-                background: "#fff3cd",
-                borderRadius: ".25em",
-                padding: "1em",
-                color: "#856404",
-                textAlign: "center"
-              }}
-            >
-              You currently have no Completed Tasks associated with this Project.
-            </Container>
+            <YellowAlert message="You currently have no Completed Tasks associated with this Project." />
           ) : (
             props.tasks
               .filter(tasks => tasks.task_type_id === 4)
@@ -185,11 +145,7 @@ const Tasks = props => {
                       <ReactMarkdown source={task.task} escapeHtml={false} />
                     }
                   />
-                  <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
-                      <MoreHoriz />
-                    </IconButton>
-                  </ListItemSecondaryAction>
+                  <ListItemSecondaryAction></ListItemSecondaryAction>
                 </ListItem>
               ))
           )}
