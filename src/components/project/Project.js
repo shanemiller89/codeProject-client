@@ -37,6 +37,18 @@ const Project = props => {
     });
   };
 
+  const editTaskStatus = editedItem => {
+    APIManager.put("tasks/tasktype", editedItem).then(() => {
+      getProject();
+    });
+  };
+
+  const editTask= (item, id) => {
+    APIManager.put(`tasks/${id}`, item).then(() => {
+      getProject();
+    });
+  };
+
   // --ADD FUNCTIONS -- //
 
 
@@ -117,13 +129,15 @@ console.log("Technologies", technologies)
           wireframes={wireframes}
           tasks={tasks}
           editProjectOverview={editProjectOverview}
+          editWireframeImage={editWireframeImage}
+          editTask={editTask}
+          editTaskStatus={editTaskStatus}
           addERD={addERD}
           addWireframe={addWireframe}
           addWireframeTitle={addWireframeTitle}
+          addTasks={addTasks}
           deleteWireframe={deleteWireframe}
           deleteTask={deleteTask}
-          editWireframeImage={editWireframeImage}
-          addTasks={addTasks}
         />
       </div>
     </>

@@ -107,6 +107,8 @@ const ProjectDetailNav = props => {
           tasks={props.tasks}
           addTasks={props.addTasks}
           deleteTask={props.deleteTask}
+          editTask={props.editTask}
+          editTaskStatus={props.editTaskStatus}
         />
       </TabPanel>
       <TabPanel value={value} index={4}>

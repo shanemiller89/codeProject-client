@@ -49,7 +49,12 @@ const Tasks = props => {
                     }
                   />
                   <ListItemSecondaryAction>
-                    <ProjectTasksFormatMenu task={task} deleteTask={props.deleteTask}/>
+                    <ProjectTasksFormatMenu
+                      task={task}
+                      deleteTask={props.deleteTask}
+                      editTask={props.editTask}
+                      editTaskStatus={props.editTaskStatus}
+                    />
                   </ListItemSecondaryAction>
                 </ListItem>
               ))
@@ -80,9 +85,12 @@ const Tasks = props => {
                     }
                   />
                   <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
-                      <MoreHoriz />
-                    </IconButton>
+                  <ProjectTasksFormatMenu
+                      task={task}
+                      deleteTask={props.deleteTask}
+                      editTask={props.editTask}
+                      editTaskStatus={props.editTaskStatus}
+                    />
                   </ListItemSecondaryAction>
                 </ListItem>
               ))
@@ -113,9 +121,12 @@ const Tasks = props => {
                     }
                   />
                   <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
-                      <MoreHoriz />
-                    </IconButton>
+                  <ProjectTasksFormatMenu
+                      task={task}
+                      deleteTask={props.deleteTask}
+                      editTask={props.editTask}
+                      editTaskStatus={props.editTaskStatus}
+                    />
                   </ListItemSecondaryAction>
                 </ListItem>
               ))
@@ -145,7 +156,14 @@ const Tasks = props => {
                       <ReactMarkdown source={task.task} escapeHtml={false} />
                     }
                   />
-                  <ListItemSecondaryAction></ListItemSecondaryAction>
+                  <ListItemSecondaryAction>
+                  <ProjectTasksFormatMenu
+                      task={task}
+                      deleteTask={props.deleteTask}
+                      editTask={props.editTask}
+                      editTaskStatus={props.editTaskStatus}
+                    />
+                  </ListItemSecondaryAction>
                 </ListItem>
               ))
           )}
