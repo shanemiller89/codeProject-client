@@ -11,7 +11,6 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { Container } from "@material-ui/core";
 
 const ProjectForm = props => {
   const [title, setTitle] = useState("");
@@ -59,6 +58,9 @@ const ProjectForm = props => {
           supplemental_technologies: supplementalTechArray
         };
         APIManager.post("projects", newProject);
+        props.history.push({
+          pathname: "/projects"
+        });
       });
   };
 
@@ -75,6 +77,9 @@ const ProjectForm = props => {
       supplemental_technologies: supplementalTechArray
     };
     APIManager.post("projects", newProject);
+    props.history.push({
+      pathname: "/projects"
+    });
   };
 
   return (

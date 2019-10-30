@@ -7,12 +7,15 @@ import DeleteDialog from "../../widgets/DeleteDialog";
 const Project = props => {
   const [project, setProject] = useState({});
   const [technologies, setTechnologies] = useState([]);
+  const [wireframes, setWireframes] = useState([]);
+
 
   const getProject = () => {
     APIManager.get("projects", `${props.match.params.projectId}`).then(
       project => {
         setProject(project);
         setTechnologies(project.technologies);
+        setWireframes(project.wireframes)
       }
     );
   };
@@ -29,6 +32,12 @@ const Project = props => {
     });
   };
 
+  const addWireframe= item => {
+    APIManager.post("wireframes", item).then(() => {
+      getProject();
+    });
+  };
+
   const deleteProject = () => {
     APIManager.delete("projects", `${props.match.params.projectId}`).then(
       () => {
@@ -39,11 +48,18 @@ const Project = props => {
     );
   };
 
+  const deleteWireframe= id => {
+    APIManager.delete("wireframes", id).then(() => {
+      getProject();
+    });
+  };
+
   useEffect(() => {
     getProject();
   }, []);
 
-  console.log("Tech", technologies);
+  console.log("Project Wireframes", wireframes)
+
   return (
     <>
       <h1>{project.title}</h1>
@@ -60,8 +76,11 @@ const Project = props => {
         <ProjectDetailNav
           project={project}
           technologies={technologies}
+          wireframes={wireframes}
           editProjectOverview={editProjectOverview}
           addERD={addERD}
+          addWireframe={addWireframe}
+          deleteWireframe={deleteWireframe}
         />
       </div>
     </>

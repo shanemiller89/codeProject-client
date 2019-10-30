@@ -20,8 +20,6 @@ const ProjectList = () => {
     getMyProjects();
   }, []);
 
-  console.log("My Projects", myProjects);
-
   return (
     <>
       <h1>Projects</h1>

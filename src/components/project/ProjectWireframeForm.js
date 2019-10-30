@@ -13,27 +13,35 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 const ProjectWireframeForm = props => {
   const [open, setOpen] = useState(false);
-  const [erd, setERD] = useState("");
+  const [wireframes, setWireframes] = useState([]);
 
-  const storageRef = firebase.storage().ref("project_ERDs");
+  const storageRef = firebase.storage().ref("project_wireframes");
 
-  const submit = e => {
+  const submit = (e,wireframe) => {
     e.preventDefault();
 
-    const ref = storageRef.child(`${props.project.title}-ERD`);
+    const ref = storageRef.child(`${props.project.title}-wireframe-${wireframe.name}`);
 
     return ref
-      .put(erd)
+      .put(wireframe)
       .then(data => data.ref.getDownloadURL())
       .then(imageUrl => {
-        const ERD = {
-          erd_image: imageUrl,
-          id: props.project.id
+        const wireframe = {
+          wireframe_image: imageUrl,
+          project_id: props.project.id
         };
-        props.addERD(ERD);
+        props.addWireframe(wireframe);
         handleClose();
       });
   };
+
+  const submitMultiple = e => {
+    e.preventDefault();
+
+    Array.from(wireframes).forEach(wireframe => (
+      submit(e, wireframe)
+    ))
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -43,10 +51,12 @@ const ProjectWireframeForm = props => {
     setOpen(false);
   };
 
+  console.log("wire", wireframes)
+
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Add Wireframes
+        Add Wireframe
       </Button>
       <Dialog
         open={open}
@@ -54,22 +64,12 @@ const ProjectWireframeForm = props => {
         aria-labelledby="form-dialog-title"
         maxWidth="xl"
       >
-        <DialogTitle id="form-dialog-title">Project Wireframes</DialogTitle>
-        <form onSubmit={submit}>
+        <DialogTitle id="form-dialog-title">Project ERD</DialogTitle>
+        <form onSubmit={submitMultiple}>
           <DialogContent>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              helperText="Only Image Files (.PNG, .JPG, etc.) are supported"
-              id="profileImage"
-              type="file"
-              multiple
-              onChange={e => setERD(e.target.files[0])}
-              name="profileImage"
-            />
-        <input type="file" multiple />
+            
+            <input type="file" multiple onChange={e => setWireframes(e.target.files)} />
+
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">

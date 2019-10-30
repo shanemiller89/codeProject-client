@@ -16,6 +16,9 @@ import AddBox from "@material-ui/icons/AddBox";
 import ProjectOverview from "./ProjectOverview";
 import ProjectERD from "./ProjectERD";
 import ProjectWireframeForm from "./ProjectWireframeForm";
+import ProjectWireframeListItem from "./ProjectWireframeListItem";
+import { Grid, Button } from "@material-ui/core";
+import WireframeFormatMenu from "./WireframeFormatMenu";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -72,7 +75,7 @@ const ProjectDetailNav = props => {
           indicatorColor="primary"
           textColor="primary"
           //   aria-label="scrollable auto tabs example"
-          centered="true"
+          centered
         >
           <Tab icon={<ViewHeadline />} label="Overview" {...a11yProps(0)} />
           <Tab icon={<AccountTree />} label="E.R.D." {...a11yProps(1)} />
@@ -83,6 +86,7 @@ const ProjectDetailNav = props => {
       </AppBar>
       <TabPanel value={value} index={0}>
         <ProjectOverview
+          key={props.project.id}
           project={props.project}
           technologies={props.technologies}
           editProjectOverview={props.editProjectOverview}
@@ -92,7 +96,6 @@ const ProjectDetailNav = props => {
         <ProjectERD project={props.project} addERD={props.addERD} />
         {props.project.erd_image === "" ? (
           <Container
-            fullWidth
             style={{
               background: "#fff3cd",
               borderRadius: ".25em",
@@ -111,7 +114,20 @@ const ProjectDetailNav = props => {
         )}
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <ProjectWireframeForm />
+        <ProjectWireframeForm
+          project={props.project}
+          addWireframe={props.addWireframe}
+        />
+        {/* <div style={{display: "flex", justifyContent: "space-around", flexWrap: "wrap"}}> */}
+        <Grid container spacing={2}>
+          {props.wireframes.map(wireframe => (
+            <Grid container item xs={3} >
+              <ProjectWireframeListItem wireframe={wireframe} />
+              <WireframeFormatMenu wireframe={wireframe} deleteWireframe={props.deleteWireframe}/>
+            </Grid>
+          ))}
+        </Grid>
+        {/* </div> */}
       </TabPanel>
       <TabPanel value={value} index={3}>
         Item Four

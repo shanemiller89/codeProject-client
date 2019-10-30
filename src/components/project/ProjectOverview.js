@@ -8,11 +8,10 @@ import Computer from "@material-ui/icons/Computer";
 
 import Code from "@material-ui/icons/Code";
 import Group from "@material-ui/icons/Group";
-import { Button } from "@material-ui/core";
 import ProjectOverviewEdit from "./ProjectOverviewEdit";
 
 
-const ReactDOM = require("react-dom");
+// const ReactDOM = require("react-dom");
 const ReactMarkdown = require("react-markdown");
 const htmlParser = require("react-markdown/plugins/html-parser");
 

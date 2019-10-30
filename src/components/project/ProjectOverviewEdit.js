@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -25,12 +25,12 @@ const ProjectOverviewEdit = props => {
 
   const handleClickOpen = () => {
     setOpen(true);
+    setOverview(props.project.overview);
   };
 
   const handleClose = () => {
     setOpen(false);
   };
-
 
   return (
     <div>
@@ -60,7 +60,7 @@ const ProjectOverviewEdit = props => {
               id="overview"
               label="Project Overview Description"
               name="overview"
-              defaultValue={props.project.overview}
+              value={overview}
               onChange={e => setOverview(e.target.value)}
             />
           </DialogContent>
