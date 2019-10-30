@@ -8,6 +8,8 @@ const Project = props => {
   const [project, setProject] = useState({});
   const [technologies, setTechnologies] = useState([]);
   const [wireframes, setWireframes] = useState([]);
+  const [tasks, setTasks] = useState([]);
+
 
 
   const getProject = () => {
@@ -16,6 +18,8 @@ const Project = props => {
         setProject(project);
         setTechnologies(project.technologies);
         setWireframes(project.wireframes)
+        setTasks(project.tasks)
+
       }
     );
   };
@@ -50,6 +54,12 @@ const Project = props => {
     });
   };
 
+  const addTasks= item => {
+    APIManager.post("tasks", item).then(() => {
+      getProject();
+    });
+  };
+
   const deleteProject = () => {
     APIManager.delete("projects", `${props.match.params.projectId}`).then(
       () => {
@@ -70,7 +80,9 @@ const Project = props => {
     getProject();
   }, []);
 
-  console.log("Project Wireframes", wireframes)
+console.log("Wireframes", wireframes)
+console.log("Tasks", tasks)
+console.log("Technologies", technologies)
 
   return (
     <>
@@ -89,12 +101,14 @@ const Project = props => {
           project={project}
           technologies={technologies}
           wireframes={wireframes}
+          tasks={tasks}
           editProjectOverview={editProjectOverview}
           addERD={addERD}
           addWireframe={addWireframe}
           addWireframeTitle={addWireframeTitle}
           deleteWireframe={deleteWireframe}
           editWireframeImage={editWireframeImage}
+          addTasks={addTasks}
         />
       </div>
     </>

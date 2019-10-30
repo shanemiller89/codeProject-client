@@ -11,7 +11,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Edit from "@material-ui/icons/Edit";
+import SwapHoriz from "@material-ui/icons/SwapHoriz";
 
 const ProjectWireframeEditForm = props => {
   const [open, setOpen] = useState(false);
@@ -54,13 +54,11 @@ const ProjectWireframeEditForm = props => {
     setOpen(false);
   };
 
-  console.log("wire", wireframes)
-
   return (
     <div>
         <MenuItem onClick={handleClickOpen}>
         <ListItemIcon>
-            <Edit fontSize="small" />
+            <SwapHoriz fontSize="small" />
           </ListItemIcon>
           Change Wireframe Image
         </MenuItem>

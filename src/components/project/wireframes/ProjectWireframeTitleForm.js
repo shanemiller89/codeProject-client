@@ -34,8 +34,6 @@ const ProjectWireframeTitleForm = props => {
     setOpen(false);
   };
 
-  console.log("title", title);
-
   return (
     <div>
       {props.wireframe.wireframe_title === "" ? (

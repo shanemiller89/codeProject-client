@@ -6,8 +6,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 
 import MoreHoriz from "@material-ui/icons/MoreHoriz";
-import Add from "@material-ui/icons/Add";
-import Edit from "@material-ui/icons/Edit";
 import Delete from "@material-ui/icons/Delete";
 import ProjectWireframeTitleForm from './ProjectWireframeTitleForm';
 import ProjectWireframeEditForm from './ProjectWireframeEditForm';

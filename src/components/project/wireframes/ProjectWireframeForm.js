@@ -51,8 +51,6 @@ const ProjectWireframeForm = props => {
     setOpen(false);
   };
 
-  console.log("wire", wireframes)
-
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>

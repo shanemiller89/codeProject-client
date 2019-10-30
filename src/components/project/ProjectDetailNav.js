@@ -13,12 +13,13 @@ import AccountTree from "@material-ui/icons/AccountTree";
 import Web from "@material-ui/icons/Web";
 import ListAlt from "@material-ui/icons/ListAlt";
 import AddBox from "@material-ui/icons/AddBox";
-import ProjectOverview from "./ProjectOverview";
-import ProjectERD from "./ProjectERD";
+import ProjectOverview from "./overview/ProjectOverview";
+import ProjectERD from "./erd/ProjectERD";
 import ProjectWireframeForm from "./wireframes/ProjectWireframeForm";
 import ProjectWireframeListItem from "./wireframes/ProjectWireframeListItem";
 import { Grid, Button } from "@material-ui/core";
 import WireframeFormatMenu from "./wireframes/WireframeFormatMenu";
+import Tasks from "./tasks/Tasks";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -118,7 +119,6 @@ const ProjectDetailNav = props => {
           project={props.project}
           addWireframe={props.addWireframe}
         />
-        {/* <div style={{display: "flex", justifyContent: "space-around", flexWrap: "wrap"}}> */}
         <Grid container spacing={2}>
           {props.wireframes.map(wireframe => (
             <Grid container item xs={3}>
@@ -134,10 +134,9 @@ const ProjectDetailNav = props => {
             </Grid>
           ))}
         </Grid>
-        {/* </div> */}
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Item Four
+        <Tasks project={props.project} addTasks={props.addTasks} tasks={props.tasks} />
       </TabPanel>
       <TabPanel value={value} index={4}>
         Item Five
