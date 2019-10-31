@@ -4,7 +4,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 
-import MoreHoriz from "@material-ui/icons/MoreHoriz";
+import MoreVert from "@material-ui/icons/MoreVert";
 import Delete from "@material-ui/icons/Delete";
 import ProjectSupplementalNoteEditForm from "./ProjectSupplementalNoteEditForm";
 
@@ -27,7 +27,7 @@ const ProjectSupplementalNoteFormatMenu = props => {
         aria-haspopup="true"
         onClick={handleClick}
       >
-        <MoreHoriz />
+        <MoreVert />
       </IconButton>
       <Menu
         id="simple-menu"
