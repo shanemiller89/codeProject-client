@@ -15,6 +15,7 @@ import ProjectOverview from "./overview/ProjectOverview";
 import Tasks from "./tasks/Tasks";
 import ProjectERD from "./erd/ProjectERD";
 import ProjectWireframes from "./wireframes/ProjectWireframes";
+import ProjectSupplementals from "./supplemental/ProjectSupplementals";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -112,7 +113,13 @@ const ProjectDetailNav = props => {
         />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        Item Five
+        <ProjectSupplementals
+          project={props.project}
+          supplementals={props.supplementals}
+          addNote={props.addNote}
+          deleteSupplemental={props.deleteSupplemental}
+          editNote={props.editNote}
+        />
       </TabPanel>
     </div>
   );

@@ -4,31 +4,34 @@ import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { MenuItem, ListItemIcon } from "@material-ui/core";
-import Edit from "@material-ui/icons/Edit";
+import Note from "@material-ui/icons/Note";
 
 
 
-const ProjectTasksEditForm = (props) => {
+const ProjectSupplementalNoteForm = (props) => {
   const [open, setOpen] = useState(false);
-  const [task, setTask] = useState("");
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
 
 
   const submit = (e) => {
       e.preventDefault()
-      const projectTask = {
-        task: task,
+      const projectNote = {
+        title: title,
+        text: text,
+        supplemental_type_id: 1,
+        project_id: props.project.id
     };
-      props.editTask(projectTask, props.task.id);
+      props.addNote(projectNote);
       handleClose()
       props.handleCloseMenu()
     }
 
   const handleClickOpen = () => {
     setOpen(true);
-    setTask(props.task)
-
   };
 
   const handleClose = () => {
@@ -36,38 +39,45 @@ const ProjectTasksEditForm = (props) => {
   };
 
   return (
-    <div>
-        
-      <MenuItem onClick={handleClickOpen}>
-        <ListItemIcon>
-          <Edit fontSize="small" />
-        </ListItemIcon>
-        Edit Task
-      </MenuItem>
+    <div>        
+        <MenuItem onClick={handleClickOpen}>
+          <ListItemIcon>
+            <Note fontSize="small" />
+          </ListItemIcon>
+          Add Note
+        </MenuItem>
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
         maxWidth="xl"
       >
-        <DialogTitle id="form-dialog-title">Edit Task</DialogTitle>
+        <DialogTitle id="form-dialog-title">Create Note</DialogTitle>
         <form onSubmit={submit}>
           <DialogContent>
-
+          <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              helperText="Reference Title"
+              id="title"
+              label="Title"
+              name="title"
+              onChange={e => setTitle(e.target.value)}
+            />
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
               multiline
-              helperText="Markdown is supported for Tasks. Otherwise, only spacing and line breaks will be rendered."
+              helperText="Markdown is supported for Supplemental Notes. Otherwise, only spacing and line breaks will be rendered."
               rows="10"
-              style={{width: "50em"}}
-              id="task"
-              label="Task"
-              name="task"
-              onChange={e => setTask(e.target.value)}
-              value={task.task}
+              id="text"
+              label="Note"
+              name="text"
+              onChange={e => setText(e.target.value)}
             />
           </DialogContent>
           <DialogActions>
@@ -84,4 +94,4 @@ const ProjectTasksEditForm = (props) => {
   );
 };
 
-export default ProjectTasksEditForm
+export default ProjectSupplementalNoteForm

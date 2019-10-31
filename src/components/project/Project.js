@@ -9,6 +9,8 @@ const Project = props => {
   const [technologies, setTechnologies] = useState([]);
   const [wireframes, setWireframes] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const [supplementals, setSupplementals] = useState([]);
+
 
 
 
@@ -19,6 +21,8 @@ const Project = props => {
         setTechnologies(project.technologies);
         setWireframes(project.wireframes)
         setTasks(project.tasks)
+        setSupplementals(project.supplementals)
+
 
       }
     );
@@ -49,6 +53,12 @@ const Project = props => {
     });
   };
 
+  const editNote= (editedItem) => {
+    APIManager.put(`supplementals/updatenote`, editedItem).then(() => {
+      getProject();
+    });
+  };
+
   // --ADD FUNCTIONS -- //
 
 
@@ -75,6 +85,11 @@ const Project = props => {
       getProject();
     });
   };
+  const addNote= item => {
+    APIManager.post("supplementals", item).then(() => {
+      getProject();
+    });
+  };
 
   // --DELETE FUNCTIONS -- //
 
@@ -97,6 +112,12 @@ const Project = props => {
 
   const deleteTask = id => {
     APIManager.delete("tasks", id).then(() => {
+      getProject();
+    });
+  };
+
+  const deleteSupplemental = id => {
+    APIManager.delete("supplementals", id).then(() => {
       getProject();
     });
   };
@@ -128,16 +149,20 @@ console.log("Technologies", technologies)
           technologies={technologies}
           wireframes={wireframes}
           tasks={tasks}
+          supplementals={supplementals}
           editProjectOverview={editProjectOverview}
           editWireframeImage={editWireframeImage}
           editTask={editTask}
           editTaskStatus={editTaskStatus}
+          editNote={editNote}
           addERD={addERD}
           addWireframe={addWireframe}
           addWireframeTitle={addWireframeTitle}
           addTasks={addTasks}
+          addNote={addNote}
           deleteWireframe={deleteWireframe}
           deleteTask={deleteTask}
+          deleteSupplemental={deleteSupplemental}
         />
       </div>
     </>
