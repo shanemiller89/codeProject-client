@@ -4,6 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ProjectSupplementalNotes from "./ProjectSupplementalNotes";
 import AddSupplementalMenu from "./AddSupplementalMenu";
+import ProjectSupplementalCodes from "./ProjectSupplementalCodes";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,6 +44,7 @@ const ProjectSupplementals = props => {
           <Typography variant="h5" component="h3">
             Code Snippets
           </Typography>
+            <ProjectSupplementalCodes />
         </Paper>
       </div>
       <div className={classes.root}>

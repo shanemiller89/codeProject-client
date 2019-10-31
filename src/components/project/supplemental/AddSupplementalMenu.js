@@ -5,6 +5,7 @@ import Menu from "@material-ui/core/Menu";
 
 import { Button } from "@material-ui/core";
 import ProjectSupplementalNoteForm from "./ProjectSupplmentalNoteForm";
+import ProjectSupplementalCodeForm from "./ProjectSupplementalCodeForm";
 
 const AddSupplementalMenu = props => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -40,6 +41,7 @@ const AddSupplementalMenu = props => {
           addNote={props.addNote}
           handleCloseMenu={handleClose}
         />
+        <ProjectSupplementalCodeForm/>
         {/* <ProjectTasksEditForm
           task={props.task}
           editTask={props.editTask}
