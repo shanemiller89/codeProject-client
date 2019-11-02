@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import ProjectSupplementalNotes from "./ProjectSupplementalNotes";
 import AddSupplementalMenu from "./AddSupplementalMenu";
 import ProjectSupplementalCodes from "./ProjectSupplementalCodes";
+import ProjectSupplementalImages from "./ProjectSupplementalImages";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -62,6 +63,14 @@ const ProjectSupplementals = props => {
           <Typography variant="h5" component="h3">
             Images
           </Typography>
+          <ProjectSupplementalImages
+            project={props.project}
+            deleteSupplemental={props.deleteSupplemental}
+            editSupplemental={props.editSupplemental}
+            images={props.supplementals.filter(
+              image => image.supplemental_type_id === 3
+            )}
+          />
         </Paper>
       </div>
     </>
