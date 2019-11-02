@@ -62,7 +62,7 @@ const ProjectWireframeForm = props => {
         aria-labelledby="form-dialog-title"
         maxWidth="xl"
       >
-        <DialogTitle id="form-dialog-title">Project ERD</DialogTitle>
+        <DialogTitle id="form-dialog-title">Project Wireframes</DialogTitle>
         <form onSubmit={submitMultiple}>
           <DialogContent>
             

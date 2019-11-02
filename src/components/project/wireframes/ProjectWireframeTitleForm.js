@@ -22,11 +22,11 @@ const ProjectWireframeTitleForm = props => {
     };
     props.addWireframeTitle(wireframeTitle, props.wireframe.id);
     handleClose();
-    props.handleClose();
   };
 
   const handleClickOpen = () => {
     setOpen(true);
+    props.handleCloseMenu()
     setTitle(props.wireframe.wireframe_title);
   };
 

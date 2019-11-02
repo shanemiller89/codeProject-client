@@ -52,7 +52,9 @@ const ProjectSupplementalNotes = props => {
               />
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <ReactMarkdown source={note.text} escapeHtml={false} />
+              <div style={{width: "100%"}}>
+              <ReactMarkdown source={note.text} escapeHtml={true} />
+              </div>
             </ExpansionPanelDetails>
           </ExpansionPanel>
         </div>

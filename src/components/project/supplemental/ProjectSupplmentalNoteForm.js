@@ -25,7 +25,7 @@ const ProjectSupplementalNoteForm = (props) => {
         supplemental_type_id: 1,
         project_id: props.project.id
     };
-      props.addNote(projectNote);
+      props.addSupplemental(projectNote);
       handleClose()
     }
 

@@ -25,8 +25,7 @@ const ProjectSupplementals = props => {
     <>
       <AddSupplementalMenu
         project={props.project}
-        addNote={props.addNote}
-        addCode={props.addCode}
+        addSupplemental={props.addSupplemental}
       />
       <div className={classes.root}>
         <Paper className={classes.root}>

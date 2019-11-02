@@ -39,7 +39,7 @@ const ProjectSupplementalCodeForm = props => {
       supplemental_type_id: 2,
       project_id: props.project.id
     };
-    props.addCode(projectCode);
+    props.addSupplemental(projectCode);
     handleClose();
   };
 

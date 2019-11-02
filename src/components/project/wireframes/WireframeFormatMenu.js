@@ -1,19 +1,15 @@
-import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-
+import React from "react";
+import IconButton from "@material-ui/core/IconButton";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 
 import MoreHoriz from "@material-ui/icons/MoreHoriz";
 import Delete from "@material-ui/icons/Delete";
-import ProjectWireframeTitleForm from './ProjectWireframeTitleForm';
-import ProjectWireframeEditForm from './ProjectWireframeEditForm';
+import ProjectWireframeTitleForm from "./ProjectWireframeTitleForm";
+import ProjectWireframeEditForm from "./ProjectWireframeEditForm";
 
-
-
-
-const WireframeFormatMenu = (props) => {
+const WireframeFormatMenu = props => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = event => {
@@ -40,19 +36,27 @@ const WireframeFormatMenu = (props) => {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
-      >         
-      <ProjectWireframeTitleForm wireframe={props.wireframe} addWireframeTitle={props.addWireframeTitle} handleClose={handleClose}/>
-      <ProjectWireframeEditForm editWireframeImage={props.editWireframeImage} project={props.project} wireframe={props.wireframe} handleClose={handleClose}/>
+      >
+        <ProjectWireframeTitleForm
+          wireframe={props.wireframe}
+          addWireframeTitle={props.addWireframeTitle}
+          handleCloseMenu={handleClose}
+        />
+        <ProjectWireframeEditForm
+          editWireframeImage={props.editWireframeImage}
+          project={props.project}
+          wireframe={props.wireframe}
+          handleCloseMenu={handleClose}
+        />
         <MenuItem onClick={() => props.deleteWireframe(props.wireframe.id)}>
-        <ListItemIcon>
+          <ListItemIcon>
             <Delete fontSize="small" />
           </ListItemIcon>
           Delete
         </MenuItem>
-
       </Menu>
     </div>
   );
-}
+};
 
-export default WireframeFormatMenu
+export default WireframeFormatMenu;

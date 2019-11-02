@@ -116,8 +116,7 @@ const ProjectDetailNav = props => {
         <ProjectSupplementals
           project={props.project}
           supplementals={props.supplementals}
-          addNote={props.addNote}
-          addCode={props.addCode}
+          addSupplemental={props.addSupplemental}
           deleteSupplemental={props.deleteSupplemental}
           editSupplemental={props.editSupplemental}
         />

@@ -9,30 +9,34 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import MenuItem from "@material-ui/core/MenuItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import SwapHoriz from "@material-ui/icons/SwapHoriz";
+import Image from "@material-ui/icons/Image";
+import { MenuItem, ListItemIcon } from "@material-ui/core";
 
-const ProjectWireframeEditForm = props => {
+const ProjectSupplementalImageForm = props => {
   const [open, setOpen] = useState(false);
-  const [wireframes, setWireframes] = useState([]);
+  const [supplementalImages, setImage] = useState("");
+  const [title, setTitle] = useState("");
 
-  const storageRef = firebase.storage().ref("project_wireframes");
+  const storageRef = firebase.storage().ref("project_supplemental_images");
 
-  const submit = (e,wireframe) => {
+  const submit = (e, supplementalImage) => {
     e.preventDefault();
 
-    const ref = storageRef.child(`${props.project.title}-wireframe-${wireframe.name}`);
+    const ref = storageRef.child(
+      `${props.project.title}-supplemental-${supplementalImage.name}`
+    );
 
     return ref
-      .put(wireframe)
+      .put(supplementalImage)
       .then(data => data.ref.getDownloadURL())
       .then(imageUrl => {
-        const wireframe = {
-          wireframe_image: imageUrl,
-          id: props.wireframe.id
+        const newImage = {
+          title: title,
+          supplemental_image: imageUrl,
+          supplemental_type_id: 3,
+          project_id: props.project.id
         };
-        props.editWireframeImage(wireframe);
+        props.addSupplemental(newImage);
         handleClose();
       });
   };
@@ -40,14 +44,14 @@ const ProjectWireframeEditForm = props => {
   const submitMultiple = e => {
     e.preventDefault();
 
-    Array.from(wireframes).forEach(wireframe => (
-      submit(e, wireframe)
+    Array.from(supplementalImages).forEach(supplementalImage => (
+      submit(e, supplementalImage)
     ))
   }
 
   const handleClickOpen = () => {
     setOpen(true);
-    props.handleCloseMenu()
+    props.handleCloseMenu();
   };
 
   const handleClose = () => {
@@ -56,33 +60,43 @@ const ProjectWireframeEditForm = props => {
 
   return (
     <div>
-        <MenuItem onClick={handleClickOpen}>
+      <MenuItem onClick={handleClickOpen}>
         <ListItemIcon>
-            <SwapHoriz fontSize="small" />
-          </ListItemIcon>
-          Change Wireframe Image
-        </MenuItem>
+          <Image fontSize="small" />
+        </ListItemIcon>
+        Add Image
+      </MenuItem>
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
         maxWidth="xl"
       >
-        <DialogTitle id="form-dialog-title">Change Wireframe</DialogTitle>
+        <DialogTitle id="form-dialog-title">Supplemental Image</DialogTitle>
         <form onSubmit={submitMultiple}>
           <DialogContent>
-          <TextField
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              helperText="Reference Title"
+              id="title"
+              label="Title"
+              name="title"
+              onChange={e => setTitle(e.target.value)}
+            />
+            <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
               helperText="Only Image Files (.PNG, .JPG, etc.) are supported"
-              id="wireframe"
+              id="supplementalImage"
               type="file"
-              onChange={e => setWireframes(e.target.files)}
-              name="wireframe"
+              onChange={e => setImage(e.target.files)}
+              name="supplementalImage"
             />
-
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
@@ -98,4 +112,4 @@ const ProjectWireframeEditForm = props => {
   );
 };
 
-export default ProjectWireframeEditForm;
+export default ProjectSupplementalImageForm;

@@ -85,16 +85,12 @@ const Project = props => {
       getProject();
     });
   };
-  const addNote= item => {
+  const addSupplemental= item => {
     APIManager.post("supplementals", item).then(() => {
       getProject();
     });
   };
-  const addCode= item => {
-    APIManager.post("supplementals", item).then(() => {
-      getProject();
-    });
-  };
+
 
   // --DELETE FUNCTIONS -- //
 
@@ -164,8 +160,7 @@ console.log("Technologies", technologies)
           addWireframe={addWireframe}
           addWireframeTitle={addWireframeTitle}
           addTasks={addTasks}
-          addCode={addCode}
-          addNote={addNote}
+          addSupplemental={addSupplemental}
           deleteWireframe={deleteWireframe}
           deleteTask={deleteTask}
           deleteSupplemental={deleteSupplemental}
