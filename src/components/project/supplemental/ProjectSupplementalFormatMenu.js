@@ -7,8 +7,9 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import MoreVert from "@material-ui/icons/MoreVert";
 import Delete from "@material-ui/icons/Delete";
 import ProjectSupplementalNoteEditForm from "./ProjectSupplementalNoteEditForm";
+import ProjectSupplementalCodeEditForm from "./ProjectSupplementalCodeEditForm";
 
-const ProjectSupplementalNoteFormatMenu = props => {
+const ProjectSupplementalFormatMenu = props => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = event => {
@@ -36,12 +37,19 @@ const ProjectSupplementalNoteFormatMenu = props => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+      {props.supplemental.supplemental_type_id === 1 ?
         <ProjectSupplementalNoteEditForm
-          note={props.note}
-          editNote={props.editNote}
+          note={props.supplemental}
+          editSupplemental={props.editSupplemental}
           handleCloseMenu={handleClose}
         />
-        <MenuItem onClick={() => props.deleteSupplemental(props.note.id)}>
+        :
+        <ProjectSupplementalCodeEditForm
+        editSupplemental={props.editSupplemental}
+        code={props.supplemental}
+        handleCloseMenu={handleClose}
+        />}
+        <MenuItem onClick={() => props.deleteSupplemental(props.supplemental.id)}>
           <ListItemIcon>
             <Delete fontSize="small" />
           </ListItemIcon>
@@ -52,4 +60,4 @@ const ProjectSupplementalNoteFormatMenu = props => {
   );
 };
 
-export default ProjectSupplementalNoteFormatMenu;
+export default ProjectSupplementalFormatMenu;

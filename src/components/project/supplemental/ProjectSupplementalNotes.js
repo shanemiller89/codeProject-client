@@ -6,7 +6,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Button, FormControlLabel } from "@material-ui/core";
-import ProjectSupplementalNoteFormatMenu from "./ProjectSupplementalNoteFormatMenu";
+import ProjectSupplementalFormatMenu from "./ProjectSupplementalFormatMenu";
 
 const ReactMarkdown = require("react-markdown");
 
@@ -43,10 +43,10 @@ const ProjectSupplementalNotes = props => {
                   </Typography>
                 }
                 control={
-                  <ProjectSupplementalNoteFormatMenu
+                  <ProjectSupplementalFormatMenu
                     deleteSupplemental={props.deleteSupplemental}
-                    editNote={props.editNote}
-                    note={note}
+                    editSupplemental={props.editSupplemental}
+                    supplemental={note}
                   />
                 }
               />

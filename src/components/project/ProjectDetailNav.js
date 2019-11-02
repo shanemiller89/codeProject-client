@@ -117,8 +117,9 @@ const ProjectDetailNav = props => {
           project={props.project}
           supplementals={props.supplementals}
           addNote={props.addNote}
+          addCode={props.addCode}
           deleteSupplemental={props.deleteSupplemental}
-          editNote={props.editNote}
+          editSupplemental={props.editSupplemental}
         />
       </TabPanel>
     </div>

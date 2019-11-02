@@ -24,13 +24,13 @@ const ProjectSupplementalNoteEditForm = (props) => {
         text: text,
         supplemental_id: props.note.id
     };
-      props.editNote(projectNote);
+      props.editSupplemental(projectNote,"updatenote");
       handleClose()
-      props.handleCloseMenu()
     }
 
   const handleClickOpen = () => {
     setOpen(true);
+    props.handleCloseMenu()
     setTitle(props.note.title)
     setText(props.note.text)
   };

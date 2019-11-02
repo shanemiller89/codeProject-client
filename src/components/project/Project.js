@@ -53,8 +53,8 @@ const Project = props => {
     });
   };
 
-  const editNote= (editedItem) => {
-    APIManager.put(`supplementals/updatenote`, editedItem).then(() => {
+  const editSupplemental= (editedItem, editAction) => {
+    APIManager.put(`supplementals/${editAction}`, editedItem).then(() => {
       getProject();
     });
   };
@@ -86,6 +86,11 @@ const Project = props => {
     });
   };
   const addNote= item => {
+    APIManager.post("supplementals", item).then(() => {
+      getProject();
+    });
+  };
+  const addCode= item => {
     APIManager.post("supplementals", item).then(() => {
       getProject();
     });
@@ -154,11 +159,12 @@ console.log("Technologies", technologies)
           editWireframeImage={editWireframeImage}
           editTask={editTask}
           editTaskStatus={editTaskStatus}
-          editNote={editNote}
+          editSupplemental={editSupplemental}
           addERD={addERD}
           addWireframe={addWireframe}
           addWireframeTitle={addWireframeTitle}
           addTasks={addTasks}
+          addCode={addCode}
           addNote={addNote}
           deleteWireframe={deleteWireframe}
           deleteTask={deleteTask}

@@ -41,7 +41,11 @@ const AddSupplementalMenu = props => {
           addNote={props.addNote}
           handleCloseMenu={handleClose}
         />
-        <ProjectSupplementalCodeForm/>
+        <ProjectSupplementalCodeForm
+          project={props.project}
+          addCode={props.addCode}
+          handleCloseMenu={handleClose}
+        />
         {/* <ProjectTasksEditForm
           task={props.task}
           editTask={props.editTask}

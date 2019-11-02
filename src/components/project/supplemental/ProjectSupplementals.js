@@ -23,7 +23,11 @@ const ProjectSupplementals = props => {
 
   return (
     <>
-      <AddSupplementalMenu project={props.project} addNote={props.addNote} />
+      <AddSupplementalMenu
+        project={props.project}
+        addNote={props.addNote}
+        addCode={props.addCode}
+      />
       <div className={classes.root}>
         <Paper className={classes.root}>
           <Typography variant="h5" component="h3">
@@ -32,7 +36,7 @@ const ProjectSupplementals = props => {
           <ProjectSupplementalNotes
             project={props.project}
             deleteSupplemental={props.deleteSupplemental}
-            editNote={props.editNote}
+            editSupplemental={props.editSupplemental}
             notes={props.supplementals.filter(
               note => note.supplemental_type_id === 1
             )}
@@ -44,7 +48,14 @@ const ProjectSupplementals = props => {
           <Typography variant="h5" component="h3">
             Code Snippets
           </Typography>
-            <ProjectSupplementalCodes />
+          <ProjectSupplementalCodes
+            project={props.project}
+            deleteSupplemental={props.deleteSupplemental}
+            editSupplemental={props.editSupplemental}
+            codes={props.supplementals.filter(
+              code => code.supplemental_type_id === 2
+            )}
+          />
         </Paper>
       </div>
       <div className={classes.root}>

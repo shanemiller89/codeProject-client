@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { MenuItem, ListItemIcon, InputLabel, Select } from "@material-ui/core";
 import Code from "@material-ui/icons/Code";
@@ -24,7 +23,7 @@ const options = [
   { key: "sql", text: "SQL", value: "sql" }
 ];
 
-const ProjectSupplementalCodeForm = props => {
+const ProjectSupplementalCodeEditForm = props => {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -36,17 +35,18 @@ const ProjectSupplementalCodeForm = props => {
       title: title,
       text: text,
       language: language,
-      supplemental_type_id: 2,
-      project_id: props.project.id
+      supplemental_id: props.code.id
     };
-    props.addCode(projectCode);
+    props.editSupplemental(projectCode, "updatecode");
     handleClose();
   };
 
   const handleClickOpen = () => {
     setOpen(true);
     props.handleCloseMenu();
-
+    setTitle(props.code.title)
+    setText(props.code.text)
+    setLanguage(props.code.language)
   };
 
   const handleClose = () => {
@@ -59,7 +59,7 @@ const ProjectSupplementalCodeForm = props => {
         <ListItemIcon>
           <Code fontSize="small" />
         </ListItemIcon>
-        Add Code Snippet
+        Edit Code Snippet
       </MenuItem>
       <Dialog
         open={open}
@@ -67,7 +67,7 @@ const ProjectSupplementalCodeForm = props => {
         aria-labelledby="form-dialog-title"
         maxWidth="xl"
       >
-        <DialogTitle id="form-dialog-title">Create Note</DialogTitle>
+        <DialogTitle id="form-dialog-title">Edit Code Snippet</DialogTitle>
         <form onSubmit={submit}>
           <DialogContent>
             <TextField
@@ -80,6 +80,7 @@ const ProjectSupplementalCodeForm = props => {
               label="Title"
               name="title"
               onChange={e => setTitle(e.target.value)}
+              value={title}
             />
             <TextField
               variant="outlined"
@@ -93,6 +94,7 @@ const ProjectSupplementalCodeForm = props => {
               label="Note"
               name="text"
               onChange={e => setText(e.target.value)}
+              value={text}
             />
             <InputLabel id="demo-simple-select-label">Language</InputLabel>
             <Select
@@ -123,4 +125,4 @@ const ProjectSupplementalCodeForm = props => {
   );
 };
 
-export default ProjectSupplementalCodeForm;
+export default ProjectSupplementalCodeEditForm;

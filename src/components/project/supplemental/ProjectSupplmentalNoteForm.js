@@ -27,11 +27,12 @@ const ProjectSupplementalNoteForm = (props) => {
     };
       props.addNote(projectNote);
       handleClose()
-      props.handleCloseMenu()
     }
 
   const handleClickOpen = () => {
     setOpen(true);
+    props.handleCloseMenu()
+
   };
 
   const handleClose = () => {
