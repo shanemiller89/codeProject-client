@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { FormControl, FormLabel, RadioGroup, Radio } from "@material-ui/core";
 
 const ProjectForm = props => {
   const [title, setTitle] = useState("");
@@ -18,16 +19,12 @@ const ProjectForm = props => {
   const [overview, setOverview] = useState("");
   const [primary_technology, setPrimaryTech] = useState("");
   const [supplemental_technologies, setSupplementalTech] = useState([]);
+  const [value, setValue] = useState("false");
+
 
   const [project_image, setProjectImage] = useState("");
   const [checked, setIsChecked] = useState(false);
   const [disabled, setIsDisabled] = useState(true);
-
-  const [privateChecked, setPrivateIsChecked] = useState(false);
-
-  const privateCheckedToggle = () => {
-    setPrivateIsChecked(!privateChecked);
-  };
 
   const checkedToggle = () => {
     setIsChecked(!checked);
@@ -52,7 +49,7 @@ const ProjectForm = props => {
           title: title,
           repo: repo,
           overview: overview,
-          private: privateChecked,
+          private: JSON.parse(value),
           project_image: imageUrl,
           primary_technology: primary_technology,
           supplemental_technologies: supplementalTechArray
@@ -71,7 +68,7 @@ const ProjectForm = props => {
       title: title,
       repo: repo,
       overview: overview,
-      private: privateChecked,
+      private: JSON.parse(value),
       project_image: project_image,
       primary_technology: primary_technology,
       supplemental_technologies: supplementalTechArray
@@ -99,7 +96,7 @@ const ProjectForm = props => {
             New Project
           </Typography>
           <form onSubmit={disabled ? createProject : createProjectWithImage}>
-            <div style={{display: "flex"}}>
+            <div style={{ display: "flex" }}>
               <div>
                 <TextField
                   variant="outlined"
@@ -122,22 +119,6 @@ const ProjectForm = props => {
                   name="repo"
                   onChange={e => setRepo(e.target.value)}
                 />
-                {/* <Container fullWidth style={{background: "#d4edda", borderRadius: ".25em", padding: "1em", color: "#155724", textAlign: "center"}}>
-              Markdown is supported for the Project Overview Description. Otherwise, only spacing and line breaks will be rendered.
-            </Container> */}
-                {/* <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              multiline
-              helperText="Markdown is supported for the Project Overview Description. Otherwise, only spacing and line breaks will be rendered."
-              rows="16"
-              id="overview"
-              label="Project Overview Description"
-              name="overview"
-              onChange={e => setOverview(e.target.value)}
-            /> */}
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -158,17 +139,30 @@ const ProjectForm = props => {
                   name="secondary"
                   onChange={e => setSupplementalTech(e.target.value)}
                 />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={privateChecked}
-                      onChange={privateCheckedToggle}
-                      value="checked"
-                      color="primary"
+                
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">Project Status</FormLabel>
+                  <RadioGroup
+                    aria-label="position"
+                    name="position"
+                    value={String(value)}
+                    onChange={e => setValue(e.target.value)}
+                    row
+                  >
+                    <FormControlLabel
+                      value="false"
+                      control={<Radio color="primary" />}
+                      label="Public"
+                      labelPlacement="start"
                     />
-                  }
-                  label="Is this a Private Project?"
-                />
+                    <FormControlLabel
+                      value="true"
+                      control={<Radio color="primary" />}
+                      label="Private"
+                      labelPlacement="start"
+                    />
+                  </RadioGroup>
+                </FormControl>
                 <br />
                 <FormControlLabel
                   control={
@@ -201,7 +195,7 @@ const ProjectForm = props => {
                   multiline
                   helperText="Markdown is supported for the Project Overview Description. Otherwise, only spacing and line breaks will be rendered."
                   rows="24"
-                  style={{marginLeft: "2em", width: "50em"}}
+                  style={{ marginLeft: "2em", width: "50em" }}
                   id="overview"
                   label="Project Overview Description"
                   name="overview"
@@ -215,7 +209,7 @@ const ProjectForm = props => {
               fullWidth
               variant="contained"
               color="primary"
-              style={{marginTop: "1em"}}
+              style={{ marginTop: "1em" }}
             >
               Create New Project
             </Button>

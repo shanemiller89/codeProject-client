@@ -105,7 +105,7 @@ const ProjectSupplementalCodeForm = props => {
             >
 
               {options.map(option => (
-                <MenuItem value={option.value}>{option.text}</MenuItem>
+                <MenuItem key={option.id} value={option.value}>{option.text}</MenuItem>
               ))}
             </Select>
           </DialogContent>

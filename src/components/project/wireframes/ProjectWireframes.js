@@ -17,7 +17,7 @@ const ProjectWireframes = props => {
       ) : (
         <Grid container spacing={2}>
           {props.wireframes.map(wireframe => (
-            <Grid container item xs={3}>
+            <Grid key={wireframe.id} container item xs={3}>
               <ProjectWireframeListItem wireframe={wireframe} />
               <h4>{wireframe.wireframe_title}</h4>
               <WireframeFormatMenu

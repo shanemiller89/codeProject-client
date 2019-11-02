@@ -6,14 +6,10 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Assignment from "@material-ui/icons/Assignment";
-import MoreHoriz from "@material-ui/icons/MoreHoriz";
-import DeleteIcon from "@material-ui/icons/Delete";
 
 import TasksForm from "./TasksForm";
-import { Container } from "@material-ui/core";
 import YellowAlert from "../../../widgets/YellowAlert";
 import ProjectTasksFormatMenu from "./ProjectTasksFormatMenu";
 import TasksFilter from "./TasksFilter";
@@ -50,7 +46,7 @@ const Tasks = props => {
               props.tasks
                 .filter(tasks => tasks.task_type_id === 1)
                 .map(task => (
-                  <ListItem divider>
+                  <ListItem key={task.id} divider>
                     <ListItemAvatar>
                       <Avatar>
                         <Assignment />
@@ -88,7 +84,7 @@ const Tasks = props => {
               props.tasks
                 .filter(tasks => tasks.task_type_id === 2)
                 .map(task => (
-                  <ListItem divider>
+                  <ListItem key={task.id} divider>
                     <ListItemAvatar>
                       <Avatar>
                         <Assignment />
@@ -126,7 +122,7 @@ const Tasks = props => {
               props.tasks
                 .filter(tasks => tasks.task_type_id === 3)
                 .map(task => (
-                  <ListItem divider>
+                  <ListItem key={task.id} divider>
                     <ListItemAvatar>
                       <Avatar>
                         <Assignment />
@@ -164,7 +160,7 @@ const Tasks = props => {
               props.tasks
                 .filter(tasks => tasks.task_type_id === 4)
                 .map(task => (
-                  <ListItem divider>
+                  <ListItem key={task.id} divider>
                     <ListItemAvatar>
                       <Avatar>
                         <Assignment />

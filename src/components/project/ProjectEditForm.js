@@ -22,21 +22,15 @@ import {
   DialogActions
 } from "@material-ui/core";
 
-const ProjectForm = props => {
+const ProjectEditForm = props => {
+  const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [repo, setRepo] = useState("");
   const [value, setValue] = useState("");
-  const [open, setOpen] = useState(false);
-
   const [project_image, setProjectImage] = useState("");
+
   const [checked, setIsChecked] = useState(false);
   const [disabled, setIsDisabled] = useState(true);
-
-  const [privateChecked, setPrivateIsChecked] = useState(false);
-
-  const privateCheckedToggle = () => {
-    setPrivateIsChecked(!privateChecked);
-  };
 
   const checkedToggle = () => {
     setIsChecked(!checked);
@@ -56,43 +50,36 @@ const ProjectForm = props => {
       .put(project_image)
       .then(data => data.ref.getDownloadURL())
       .then(imageUrl => {
-        const supplementalTechArray = supplemental_technologies.split(",");
-        const newProject = {
+        const editProject = {
           title: title,
           repo: repo,
-          overview: overview,
-          private: privateChecked,
-          project_image: imageUrl,
-          primary_technology: primary_technology,
-          supplemental_technologies: supplementalTechArray
+          private: JSON.parse(value),
+          project_image: imageUrl
         };
-        APIManager.post("projects", newProject);
-        props.history.push({
-          pathname: "/projects"
-        });
+        props.editProject(editProject, props.project.id);
+        handleClose()
       });
   };
 
   const submit = event => {
     event.preventDefault();
-    const supplementalTechArray = supplemental_technologies.split(",");
-    const newProject = {
+    const editProject = {
       title: title,
       repo: repo,
-      overview: overview,
-      private: privateChecked,
-      project_image: project_image,
-      primary_technology: primary_technology,
-      supplemental_technologies: supplementalTechArray
+      private: JSON.parse(value),
+      project_image: project_image
     };
-    APIManager.post("projects", newProject);
-    props.history.push({
-      pathname: "/projects"
-    });
+    props.editProject(editProject, props.project.id);
+    handleClose()
   };
 
   const handleClickOpen = () => {
     setOpen(true);
+    setTitle(props.project.title);
+    setRepo(props.project.repo);
+    setValue(props.project.private);
+    setProjectImage(props.project.project_image);
+    console.log("Boolean", props.project.private)
   };
 
   const handleClose = () => {
@@ -110,8 +97,8 @@ const ProjectForm = props => {
         aria-labelledby="form-dialog-title"
         maxWidth="xl"
       >
-        <DialogTitle id="form-dialog-title">Create Task</DialogTitle>
-        <form onSubmit={submit}>
+        <DialogTitle id="form-dialog-title">Edit Project</DialogTitle>
+        <form onSubmit={disabled ? submit : submitWithImage}>
           <DialogContent>
             <TextField
               variant="outlined"
@@ -123,6 +110,7 @@ const ProjectForm = props => {
               name="title"
               autoFocus
               onChange={e => setTitle(e.target.value)}
+              value={title}
             />
             <TextField
               variant="outlined"
@@ -133,13 +121,14 @@ const ProjectForm = props => {
               label="Repository Link"
               name="repo"
               onChange={e => setRepo(e.target.value)}
+              value={repo}
             />
             <FormControl component="fieldset">
               <FormLabel component="legend">Project Status</FormLabel>
               <RadioGroup
                 aria-label="position"
                 name="position"
-                value={value}
+                value={String(value)}
                 onChange={e => setValue(e.target.value)}
                 row
               >
@@ -157,29 +146,6 @@ const ProjectForm = props => {
                 />
               </RadioGroup>
             </FormControl>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Tasks Filter</FormLabel>
-              <RadioGroup
-                aria-label="position"
-                name="position"
-                value={value}
-                onChange={e => setValue(e.target.value)}
-                row
-              >
-                <FormControlLabel
-                  value="all"
-                  control={<Radio color="primary" />}
-                  label="All"
-                  labelPlacement="start"
-                />
-                <FormControlLabel
-                  value="incoming"
-                  control={<Radio color="primary" />}
-                  label="Incoming"
-                  labelPlacement="start"
-                />
-              </RadioGroup>
-            </FormControl>
             <br />
             <FormControlLabel
               control={
@@ -190,7 +156,7 @@ const ProjectForm = props => {
                   color="primary"
                 />
               }
-              label="Upload logo or associated Image for this project?"
+              label="Change logo or associated Image for this project?"
             />
             <TextField
               variant="outlined"
@@ -217,4 +183,4 @@ const ProjectForm = props => {
   );
 };
 
-export default ProjectForm;
+export default ProjectEditForm;

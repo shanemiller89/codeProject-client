@@ -29,7 +29,7 @@ const ProjectSupplementalCodes = props => {
       <YellowAlert message="You currently have no Code Snippets assoicated with this Project." />
       :
       props.codes.map(code => (
-        <div className={classes.root}>
+        <div key={code.id} className={classes.root}>
           <ExpansionPanel>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}

@@ -12,7 +12,7 @@ const ProjectSupplementalImages = props => {
       ) : (
         <Grid container spacing={2}>
           {props.images.map(image => (
-            <Grid container item xs={3}>
+            <Grid key={image.id} container item xs={3}>
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <ProjectSupplementalImageListItem image={image} />
                 <div style={{display: "flex"}}>

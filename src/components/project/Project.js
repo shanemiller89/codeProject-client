@@ -3,6 +3,7 @@ import APIManager from "../../util/APIManager";
 import ProjectDetailNav from "./ProjectDetailNav";
 import { Button } from "@material-ui/core";
 import DeleteDialog from "../../widgets/DeleteDialog";
+import ProjectEditForm from "./ProjectEditForm";
 
 const Project = props => {
   const [project, setProject] = useState({});
@@ -11,23 +12,24 @@ const Project = props => {
   const [tasks, setTasks] = useState([]);
   const [supplementals, setSupplementals] = useState([]);
 
-
-
-
   const getProject = () => {
     APIManager.get("projects", `${props.match.params.projectId}`).then(
       project => {
         setProject(project);
         setTechnologies(project.technologies);
-        setWireframes(project.wireframes)
-        setTasks(project.tasks)
-        setSupplementals(project.supplementals)
-
-
+        setWireframes(project.wireframes);
+        setTasks(project.tasks);
+        setSupplementals(project.supplementals);
       }
     );
   };
-// --EDIT FUNCTIONS -- //
+  // --EDIT FUNCTIONS -- //
+
+  const editProject = (item, id) => {
+    APIManager.put(`projects/${id}`, item).then(() => {
+      getProject();
+    });
+  };
 
   const editProjectOverview = editedItem => {
     APIManager.put("projects/overview", editedItem).then(() => {
@@ -47,13 +49,13 @@ const Project = props => {
     });
   };
 
-  const editTask= (item, id) => {
+  const editTask = (item, id) => {
     APIManager.put(`tasks/${id}`, item).then(() => {
       getProject();
     });
   };
 
-  const editSupplemental= (editedItem, editAction) => {
+  const editSupplemental = (editedItem, editAction) => {
     APIManager.put(`supplementals/${editAction}`, editedItem).then(() => {
       getProject();
     });
@@ -61,39 +63,36 @@ const Project = props => {
 
   // --ADD FUNCTIONS -- //
 
-
-  const addERD= editedItem => {
+  const addERD = editedItem => {
     APIManager.put("projects/erd", editedItem).then(() => {
       getProject();
     });
   };
 
-  const addWireframe= item => {
+  const addWireframe = item => {
     APIManager.post("wireframes", item).then(() => {
       getProject();
     });
   };
 
-  const addWireframeTitle= (item, id) => {
+  const addWireframeTitle = (item, id) => {
     APIManager.put(`wireframes/${id}`, item).then(() => {
       getProject();
     });
   };
 
-  const addTasks= item => {
+  const addTasks = item => {
     APIManager.post("tasks", item).then(() => {
       getProject();
     });
   };
-  const addSupplemental= item => {
+  const addSupplemental = item => {
     APIManager.post("supplementals", item).then(() => {
       getProject();
     });
   };
 
-
   // --DELETE FUNCTIONS -- //
-
 
   const deleteProject = () => {
     APIManager.delete("projects", `${props.match.params.projectId}`).then(
@@ -105,7 +104,7 @@ const Project = props => {
     );
   };
 
-  const deleteWireframe= id => {
+  const deleteWireframe = id => {
     APIManager.delete("wireframes", id).then(() => {
       getProject();
     });
@@ -123,7 +122,6 @@ const Project = props => {
     });
   };
 
-
   useEffect(() => {
     getProject();
   }, []);
@@ -135,6 +133,7 @@ const Project = props => {
       <h2>
         Repo: <a href={project.repo}>{project.repo}</a>
       </h2>
+      <ProjectEditForm project={project} editProject={editProject} />
       <DeleteDialog
         deletedItem="Project"
         deleteFunction={deleteProject}

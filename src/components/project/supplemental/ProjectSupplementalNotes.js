@@ -30,7 +30,7 @@ const ProjectSupplementalNotes = props => {
         <YellowAlert message="You currently have no Notes associated with this Project." />
       ) : (
         props.notes.map(note => (
-          <div className={classes.root}>
+          <div key={note.id} className={classes.root}>
             <ExpansionPanel>
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
