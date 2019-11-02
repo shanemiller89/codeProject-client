@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -8,18 +8,18 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 
-const ProjectOverviewEdit = props => {
+const TasksForm = (props) => {
   const [open, setOpen] = useState(false);
-  const [overview, setOverview] = useState("");
+  const [task, setTask] = useState("");
 
 
   const submit = (e) => {
       e.preventDefault()
-      const editedOverview = {
-        overview: overview,
-        id: props.project.id
-      };
-      props.editProjectOverview(editedOverview);
+      const projectTask = {
+        task: task,
+        project_id: props.project.id
+    };
+      props.addTasks(projectTask);
       handleClose()
     }
 
@@ -31,11 +31,10 @@ const ProjectOverviewEdit = props => {
     setOpen(false);
   };
 
-
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Edit
+        Create Tasks
       </Button>
       <Dialog
         open={open}
@@ -43,10 +42,9 @@ const ProjectOverviewEdit = props => {
         aria-labelledby="form-dialog-title"
         maxWidth="xl"
       >
-        <DialogTitle id="form-dialog-title">Edit</DialogTitle>
+        <DialogTitle id="form-dialog-title">Create Task</DialogTitle>
         <form onSubmit={submit}>
           <DialogContent>
-            <DialogContentText>Edit Overview</DialogContentText>
 
             <TextField
               variant="outlined"
@@ -54,14 +52,13 @@ const ProjectOverviewEdit = props => {
               required
               fullWidth
               multiline
-              helperText="Markdown is supported for the Project Overview Description. Otherwise, only spacing and line breaks will be rendered."
-              rows="30"
+              helperText="Markdown is supported for Tasks. Otherwise, only spacing and line breaks will be rendered."
+              rows="10"
               style={{width: "50em"}}
-              id="overview"
-              label="Project Overview Description"
-              name="overview"
-              defaultValue={props.project.overview}
-              onChange={e => setOverview(e.target.value)}
+              id="task"
+              label="Task"
+              name="task"
+              onChange={e => setTask(e.target.value)}
             />
           </DialogContent>
           <DialogActions>
@@ -78,4 +75,4 @@ const ProjectOverviewEdit = props => {
   );
 };
 
-export default ProjectOverviewEdit
+export default TasksForm

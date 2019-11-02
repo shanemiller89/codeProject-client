@@ -20,8 +20,6 @@ const ProjectList = () => {
     getMyProjects();
   }, []);
 
-  console.log("My Projects", myProjects);
-
   return (
     <>
       <h1>Projects</h1>
@@ -33,7 +31,7 @@ const ProjectList = () => {
       <h3>My Projects</h3>
       <Grid container spacing={5} style={{marginLeft: "3em"}}>
         {myProjects.map(project => (
-          <Grid item xs={4} spacing={5}>
+          <Grid key={project.id} item xs={4} spacing={5}>
             <ProjectCard key={project.id} project={project}/>
           </Grid>
         ))}

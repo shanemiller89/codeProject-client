@@ -11,7 +11,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 // import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-const ProjectERD = props => {
+const ProjectERDForm = props => {
   const [open, setOpen] = useState(false);
   const [erd, setERD] = useState("");
 
@@ -83,4 +83,4 @@ const ProjectERD = props => {
   );
 };
 
-export default ProjectERD;
+export default ProjectERDForm;

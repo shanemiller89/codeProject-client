@@ -6,16 +6,16 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
-
 import ViewHeadline from "@material-ui/icons/ViewHeadline";
 import AccountTree from "@material-ui/icons/AccountTree";
 import Web from "@material-ui/icons/Web";
 import ListAlt from "@material-ui/icons/ListAlt";
 import AddBox from "@material-ui/icons/AddBox";
-import ProjectOverview from "./ProjectOverview";
-import ProjectERD from "./ProjectERD";
-import ProjectWireframeForm from "./ProjectWireframeForm";
+import ProjectOverview from "./overview/ProjectOverview";
+import Tasks from "./tasks/Tasks";
+import ProjectERD from "./erd/ProjectERD";
+import ProjectWireframes from "./wireframes/ProjectWireframes";
+import ProjectSupplementals from "./supplemental/ProjectSupplementals";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -71,8 +71,8 @@ const ProjectDetailNav = props => {
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
-          //   aria-label="scrollable auto tabs example"
-          centered="true"
+          aria-label="Project Details"
+          centered
         >
           <Tab icon={<ViewHeadline />} label="Overview" {...a11yProps(0)} />
           <Tab icon={<AccountTree />} label="E.R.D." {...a11yProps(1)} />
@@ -83,6 +83,7 @@ const ProjectDetailNav = props => {
       </AppBar>
       <TabPanel value={value} index={0}>
         <ProjectOverview
+          key={props.project.id}
           project={props.project}
           technologies={props.technologies}
           editProjectOverview={props.editProjectOverview}
@@ -90,34 +91,35 @@ const ProjectDetailNav = props => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <ProjectERD project={props.project} addERD={props.addERD} />
-        {props.project.erd_image === "" ? (
-          <Container
-            fullWidth
-            style={{
-              background: "#fff3cd",
-              borderRadius: ".25em",
-              padding: "1em",
-              color: "#856404",
-              textAlign: "center"
-            }}
-          >
-            You currently have no ERD associated with this Project.
-          </Container>
-        ) : (
-          <img
-            alt={`${props.project.title}-ERD`}
-            src={props.project.erd_image}
-          />
-        )}
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <ProjectWireframeForm />
+        <ProjectWireframes
+          project={props.project}
+          wireframes={props.wireframes}
+          addWireframe={props.addWireframe}
+          addWireframeTitle={props.addWireframeTitle}
+          deleteWireframe={props.deleteWireframe}
+          editWireframeImage={props.editWireframeImage}
+        />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Item Four
+        <Tasks
+          project={props.project}
+          tasks={props.tasks}
+          addTasks={props.addTasks}
+          deleteTask={props.deleteTask}
+          editTask={props.editTask}
+          editTaskStatus={props.editTaskStatus}
+        />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        Item Five
+        <ProjectSupplementals
+          project={props.project}
+          supplementals={props.supplementals}
+          addSupplemental={props.addSupplemental}
+          deleteSupplemental={props.deleteSupplemental}
+          editSupplemental={props.editSupplemental}
+        />
       </TabPanel>
     </div>
   );

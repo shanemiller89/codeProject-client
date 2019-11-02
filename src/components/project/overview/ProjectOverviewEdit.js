@@ -1,42 +1,31 @@
-import React, { useState } from "react";
-
-import * as firebase from "firebase/app";
-import "firebase/storage";
-
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-// import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-const ProjectWireframeForm = props => {
+
+const ProjectOverviewEdit = props => {
   const [open, setOpen] = useState(false);
-  const [erd, setERD] = useState("");
+  const [overview, setOverview] = useState("");
 
-  const storageRef = firebase.storage().ref("project_ERDs");
 
-  const submit = e => {
-    e.preventDefault();
-
-    const ref = storageRef.child(`${props.project.title}-ERD`);
-
-    return ref
-      .put(erd)
-      .then(data => data.ref.getDownloadURL())
-      .then(imageUrl => {
-        const ERD = {
-          erd_image: imageUrl,
-          id: props.project.id
-        };
-        props.addERD(ERD);
-        handleClose();
-      });
-  };
+  const submit = (e) => {
+      e.preventDefault()
+      const editedOverview = {
+        overview: overview,
+        id: props.project.id
+      };
+      props.editProjectOverview(editedOverview);
+      handleClose()
+    }
 
   const handleClickOpen = () => {
     setOpen(true);
+    setOverview(props.project.overview);
   };
 
   const handleClose = () => {
@@ -46,7 +35,7 @@ const ProjectWireframeForm = props => {
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Add Wireframes
+        Edit
       </Button>
       <Dialog
         open={open}
@@ -54,22 +43,26 @@ const ProjectWireframeForm = props => {
         aria-labelledby="form-dialog-title"
         maxWidth="xl"
       >
-        <DialogTitle id="form-dialog-title">Project Wireframes</DialogTitle>
+        <DialogTitle id="form-dialog-title">Edit</DialogTitle>
         <form onSubmit={submit}>
           <DialogContent>
+            <DialogContentText>Edit Overview</DialogContentText>
+
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              helperText="Only Image Files (.PNG, .JPG, etc.) are supported"
-              id="profileImage"
-              type="file"
-              multiple
-              onChange={e => setERD(e.target.files[0])}
-              name="profileImage"
+              multiline
+              helperText="Markdown is supported for the Project Overview Description. Otherwise, only spacing and line breaks will be rendered."
+              rows="30"
+              style={{width: "50em"}}
+              id="overview"
+              label="Project Overview Description"
+              name="overview"
+              value={overview}
+              onChange={e => setOverview(e.target.value)}
             />
-        <input type="file" multiple />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
@@ -85,4 +78,4 @@ const ProjectWireframeForm = props => {
   );
 };
 
-export default ProjectWireframeForm;
+export default ProjectOverviewEdit
