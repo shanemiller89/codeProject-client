@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Button, FormControlLabel } from "@material-ui/core";
 import ProjectSupplementalFormatMenu from "./ProjectSupplementalFormatMenu";
+import YellowAlert from "../../../widgets/YellowAlert";
 
 const ReactMarkdown = require("react-markdown");
 
@@ -25,40 +26,44 @@ const ProjectSupplementalNotes = props => {
 
   return (
     <>
-      {props.notes.map(note => (
-        <div className={classes.root}>
-          <ExpansionPanel>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <FormControlLabel
-                aria-label="Acknowledge"
-                onClick={event => event.stopPropagation()}
-                onFocus={event => event.stopPropagation()}
-                label={
-                  <Typography className={classes.heading}>
-                    {note.title}
-                  </Typography>
-                }
-                control={
-                  <ProjectSupplementalFormatMenu
-                    deleteSupplemental={props.deleteSupplemental}
-                    editSupplemental={props.editSupplemental}
-                    supplemental={note}
-                  />
-                }
-              />
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <div style={{width: "100%"}}>
-              <ReactMarkdown source={note.text} escapeHtml={true} />
-              </div>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-        </div>
-      ))}
+      {props.notes.length === 0 ? (
+        <YellowAlert message="You currently have no Notes associated with this Project." />
+      ) : (
+        props.notes.map(note => (
+          <div className={classes.root}>
+            <ExpansionPanel>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <FormControlLabel
+                  aria-label="Acknowledge"
+                  onClick={event => event.stopPropagation()}
+                  onFocus={event => event.stopPropagation()}
+                  label={
+                    <Typography className={classes.heading}>
+                      {note.title}
+                    </Typography>
+                  }
+                  control={
+                    <ProjectSupplementalFormatMenu
+                      deleteSupplemental={props.deleteSupplemental}
+                      editSupplemental={props.editSupplemental}
+                      supplemental={note}
+                    />
+                  }
+                />
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <div style={{ width: "100%" }}>
+                  <ReactMarkdown source={note.text} escapeHtml={true} />
+                </div>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          </div>
+        ))
+      )}
     </>
   );
 };

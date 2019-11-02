@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { FormControlLabel } from "@material-ui/core";
 import ProjectSupplementalFormatMenu from "./ProjectSupplementalFormatMenu";
+import YellowAlert from "../../../widgets/YellowAlert";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,8 +25,10 @@ const ProjectSupplementalCodes = props => {
   const classes = useStyles();
 
   return (
-    <>
-      {props.codes.map(code => (
+    <>{props.codes.length === 0 ?
+      <YellowAlert message="You currently have no Code Snippets assoicated with this Project." />
+      :
+      props.codes.map(code => (
         <div className={classes.root}>
           <ExpansionPanel>
             <ExpansionPanelSummary

@@ -128,10 +128,6 @@ const Project = props => {
     getProject();
   }, []);
 
-console.log("Wireframes", wireframes)
-console.log("Tasks", tasks)
-console.log("Technologies", technologies)
-
   return (
     <>
       <h1>{project.title}</h1>

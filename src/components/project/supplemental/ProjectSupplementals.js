@@ -6,6 +6,7 @@ import ProjectSupplementalNotes from "./ProjectSupplementalNotes";
 import AddSupplementalMenu from "./AddSupplementalMenu";
 import ProjectSupplementalCodes from "./ProjectSupplementalCodes";
 import ProjectSupplementalImages from "./ProjectSupplementalImages";
+import SupplementalFilter from "./SupplementalFilter";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,21 +15,28 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProjectSupplementals = props => {
-  const [notes, setNotes] = useState("");
-  const [codes, setCodes] = useState("");
-  const [images, setImages] = useState("");
+  const [noteView, setNoteView] = useState(false)
+  const [codeView, setCodeView] = useState(false)
+  const [imageView, setImageView] = useState(false)
+
+
 
   const classes = useStyles();
 
-  console.log("Notes", notes);
-
   return (
     <>
+    <div style={{display: "flex"}}>
       <AddSupplementalMenu
         project={props.project}
         addSupplemental={props.addSupplemental}
       />
-      <div className={classes.root}>
+      <SupplementalFilter 
+      setNoteView={setNoteView}
+      setCodeView={setCodeView}
+      setImageView={setImageView}
+      />
+      </div>
+      <div className={classes.root} hidden={noteView}>
         <Paper className={classes.root}>
           <Typography variant="h5" component="h3">
             Notes
@@ -43,7 +51,7 @@ const ProjectSupplementals = props => {
           />
         </Paper>
       </div>
-      <div className={classes.root}>
+      <div className={classes.root} hidden={codeView}>
         <Paper className={classes.root}>
           <Typography variant="h5" component="h3">
             Code Snippets
@@ -58,7 +66,7 @@ const ProjectSupplementals = props => {
           />
         </Paper>
       </div>
-      <div className={classes.root}>
+      <div className={classes.root} hidden={imageView}>
         <Paper className={classes.root}>
           <Typography variant="h5" component="h3">
             Images
