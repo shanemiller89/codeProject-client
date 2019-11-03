@@ -4,6 +4,7 @@ import ProjectDetailNav from "./ProjectDetailNav";
 import { Button } from "@material-ui/core";
 import DeleteDialog from "../../widgets/DeleteDialog";
 import ProjectEditForm from "./ProjectEditForm";
+import CollaboratorInviteForm from "./collaborators/CollaboratorInviteForm";
 
 const Project = props => {
   const [project, setProject] = useState({});
@@ -139,6 +140,7 @@ const Project = props => {
         deleteFunction={deleteProject}
         id={props.match.params.projectId}
       />
+        <CollaboratorInviteForm />
       <div style={{ marginLeft: "6em" }}>
         <ProjectDetailNav
           project={project}
