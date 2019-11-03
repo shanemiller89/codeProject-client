@@ -7,33 +7,51 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import APIManager from "../../../util/APIManager"
+import APIManager from "../../../util/APIManager";
+import {
+  Container,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Avatar,
+  ListItemSecondaryAction,
+  List,
+  Radio,
+  Paper
+} from "@material-ui/core";
 
 const CollaboratorInviteForm = props => {
   const [open, setOpen] = useState(false);
-  const [coders, setCoders] =useState([])
-  const [collaborator, setCollaborator] = useState("")
+  const [coders, setCoders] = useState([]);
+  const [search, setSearch] = useState("");
+  const [collaborator, setCollaborator] = useState("");
   const [message, setMessage] = useState("");
+  const [checked, setChecked] = useState(false);
 
-//   const submit = e => {
-//     e.preventDefault();
-//     const projectTask = {
-//       task: task,
-//       project_id: props.project.id
-//     };
-//     props.addTasks(projectTask);
-//     handleClose();
-//   };
+    // const submit = e => {
+    //   e.preventDefault();
+    //   const collaborator = {
+    //     message: message,
+    //     project_id: props.project.id
+    //   };
+    //   props.addTasks(collaborator);
+    //   handleClose();
+    // };
 
-const searchCoders = () => {
-    APIManager.getAll("coders?users=krys").then(coders => {
-        setCoders(coders)
-    })
-}
+  const searchCoders = search => {
+    APIManager.getAll(`coders?users=${search}`).then(coders => {
+      setCoders(coders);
+    });
+  };
 
-useEffect(() => {
-    searchCoders();
-  }, []);
+  const handleSearch = e => {
+    setSearch(e.target.value);
+    searchCoders(search);
+  };
+
+  const handleClear = e => {
+    setCollaborator("");
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -43,7 +61,8 @@ useEffect(() => {
     setOpen(false);
   };
 
-  console.log("Coders", coders)
+  console.log("Coders", coders);
+  console.log("Collaborator", collaborator);
 
   return (
     <div>
@@ -59,34 +78,88 @@ useEffect(() => {
         <DialogTitle id="form-dialog-title">Invite Collaborator</DialogTitle>
         <form>
           <DialogContent>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              type="search"
-              id="title"
-              label="Project Name"
-              name="title"
-              autoFocus
-              onChange={e => setCollaborator(e.target.value)}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              multiline
-              helperText="Send a message with your collaboration invitation"
-              rows="10"
-              style={{ width: "50em" }}
-              id="message"
-              label="Message"
-              name="message"
-              onChange={e => setMessage(e.target.value)}
-            />
+            <div style={{ display: "flex" }}>
+              <div>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  type="search"
+                  id="title"
+                  label="Project Name"
+                  name="title"
+                  autoFocus
+                  onChange={handleSearch}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  multiline
+                  helperText="Send a message with your collaboration invitation"
+                  rows="10"
+                  id="message"
+                  label="Message"
+                  name="message"
+                  onChange={e => setMessage(e.target.value)}
+                />
+              </div>
+              <div>
+                {/* <Container
+                  style={{ height: 350, width: 700, marginLeft: "1.5em"}}
+                > */}
+                <Paper
+                  style={{
+                    height: 350,
+                    width: 700,
+                    marginLeft: "1.5em",
+                    overflow: "auto"
+                  }}
+                >
+                  <List>
+                    {coders.map(coder => (
+                      <ListItem key={coder.id} divider>
+                        <ListItemAvatar>
+                          <Avatar
+                            src={coder.profile_image}
+                            alt={coder.user.username}
+                            style={{
+                              margin: 10,
+                              width: 60,
+                              height: 60
+                            }}
+                          />
+                        </ListItemAvatar>
+                        <ListItemText primary={coder.user.username} />
+                        <ListItemSecondaryAction>
+                          {/* <Radio
+                            onChange={e => setCollaborator(e.target.value)}
+                            value={coder.id}
+                            name="selected user"
+                            disabled={collaborator.length !== 0 ? true : false}
+                            inputProps={{ "aria-label": coder.id }}
+                          /> */}
+                          <Button
+                            onClick={e => setCollaborator(coder.id)}
+                            disabled={collaborator.length !== 0 ? true : false}
+
+                          >
+                            Select
+                          </Button>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    ))}
+                  </List>
+                </Paper>
+                {/* </Container> */}
+              </div>
+            </div>
           </DialogContent>
           <DialogActions>
+            <Button onClick={handleClear} color="primary">
+              Clear Selected Collaborator
+            </Button>
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
@@ -100,4 +173,4 @@ useEffect(() => {
   );
 };
 
-export default CollaboratorInviteForm
+export default CollaboratorInviteForm;
