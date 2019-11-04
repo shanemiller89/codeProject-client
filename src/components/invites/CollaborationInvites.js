@@ -12,7 +12,7 @@ const CollaborationInvites = () => {
         })
     }
 
-    const acceptInvite = (editedItem, id) => {
+    const updateInvite = (editedItem, id) => {
       APIManager.put(`collaboratorinvites/${id}`, editedItem).then(() => {
           getInvites()
       })
@@ -28,7 +28,7 @@ const CollaborationInvites = () => {
     <>
     <h1>Collaboration Invites</h1>
     {invites.map(invite => (
-        <CollaborationInviteCard invite={invite} acceptInvite={acceptInvite}/>
+        <CollaborationInviteCard invite={invite} updateInvite={updateInvite}/>
     ))}
 
     </>

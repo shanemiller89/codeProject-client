@@ -14,7 +14,6 @@ const Project = props => {
   const [supplementals, setSupplementals] = useState([]);
   const [collaborators, setCollaborators] = useState([]);
 
-
   const getProject = () => {
     APIManager.get("projects", `${props.match.params.projectId}`).then(
       project => {
@@ -23,7 +22,7 @@ const Project = props => {
         setWireframes(project.wireframes);
         setTasks(project.tasks);
         setSupplementals(project.supplementals);
-        setCollaborators(project.collaborators)
+        setCollaborators(project.collaborators);
       }
     );
   };
@@ -68,8 +67,8 @@ const Project = props => {
   // --ADD FUNCTIONS -- //
 
   const createInvite = item => {
-    APIManager.post("collaboratorinvites", item)
-  }
+    APIManager.post("collaboratorinvites", item);
+  };
 
   const addERD = editedItem => {
     APIManager.put("projects/erd", editedItem).then(() => {
@@ -130,6 +129,12 @@ const Project = props => {
     });
   };
 
+  const deleteCollaborator = data => {
+    APIManager.put("projects/collaborator", data).then(() => {
+      getProject();
+    });
+  };
+
   useEffect(() => {
     getProject();
   }, []);
@@ -147,7 +152,9 @@ const Project = props => {
         deleteFunction={deleteProject}
         id={props.match.params.projectId}
       />
-        <CollaboratorInviteForm project={project} createInvite={createInvite}/>
+      {project.private === true ? null : (
+        <CollaboratorInviteForm project={project} createInvite={createInvite} />
+      )}
       <div style={{ marginLeft: "6em" }}>
         <ProjectDetailNav
           project={project}
@@ -169,6 +176,7 @@ const Project = props => {
           deleteWireframe={deleteWireframe}
           deleteTask={deleteTask}
           deleteSupplemental={deleteSupplemental}
+          deleteCollaborator={deleteCollaborator}
         />
       </div>
     </>

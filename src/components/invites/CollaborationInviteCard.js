@@ -42,7 +42,14 @@ const CollaborationInviteCard = props => {
     const accepted = {
       accept: true
     }
-    props.acceptInvite(accepted, props.invite.id)
+    props.updateInvite(accepted, props.invite.id)
+  }
+
+  const handleDecline = () => {
+    const accepted = {
+      accept: false
+    }
+    props.updateInvite(accepted, props.invite.id)
   }
 
 
@@ -74,7 +81,7 @@ const CollaborationInviteCard = props => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="large" color="secondary">
+        <Button onClick ={handleDecline} size="large" color="secondary">
           Decline
         </Button>
         <Button onClick={handleAccept} size="large" color="primary">
