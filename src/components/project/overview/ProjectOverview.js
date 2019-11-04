@@ -9,6 +9,16 @@ import Computer from "@material-ui/icons/Computer";
 import Code from "@material-ui/icons/Code";
 import Group from "@material-ui/icons/Group";
 import ProjectOverviewEdit from "./ProjectOverviewEdit";
+import {
+  List,
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
+  Button,
+  ListItemSecondaryAction
+} from "@material-ui/core";
+import YellowAlert from "../../../widgets/YellowAlert";
 
 // const ReactDOM = require("react-dom");
 const ReactMarkdown = require("react-markdown");
@@ -45,6 +55,16 @@ const ProjectOverview = props => {
       /* ... */
     ]
   });
+
+  const removeCollaborator = (project, collab) => {
+    const data = {
+      project_id: project,
+      collaborator_id: collab
+    };
+    props.deleteCollaborator(data);
+  };
+
+  console.log("Collabs", props.collaborators);
 
   return (
     <>
@@ -117,9 +137,47 @@ const ProjectOverview = props => {
               Collaborators
             </h1>
             <Paper elevation={3} className={classes.collaborators}>
-              {/* <Typography component="p">
-          {props.project.overview}
-        </Typography> */}
+              <List>
+                {props.project.private === true ?
+                <YellowAlert message="Only Public projects may have collaborators." />
+                :
+                  props.collaborators.length === 0 ? (
+                  <YellowAlert message="You currently have no collaborators for this project." />
+                ) : (
+                  props.collaborators.map(collaborator => (
+                    <ListItem key={collaborator.id} divider>
+                      <ListItemAvatar>
+                        <Avatar
+                          src={collaborator.profile_image}
+                          alt={collaborator.user.username}
+                          style={{
+                            margin: 10,
+                            width: 45,
+                            height: 45
+                          }}
+                        />
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={<strong>{collaborator.user.username}</strong>}
+                        secondary={`Primary Language: ${collaborator.primary_language}`}
+                      />
+                      <ListItemSecondaryAction>
+                        <Button
+                          size="small"
+                          onClick={() =>
+                            removeCollaborator(
+                              props.project.id,
+                              collaborator.id
+                            )
+                          }
+                        >
+                          Remove
+                        </Button>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))
+                )}
+              </List>
             </Paper>
           </div>
         </div>

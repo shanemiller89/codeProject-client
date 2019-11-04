@@ -4,6 +4,7 @@ import ProjectDetailNav from "./ProjectDetailNav";
 import { Button } from "@material-ui/core";
 import DeleteDialog from "../../widgets/DeleteDialog";
 import ProjectEditForm from "./ProjectEditForm";
+import CollaboratorInviteForm from "./collaborators/CollaboratorInviteForm";
 
 const Project = props => {
   const [project, setProject] = useState({});
@@ -11,6 +12,7 @@ const Project = props => {
   const [wireframes, setWireframes] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [supplementals, setSupplementals] = useState([]);
+  const [collaborators, setCollaborators] = useState([]);
 
   const getProject = () => {
     APIManager.get("projects", `${props.match.params.projectId}`).then(
@@ -20,6 +22,7 @@ const Project = props => {
         setWireframes(project.wireframes);
         setTasks(project.tasks);
         setSupplementals(project.supplementals);
+        setCollaborators(project.collaborators);
       }
     );
   };
@@ -62,6 +65,10 @@ const Project = props => {
   };
 
   // --ADD FUNCTIONS -- //
+
+  const createInvite = item => {
+    APIManager.post("collaboratorinvites", item);
+  };
 
   const addERD = editedItem => {
     APIManager.put("projects/erd", editedItem).then(() => {
@@ -122,6 +129,12 @@ const Project = props => {
     });
   };
 
+  const deleteCollaborator = data => {
+    APIManager.put("projects/collaborator", data).then(() => {
+      getProject();
+    });
+  };
+
   useEffect(() => {
     getProject();
   }, []);
@@ -139,6 +152,9 @@ const Project = props => {
         deleteFunction={deleteProject}
         id={props.match.params.projectId}
       />
+      {project.private === true ? null : (
+        <CollaboratorInviteForm project={project} createInvite={createInvite} />
+      )}
       <div style={{ marginLeft: "6em" }}>
         <ProjectDetailNav
           project={project}
@@ -146,6 +162,7 @@ const Project = props => {
           wireframes={wireframes}
           tasks={tasks}
           supplementals={supplementals}
+          collaborators={collaborators}
           editProjectOverview={editProjectOverview}
           editWireframeImage={editWireframeImage}
           editTask={editTask}
@@ -159,6 +176,7 @@ const Project = props => {
           deleteWireframe={deleteWireframe}
           deleteTask={deleteTask}
           deleteSupplemental={deleteSupplemental}
+          deleteCollaborator={deleteCollaborator}
         />
       </div>
     </>
