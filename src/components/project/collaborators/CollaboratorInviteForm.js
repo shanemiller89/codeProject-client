@@ -140,7 +140,7 @@ const CollaboratorInviteForm = props => {
                             }}
                           />
                         </ListItemAvatar>
-                        <ListItemText primary={coder.user.username} />
+                        <ListItemText primary={<strong>{coder.user.username}</strong>} secondary={`Primary Language: ${coder.primary_language}`} />
                         <ListItemSecondaryAction>
                           <Button
                             onClick={e => setCollaborator(coder.id)}

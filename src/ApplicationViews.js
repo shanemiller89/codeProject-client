@@ -6,6 +6,7 @@ import ProjectList from "./components/project/ProjectList";
 import Project from "./components/project/Project";
 
 import ProjectForm from "./components/project/ProjectForm";
+import CollaborationInvites from "./components/invites/CollaborationInvites";
 
 const ApplicationViews = () => {
   return (
@@ -24,6 +25,14 @@ const ApplicationViews = () => {
           return <Profile {...props} />;
         }}
       />
+            <Route
+        exact
+        path="/collab_invites"
+        render={props => {
+          return <CollaborationInvites {...props} />;
+        }}
+      />
+
       <Route
         exact
         path="/projects"

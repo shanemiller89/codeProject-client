@@ -12,6 +12,8 @@ const Project = props => {
   const [wireframes, setWireframes] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [supplementals, setSupplementals] = useState([]);
+  const [collaborators, setCollaborators] = useState([]);
+
 
   const getProject = () => {
     APIManager.get("projects", `${props.match.params.projectId}`).then(
@@ -21,6 +23,7 @@ const Project = props => {
         setWireframes(project.wireframes);
         setTasks(project.tasks);
         setSupplementals(project.supplementals);
+        setCollaborators(project.collaborators)
       }
     );
   };
@@ -152,6 +155,7 @@ const Project = props => {
           wireframes={wireframes}
           tasks={tasks}
           supplementals={supplementals}
+          collaborators={collaborators}
           editProjectOverview={editProjectOverview}
           editWireframeImage={editWireframeImage}
           editTask={editTask}

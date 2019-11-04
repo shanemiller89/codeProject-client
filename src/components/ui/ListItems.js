@@ -9,6 +9,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 
 import DeveloperBoard from "@material-ui/icons/DeveloperBoard";
+import { Badge } from "@material-ui/core";
 
 export const ListItems = (
   <div>
@@ -28,12 +29,16 @@ export const ListItems = (
         <ListItemText primary="Projects" />
       </ListItem>
     </Link>
-    <ListItem button>
-      <ListItemIcon>
-        <MailIcon fontSize="large" />
-      </ListItemIcon>
-      <ListItemText primary="Invites" />
-    </ListItem>
+    <Link to="/collab_invites">
+      <ListItem button>
+          <ListItemIcon>
+        <Badge badgeContent={4} color="secondary">
+            <MailIcon fontSize="large" />
+        </Badge>
+          </ListItemIcon>
+        <ListItemText primary="Invites" />
+      </ListItem>
+    </Link>
     <Link to="/profile">
       <ListItem button>
         <ListItemIcon>

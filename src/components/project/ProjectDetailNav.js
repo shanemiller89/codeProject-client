@@ -86,6 +86,7 @@ const ProjectDetailNav = props => {
           key={props.project.id}
           project={props.project}
           technologies={props.technologies}
+          collaborators={props.collaborators}
           editProjectOverview={props.editProjectOverview}
         />
       </TabPanel>
