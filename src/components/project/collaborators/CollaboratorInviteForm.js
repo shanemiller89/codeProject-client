@@ -6,6 +6,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import SearchRounded from '@material-ui/icons/SearchRounded';
+
 
 import APIManager from "../../../util/APIManager";
 import {
@@ -17,7 +19,8 @@ import {
   ListItemSecondaryAction,
   List,
   Radio,
-  Paper
+  Paper,
+  InputAdornment
 } from "@material-ui/core";
 
 const CollaboratorInviteForm = props => {
@@ -26,17 +29,17 @@ const CollaboratorInviteForm = props => {
   const [search, setSearch] = useState("");
   const [collaborator, setCollaborator] = useState("");
   const [message, setMessage] = useState("");
-  const [checked, setChecked] = useState(false);
 
-    // const submit = e => {
-    //   e.preventDefault();
-    //   const collaborator = {
-    //     message: message,
-    //     project_id: props.project.id
-    //   };
-    //   props.addTasks(collaborator);
-    //   handleClose();
-    // };
+  const submit = e => {
+    e.preventDefault();
+    const newCollaborator = {
+      collaborator_id: collaborator,
+      message: message,
+      project_id: props.project.id
+    };
+    props.createInvite(newCollaborator);
+    handleClose();
+  };
 
   const searchCoders = search => {
     APIManager.getAll(`coders?users=${search}`).then(coders => {
@@ -76,7 +79,7 @@ const CollaboratorInviteForm = props => {
         maxWidth="xl"
       >
         <DialogTitle id="form-dialog-title">Invite Collaborator</DialogTitle>
-        <form>
+        <form onSubmit={submit}>
           <DialogContent>
             <div style={{ display: "flex" }}>
               <div>
@@ -86,10 +89,17 @@ const CollaboratorInviteForm = props => {
                   fullWidth
                   type="search"
                   id="title"
-                  label="Project Name"
+                  label="User Search"
                   name="title"
                   autoFocus
                   onChange={handleSearch}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchRounded />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 <TextField
                   variant="outlined"
@@ -106,17 +116,16 @@ const CollaboratorInviteForm = props => {
                 />
               </div>
               <div>
-                {/* <Container
-                  style={{ height: 350, width: 700, marginLeft: "1.5em"}}
-                > */}
                 <Paper
-                  style={{
-                    height: 350,
-                    width: 700,
-                    marginLeft: "1.5em",
-                    overflow: "auto"
-                  }}
+                elevation={3}
+                style={{
+                  height: 325,
+                  width: 700,
+                  marginLeft: "1.5em",
+                  overflow: "auto"
+                }}
                 >
+                <h3>User Search Results</h3>
                   <List>
                     {coders.map(coder => (
                       <ListItem key={coder.id} divider>
@@ -133,17 +142,9 @@ const CollaboratorInviteForm = props => {
                         </ListItemAvatar>
                         <ListItemText primary={coder.user.username} />
                         <ListItemSecondaryAction>
-                          {/* <Radio
-                            onChange={e => setCollaborator(e.target.value)}
-                            value={coder.id}
-                            name="selected user"
-                            disabled={collaborator.length !== 0 ? true : false}
-                            inputProps={{ "aria-label": coder.id }}
-                          /> */}
                           <Button
                             onClick={e => setCollaborator(coder.id)}
                             disabled={collaborator.length !== 0 ? true : false}
-
                           >
                             Select
                           </Button>
@@ -152,7 +153,6 @@ const CollaboratorInviteForm = props => {
                     ))}
                   </List>
                 </Paper>
-                {/* </Container> */}
               </div>
             </div>
           </DialogContent>

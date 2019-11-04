@@ -6,6 +6,7 @@ import ProjectCard from "./ProjectCard";
 
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import ProjectForm from "./ProjectForm";
 
 const ProjectList = () => {
   const [myProjects, setMyProjects] = useState([]);
@@ -23,11 +24,7 @@ const ProjectList = () => {
   return (
     <>
       <h1>Projects</h1>
-      <Link to="projects/new-form">
-        <Button variant="contained" color="primary">
-          Create New Project
-        </Button>
-      </Link>
+        <ProjectForm getMyProjects={getMyProjects}/>
       <h3>My Projects</h3>
       <Grid container spacing={5} style={{marginLeft: "3em"}}>
         {myProjects.map(project => (

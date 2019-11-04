@@ -64,6 +64,10 @@ const Project = props => {
 
   // --ADD FUNCTIONS -- //
 
+  const createInvite = item => {
+    APIManager.post("collaboratorinvites", item)
+  }
+
   const addERD = editedItem => {
     APIManager.put("projects/erd", editedItem).then(() => {
       getProject();
@@ -140,7 +144,7 @@ const Project = props => {
         deleteFunction={deleteProject}
         id={props.match.params.projectId}
       />
-        <CollaboratorInviteForm />
+        <CollaboratorInviteForm project={project} createInvite={createInvite}/>
       <div style={{ marginLeft: "6em" }}>
         <ProjectDetailNav
           project={project}

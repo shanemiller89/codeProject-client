@@ -75,16 +75,14 @@ const Login = (props) => {
   
   const classes = useStyles();
   
-  const submit = (event) => {
+  const submitLogin = (event) => {
     event.preventDefault()
     const credentials = {
       username: username,
       password: password
     };
-    login(credentials, props.setIsLoggedIn).then(() => {
-      if (!isAuthenticated()) {
-        alert("Wrong Username or Password");
-      }
+    login(credentials, props.setIsLoggedIn).then(response => {
+      // console.log("Response", response)
     });
   };
 
@@ -102,7 +100,7 @@ const Login = (props) => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} onSubmit={submit}>
+          <form className={classes.form} onSubmit={submitLogin}>
             <TextField
               variant="outlined"
               margin="normal"
