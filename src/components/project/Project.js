@@ -41,6 +41,12 @@ const Project = props => {
     });
   };
 
+  const editTechnology = (item, id) => {
+    APIManager.put(`technologies/${id}`, item).then(() => {
+      getProject();
+    });
+  };
+
   const editWireframeImage = editedItem => {
     APIManager.put("wireframes/updatewireframe", editedItem).then(() => {
       getProject();
@@ -70,6 +76,13 @@ const Project = props => {
   const createInvite = item => {
     APIManager.post("collaboratorinvites", item);
   };
+
+  const addTechnology = item => {
+    APIManager.post("technologies", item).then(() => {
+      getProject();
+    });
+  };
+
 
   const addERD = editedItem => {
     APIManager.put("projects/erd", editedItem).then(() => {
@@ -136,6 +149,14 @@ const Project = props => {
     });
   };
 
+  const deleteTechnology = id => {
+    APIManager.delete("technologies", id).then(() => {
+      getProject();
+    });
+  };
+
+
+
   useEffect(() => {
     getProject();
   }, []);
@@ -172,9 +193,11 @@ const Project = props => {
           collaborators={collaborators}
           editProjectOverview={editProjectOverview}
           editWireframeImage={editWireframeImage}
+          editTechnology={editTechnology}
           editTask={editTask}
           editTaskStatus={editTaskStatus}
           editSupplemental={editSupplemental}
+          addTechnology={addTechnology}
           addERD={addERD}
           addWireframe={addWireframe}
           addWireframeTitle={addWireframeTitle}
@@ -184,6 +207,7 @@ const Project = props => {
           deleteTask={deleteTask}
           deleteSupplemental={deleteSupplemental}
           deleteCollaborator={deleteCollaborator}
+          deleteTechnology={deleteTechnology}
         />
       </div>
     </>

@@ -87,8 +87,11 @@ const ProjectDetailNav = props => {
           project={props.project}
           technologies={props.technologies}
           collaborators={props.collaborators}
+          addTechnology={props.addTechnology}
           editProjectOverview={props.editProjectOverview}
+          editTechnology={props.editTechnology}
           deleteCollaborator={props.deleteCollaborator}
+          deleteTechnology={props.deleteTechnology}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
