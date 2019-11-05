@@ -35,21 +35,31 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column"
   },
   fixedHeight: {
-    height: 340
+    height: 400
   }
 }));
 
 const Dashboard = () => {
   const [projects, setProjects] = useState([]);
+  const [collabProjects, setCollabProjects] = useState([]);
+
   const [invites, setInvites] = useState([]);
   const [recentTasks, setTasks] = useState([]);
+  const [recentCollabTasks, setCollabTasks] = useState([]);
+
 
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   const getRecentProjects = () => {
-    APIManager.getAll("projects/recent").then(projects => {
+    APIManager.getAll("projects/recentpersonal").then(projects => {
       setProjects(projects);
+    });
+  };
+
+  const getRecentCollabProjects = () => {
+    APIManager.getAll("projects/recentcollaborator").then(projects => {
+      setCollabProjects(projects);
     });
   };
 
@@ -64,11 +74,19 @@ const Dashboard = () => {
       setTasks(tasks);
     });
   };
+  
+  const getRecentCollabTasks = () => {
+    APIManager.getAll("projecttasks/recentcollabtasks").then(tasks => {
+      setCollabTasks(tasks);
+    });
+  };
 
   useEffect(() => {
     getRecentProjects();
+    getRecentCollabProjects();
     getPendingInvites();
     getRecentTasks();
+    getRecentCollabTasks();
   }, []);
 
   console.log("Tasks", recentTasks);
@@ -78,10 +96,10 @@ const Dashboard = () => {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="xl" className={classes.container}>
-          <Grid container spacing={6}>
+          <Grid container spacing={3}>
             <Grid item xs={12} md={7} lg={8}>
               <Paper className={fixedHeightPaper}>
-                <DashboardRecentProjects projects={projects} />
+                <DashboardRecentProjects projects={projects} collabProjects={collabProjects} />
               </Paper>
             </Grid>
             <Grid item xs={12} md={5} lg={4}>
@@ -91,7 +109,7 @@ const Dashboard = () => {
             </Grid>
             <Grid item xs={12}>
               <Paper className={classes.paper} style={{ height: 400 }}>
-                <DashboardRecentTasks recentTasks={recentTasks} />
+                <DashboardRecentTasks recentTasks={recentTasks} recentCollabTasks={recentCollabTasks} />
               </Paper>
             </Grid>
           </Grid>

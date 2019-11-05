@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -24,11 +24,10 @@ const useStyles = makeStyles({
     minWidth: 650
   },
   alert: {
-    marginTop: "6em"
+    marginTop: "8em"
   },
   header: {
-    display: "flex",
-
+    display: "flex"
   }
 });
 
@@ -43,37 +42,78 @@ const DashboardRecentProjects = props => {
   return (
     <React.Fragment>
       <div className={classes.header}>
-      <Typography color="textSecondary" component="h1" variant="h4">
-        Recent Projects
-      </Typography>
-      <FormControl component="fieldset">
-        <RadioGroup
-          aria-label="position"
-          name="position"
-          value={value}
-          onChange={handleChange}
-          row
-        >
-          <FormControlLabel
-            value="personal"
-            control={<Radio color="primary" />}
-            label="Personal"
-            labelPlacement="start"
-          />
-          <FormControlLabel
-            value="collaborator"
-            control={<Radio color="primary" />}
-            label="Collaborator"
-            labelPlacement="start"
-          />
-        </RadioGroup>
-      </FormControl>
+        <Typography color="textSecondary" component="h1" variant="h4">
+          Recent Projects
+        </Typography>
+        <FormControl component="fieldset">
+          <RadioGroup
+            aria-label="position"
+            name="position"
+            value={value}
+            onChange={handleChange}
+            row
+          >
+            <FormControlLabel
+              value="personal"
+              control={<Radio color="primary" />}
+              label="Personal"
+              labelPlacement="start"
+            />
+            <FormControlLabel
+              value="collaborator"
+              control={<Radio color="primary" />}
+              label="Collaborator"
+              labelPlacement="start"
+            />
+          </RadioGroup>
+        </FormControl>
       </div>
-      {props.projects.length === 0 ? (
+      {value === "personal" ? (
+        props.projects.length === 0 ? (
+          <div className={classes.alert}>
+            <YellowAlert
+              className={classes.alert}
+              message="You currently have no recent Projects"
+            />
+          </div>
+        ) : (
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Project Name</TableCell>
+                <TableCell align="right">Primary Language</TableCell>
+                <TableCell align="right"># Collaborators</TableCell>
+                <TableCell align="right"># In Progress Tasks</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {props.projects.map(project => (
+                <TableRow key={project.id}>
+                  <TableCell component="th" scope="row">
+                    {project.title}
+                  </TableCell>
+                  <TableCell align="right">
+                    {project.technologies[0].technology}
+                  </TableCell>
+                  <TableCell align="right">
+                    {project.collaborators.length}
+                  </TableCell>
+                  <TableCell align="right">
+                    {
+                      project.tasks.filter(task => task.task_type_id === 2)
+                        .length
+                    }
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )
+      ) : props.collabProjects.length === 0 ? (
         <div className={classes.alert}>
           <YellowAlert
             className={classes.alert}
-            message="You currently have no recent Projects"
+            message="You currently have no recent Collaborator Projects"
           />
         </div>
       ) : (
@@ -87,19 +127,19 @@ const DashboardRecentProjects = props => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.projects.map(project => (
-              <TableRow key={project.id}>
+            {props.collabProjects.map(collabProject => (
+              <TableRow key={collabProject.id}>
                 <TableCell component="th" scope="row">
-                  {project.title}
+                  {collabProject.title}
                 </TableCell>
                 <TableCell align="right">
-                  {project.technologies[0].technology}
+                  {collabProject.technologies[0].technology}
                 </TableCell>
                 <TableCell align="right">
-                  {project.collaborators.length}
+                  {collabProject.collaborators.length}
                 </TableCell>
                 <TableCell align="right">
-                  {project.tasks.filter(task => task.task_type_id === 2).length}
+                  {collabProject.tasks.filter(task => task.task_type_id === 2).length}
                 </TableCell>
               </TableRow>
             ))}

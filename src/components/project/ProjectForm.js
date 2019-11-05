@@ -161,6 +161,7 @@ const ProjectForm = props => {
                       <TextField
                         variant="outlined"
                         margin="normal"
+                        required
                         fullWidth
                         helperText="Primary Technology (i.e. language, frameworks, etc.) being used."
                         id="primary"
@@ -171,6 +172,7 @@ const ProjectForm = props => {
                       <TextField
                         variant="outlined"
                         margin="normal"
+                        required
                         fullWidth
                         helperText="Separate with comma (i.e 'Semantic-UI, Firebase, Django')"
                         id="secondary"

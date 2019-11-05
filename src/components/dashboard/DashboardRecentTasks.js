@@ -66,7 +66,8 @@ const DashboardRecentTasks = props => {
         </RadioGroup>
       </FormControl>
       </div>
-      {props.recentTasks.length === 0 ? (
+      {value === "personal" ?
+        props.recentTasks.length === 0 ? (
         <div className={classes.alert}>
           <YellowAlert message="You currently have no recent incoming tasks." />
         </div>
@@ -91,7 +92,34 @@ const DashboardRecentTasks = props => {
             ))}
           </TableBody>
         </Table>
-      )}
+      ) : 
+      props.recentCollabTasks.length === 0 ? (
+        <div className={classes.alert}>
+          <YellowAlert message="You currently have no recent incoming collaborator tasks." />
+        </div>
+      ) : (
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="left">Tasks</TableCell>
+              <TableCell align="right">Project Name</TableCell>
+              {/* <TableCell align="right">Task Type</TableCell> */}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {props.recentCollabTasks.map(recentTask => (
+              <TableRow key={recentTask.id}>
+                <TableCell component="th" scope="row">
+                  {recentTask.task.task}
+                </TableCell>
+                {/* <TableCell align="right"></TableCell> */}
+                <TableCell align="right">{recentTask.project.title}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      )
+      }
     </React.Fragment>
   );
 };
