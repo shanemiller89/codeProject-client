@@ -81,29 +81,17 @@ const Dashboard = () => {
           <Grid container spacing={6}>
             <Grid item xs={12} md={7} lg={8}>
               <Paper className={fixedHeightPaper}>
-                {projects.length === 0 ? (
-                  <YellowAlert message="You have no recent projects" />
-                ) : (
-                  <DashboardRecentProjects projects={projects} />
-                )}
+                <DashboardRecentProjects projects={projects} />
               </Paper>
             </Grid>
             <Grid item xs={12} md={5} lg={4}>
               <Paper className={fixedHeightPaper}>
-                {invites.length === 0 ? (
-                  <YellowAlert message="You have no pending sent invites" />
-                ) : (
-                  <DashboardRecentCollabRequest invites={invites} />
-                )}
+                <DashboardRecentCollabRequest invites={invites} />
               </Paper>
             </Grid>
             <Grid item xs={12}>
               <Paper className={classes.paper} style={{ height: 400 }}>
-                {recentTasks.length === 0 ? (
-                  <YellowAlert message="You have no recent Incoming tasks" />
-                ) : (
-                  <DashboardRecentTasks recentTasks={recentTasks} />
-                )}
+                <DashboardRecentTasks recentTasks={recentTasks} />
               </Paper>
             </Grid>
           </Grid>

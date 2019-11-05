@@ -16,7 +16,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import useSimpleAuth from "../../hooks/useSimpleAuth";
-import { ListItems } from "./ListItems";
+import  ListItems  from "./ListItems";
 import Dashboard from "../dashboard/Dashboard";
 import DeveloperBoard from "@material-ui/icons/DeveloperBoard";
 import UserContext from "../../context/UserContext";
@@ -117,6 +117,7 @@ const useStyles = makeStyles(theme => ({
 const NavBar = props => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -201,7 +202,7 @@ const NavBar = props => {
               </IconButton>
             </div>
             <Divider />
-            <List>{ListItems}</List>
+            <List><ListItems invites={context.inviteLength}/></List>
           </Drawer>
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />

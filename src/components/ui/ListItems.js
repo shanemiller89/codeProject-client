@@ -11,7 +11,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import DeveloperBoard from "@material-ui/icons/DeveloperBoard";
 import { Badge } from "@material-ui/core";
 
-export const ListItems = (
+const ListItems = (props) => (
   <div>
     <Link to="/">
       <ListItem button>
@@ -32,7 +32,7 @@ export const ListItems = (
     <Link to="/collab_invites">
       <ListItem button>
           <ListItemIcon>
-        <Badge badgeContent={4} color="secondary">
+        <Badge badgeContent={props.invites} color="secondary">
             <MailIcon fontSize="large" />
         </Badge>
           </ListItemIcon>
@@ -49,3 +49,4 @@ export const ListItems = (
     </Link>
   </div>
 );
+export default ListItems
