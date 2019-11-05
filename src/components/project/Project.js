@@ -5,6 +5,7 @@ import { Button } from "@material-ui/core";
 import DeleteDialog from "../../widgets/DeleteDialog";
 import ProjectEditForm from "./ProjectEditForm";
 import CollaboratorInviteForm from "./collaborators/CollaboratorInviteForm";
+import UserContext from "../../context/UserContext";
 
 const Project = props => {
   const [project, setProject] = useState({});
@@ -40,6 +41,12 @@ const Project = props => {
     });
   };
 
+  const editTechnology = (item, id) => {
+    APIManager.put(`technologies/${id}`, item).then(() => {
+      getProject();
+    });
+  };
+
   const editWireframeImage = editedItem => {
     APIManager.put("wireframes/updatewireframe", editedItem).then(() => {
       getProject();
@@ -69,6 +76,13 @@ const Project = props => {
   const createInvite = item => {
     APIManager.post("collaboratorinvites", item);
   };
+
+  const addTechnology = item => {
+    APIManager.post("technologies", item).then(() => {
+      getProject();
+    });
+  };
+
 
   const addERD = editedItem => {
     APIManager.put("projects/erd", editedItem).then(() => {
@@ -135,11 +149,21 @@ const Project = props => {
     });
   };
 
+  const deleteTechnology = id => {
+    APIManager.delete("technologies", id).then(() => {
+      getProject();
+    });
+  };
+
+
+
   useEffect(() => {
     getProject();
   }, []);
 
   return (
+    <UserContext.Consumer>
+    {context => (
     <>
       <h1>{project.title}</h1>
       {project.private === true ? <h2>Private</h2> : <h2>Public</h2>}
@@ -147,14 +171,18 @@ const Project = props => {
         Repo: <a href={project.repo}>{project.repo}</a>
       </h2>
       <ProjectEditForm project={project} editProject={editProject} />
+      {context.user.id === project.owner_id ?
       <DeleteDialog
         deletedItem="Project"
         deleteFunction={deleteProject}
         id={props.match.params.projectId}
       />
-      {project.private === true ? null : (
+      : null}
+      {context.user.id === project.owner_id ?
+      project.private === true ? null : (
         <CollaboratorInviteForm project={project} createInvite={createInvite} />
-      )}
+      ) : null}
+      
       <div style={{ marginLeft: "6em" }}>
         <ProjectDetailNav
           project={project}
@@ -165,9 +193,11 @@ const Project = props => {
           collaborators={collaborators}
           editProjectOverview={editProjectOverview}
           editWireframeImage={editWireframeImage}
+          editTechnology={editTechnology}
           editTask={editTask}
           editTaskStatus={editTaskStatus}
           editSupplemental={editSupplemental}
+          addTechnology={addTechnology}
           addERD={addERD}
           addWireframe={addWireframe}
           addWireframeTitle={addWireframeTitle}
@@ -177,9 +207,12 @@ const Project = props => {
           deleteTask={deleteTask}
           deleteSupplemental={deleteSupplemental}
           deleteCollaborator={deleteCollaborator}
+          deleteTechnology={deleteTechnology}
         />
       </div>
     </>
+      )}
+    </UserContext.Consumer>
   );
 };
 

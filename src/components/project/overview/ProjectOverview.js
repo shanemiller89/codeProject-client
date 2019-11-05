@@ -19,6 +19,9 @@ import {
   ListItemSecondaryAction
 } from "@material-ui/core";
 import YellowAlert from "../../../widgets/YellowAlert";
+import UserContext from "../../../context/UserContext";
+import TechnologyChip from "./TechnologyChip";
+import TechnologyAddForm from "./TechnologyAddForm";
 
 // const ReactDOM = require("react-dom");
 const ReactMarkdown = require("react-markdown");
@@ -67,122 +70,126 @@ const ProjectOverview = props => {
   console.log("Collabs", props.collaborators);
 
   return (
-    <>
-      <div style={{ display: "flex" }}>
-        <div>
-          <h1>
-            <Description />
-            Overview
-          </h1>
-          <Paper elevation={3} className={classes.overview}>
-            {/* <Typography component="p">
+    <UserContext>
+      {context => (
+        <>
+          <div style={{ display: "flex" }}>
+            <div>
+              <h1>
+                <Description />
+                Overview
+              </h1>
+              <Paper elevation={3} className={classes.overview}>
+                {/* <Typography component="p">
           {props.project.overview}
         </Typography> */}
-            <ProjectOverviewEdit
-              project={props.project}
-              editProjectOverview={props.editProjectOverview}
-            />
-            <div>
-              <ReactMarkdown
-                source={props.project.overview}
-                escapeHtml={false}
-                astPlugins={[parseHtml]}
-              />
+                <ProjectOverviewEdit
+                  project={props.project}
+                  editProjectOverview={props.editProjectOverview}
+                />
+                <div>
+                  <ReactMarkdown
+                    source={props.project.overview}
+                    escapeHtml={false}
+                    astPlugins={[parseHtml]}
+                  />
+                </div>
+              </Paper>
             </div>
-          </Paper>
-        </div>
-        <div>
-          <div>
-            <h1>
-              <Computer />
-              Technologies
-            </h1>
-            <Paper elevation={3} className={classes.technologies}>
-              <Typography variant="h6" component="h5">
-                Primary Technology:
-                {props.technologies
-                  .filter(technology => technology.technology_type_id === 1)
-                  .map(primary => (
-                    <Chip
-                      key={primary.id}
-                      className={classes.chips}
-                      color="primary"
-                      size="medium"
-                      label={primary.technology}
-                      icon={<Code />}
-                    />
-                  ))}
-              </Typography>
-              <br />
-              <Typography variant="h6" component="h5">
-                Supplemental Technologies:
-                {props.technologies
-                  .filter(technology => technology.technology_type_id === 2)
-                  .map(primary => (
-                    <Chip
-                      key={primary.id}
-                      className={classes.chips}
-                      color="secondary"
-                      size="medium"
-                      label={primary.technology}
-                      icon={<Code />}
-                    />
-                  ))}
-              </Typography>
-            </Paper>
-          </div>
-          <div>
-            <h1>
-              <Group />
-              Collaborators
-            </h1>
-            <Paper elevation={3} className={classes.collaborators}>
-              <List>
-                {props.project.private === true ?
-                <YellowAlert message="Only Public projects may have collaborators." />
-                :
-                  props.collaborators.length === 0 ? (
-                  <YellowAlert message="You currently have no collaborators for this project." />
-                ) : (
-                  props.collaborators.map(collaborator => (
-                    <ListItem key={collaborator.id} divider>
-                      <ListItemAvatar>
-                        <Avatar
-                          src={collaborator.profile_image}
-                          alt={collaborator.user.username}
-                          style={{
-                            margin: 10,
-                            width: 45,
-                            height: 45
-                          }}
+            <div>
+              <div>
+                <h1>
+                  <Computer />
+                  Technologies
+                </h1>
+                <Paper elevation={3} className={classes.technologies}>
+                  <Typography variant="h6" component="h5">
+                    Primary Technology:
+                    {props.technologies
+                      .filter(technology => technology.technology_type_id === 1)
+                      .map(technology => (
+                        <TechnologyChip
+                          technology={technology}
+                          editTechnology={props.editTechnology}
+                          classes_chips={classes.chips}
                         />
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={<strong>{collaborator.user.username}</strong>}
-                        secondary={`Primary Language: ${collaborator.primary_language}`}
-                      />
-                      <ListItemSecondaryAction>
-                        <Button
-                          size="small"
-                          onClick={() =>
-                            removeCollaborator(
-                              props.project.id,
-                              collaborator.id
-                            )
-                          }
-                        >
-                          Remove
-                        </Button>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                  ))
-                )}
-              </List>
-            </Paper>
+                      ))}
+                  </Typography>
+                  <br />
+                  <Typography variant="h6" component="h5">
+                    Supplemental Technologies:
+                    <TechnologyAddForm project={props.project} addTechnology={props.addTechnology}/>
+                    {props.technologies
+                      .filter(technology => technology.technology_type_id === 2)
+                      .map(technology => (
+                        <TechnologyChip
+                          technology={technology}
+                          editTechnology={props.editTechnology}
+                          classes_chips={classes.chips}
+                          deleteTechnology={props.deleteTechnology}
+                        />
+                      ))}
+                  </Typography>
+                </Paper>
+              </div>
+              <div>
+                <h1>
+                  <Group />
+                  Collaborators
+                </h1>
+                <Paper elevation={3} className={classes.collaborators}>
+                  <List>
+                    {props.project.private === true ? (
+                      <YellowAlert message="Only Public projects may have collaborators." />
+                    ) : props.collaborators.length === 0 ? (
+                      <YellowAlert message="You currently have no collaborators for this project." />
+                    ) : (
+                      props.collaborators.map(collaborator => (
+                        <ListItem key={collaborator.id} divider>
+                          <ListItemAvatar>
+                            <Avatar
+                              src={collaborator.profile_image}
+                              alt={collaborator.user.username}
+                              style={{
+                                margin: 10,
+                                width: 45,
+                                height: 45
+                              }}
+                            />
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={
+                              <strong>{collaborator.user.username}</strong>
+                            }
+                            secondary={`Primary Language: ${collaborator.primary_language}`}
+                          />
+                          <ListItemSecondaryAction>
+                            {context.user.id === props.project.owner_id ||
+                            context.user.id === collaborator.id ? (
+                              <Button
+                                size="small"
+                                onClick={() =>
+                                  removeCollaborator(
+                                    props.project.id,
+                                    collaborator.id
+                                  )
+                                }
+                              >
+                                Remove
+                              </Button>
+                            ) : null}
+                          </ListItemSecondaryAction>
+                        </ListItem>
+                      ))
+                    )}
+                  </List>
+                </Paper>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </>
+        </>
+      )}
+    </UserContext>
   );
 };
 

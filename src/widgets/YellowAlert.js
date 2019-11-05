@@ -10,8 +10,9 @@ const YellowAlert = props => {
           borderRadius: ".25em",
           padding: "1em",
           color: "#856404",
-          textAlign: "center"
+          textAlign: "center",
         }}
+        maxWidth="xl"
       >
         {props.message}
       </Container>
