@@ -45,7 +45,7 @@ const ProjectList = () => {
         </Grid>
       </div>
       <div>
-      <h3>Collaboration Projects</h3>
+      <h3>CollaboratorProjects</h3>
       <Grid container spacing={5} style={{marginLeft: "3em"}}>
         {collaboratorProjects.map(project => (
           <Grid key={project.id} item xs={4} spacing={5}>

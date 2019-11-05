@@ -5,6 +5,7 @@ import { Button } from "@material-ui/core";
 import DeleteDialog from "../../widgets/DeleteDialog";
 import ProjectEditForm from "./ProjectEditForm";
 import CollaboratorInviteForm from "./collaborators/CollaboratorInviteForm";
+import UserContext from "../../context/UserContext";
 
 const Project = props => {
   const [project, setProject] = useState({});
@@ -140,6 +141,8 @@ const Project = props => {
   }, []);
 
   return (
+    <UserContext.Consumer>
+    {context => (
     <>
       <h1>{project.title}</h1>
       {project.private === true ? <h2>Private</h2> : <h2>Public</h2>}
@@ -147,14 +150,18 @@ const Project = props => {
         Repo: <a href={project.repo}>{project.repo}</a>
       </h2>
       <ProjectEditForm project={project} editProject={editProject} />
+      {context.user.id === project.owner_id ?
       <DeleteDialog
         deletedItem="Project"
         deleteFunction={deleteProject}
         id={props.match.params.projectId}
       />
-      {project.private === true ? null : (
+      : null}
+      {context.user.id === project.owner_id ?
+      project.private === true ? null : (
         <CollaboratorInviteForm project={project} createInvite={createInvite} />
-      )}
+      ) : null}
+      
       <div style={{ marginLeft: "6em" }}>
         <ProjectDetailNav
           project={project}
@@ -180,6 +187,8 @@ const Project = props => {
         />
       </div>
     </>
+      )}
+    </UserContext.Consumer>
   );
 };
 

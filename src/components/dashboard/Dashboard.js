@@ -1,88 +1,109 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 
 import APIManager from "../../util/APIManager";
 
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
-import DashboardRecentProjects from './DashboardRecentProjects';
-import DashboardRecentCollabRequest from './DashboardRecentCoallabRequest';
-import DashboardRecentTasks from './DashboardRecentTasks';
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Link from "@material-ui/core/Link";
+import DashboardRecentProjects from "./DashboardRecentProjects";
+import DashboardRecentCollabRequest from "./DashboardRecentCoallabRequest";
+import DashboardRecentTasks from "./DashboardRecentTasks";
+import YellowAlert from "../../widgets/YellowAlert";
 
 // const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
+    display: "flex"
   },
   title: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   container: {
-    width: '90%',
+    width: "90%",
     paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
+    paddingBottom: theme.spacing(4)
   },
   paper: {
     padding: theme.spacing(2),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column"
   },
   fixedHeight: {
-    height: 340,
-  },
+    height: 340
+  }
 }));
 
 const Dashboard = () => {
   const [projects, setProjects] = useState([]);
-  const [tasks, setTasks] = useState({tasks:[]})
-
+  const [invites, setInvites] = useState([]);
+  const [recentTasks, setTasks] = useState([]);
 
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-
-  const getProjects = () => {
-    APIManager.getAll("projects/owner").then(projects => {
+  const getRecentProjects = () => {
+    APIManager.getAll("projects/recent").then(projects => {
       setProjects(projects);
-      setTasks(projects)
+    });
+  };
+
+  const getPendingInvites = () => {
+    APIManager.getAll("collaboratorinvites/pendinginvites").then(invites => {
+      setInvites(invites);
+    });
+  };
+
+  const getRecentTasks = () => {
+    APIManager.getAll("projecttasks").then(tasks => {
+      setTasks(tasks);
     });
   };
 
   useEffect(() => {
-    getProjects();
+    getRecentProjects();
+    getPendingInvites();
+    getRecentTasks();
   }, []);
 
+  console.log("Tasks", recentTasks);
 
   return (
     <>
-    <main className={classes.content}>
-      {/* {projects.map(project => (
-        project.tasks.filter(task => task.task_type_id === 2).map(task => (
-          task.task
-        ))
-      ))} */}
+      <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="xl" className={classes.container}>
           <Grid container spacing={6}>
-            <Grid item xs={12} md={8} lg={9}>
+            <Grid item xs={12} md={7} lg={8}>
               <Paper className={fixedHeightPaper}>
-                <DashboardRecentProjects projects={projects}/>
+                {projects.length === 0 ? (
+                  <YellowAlert message="You have no recent projects" />
+                ) : (
+                  <DashboardRecentProjects projects={projects} />
+                )}
               </Paper>
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12} md={5} lg={4}>
               <Paper className={fixedHeightPaper}>
-                <DashboardRecentCollabRequest />
+                {invites.length === 0 ? (
+                  <YellowAlert message="You have no pending sent invites" />
+                ) : (
+                  <DashboardRecentCollabRequest invites={invites} />
+                )}
               </Paper>
             </Grid>
             <Grid item xs={12}>
-              <Paper className={classes.paper} style={{height: 340}}>
-                <DashboardRecentTasks />
+              <Paper className={classes.paper} style={{ height: 400 }}>
+                {recentTasks.length === 0 ? (
+                  <YellowAlert message="You have no recent Incoming tasks" />
+                ) : (
+                  <DashboardRecentTasks recentTasks={recentTasks} />
+                )}
               </Paper>
             </Grid>
           </Grid>

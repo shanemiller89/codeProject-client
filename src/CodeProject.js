@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useSimpleAuth from "./hooks/useSimpleAuth";
 import NavBar from "./components/ui/NavBar";
 import Login from "./components/auth/Login";
+import UserProvider from "./context/UserProvider";
 
 const CodeProject = () => {
   const { isAuthenticated } = useSimpleAuth();
@@ -9,9 +10,11 @@ const CodeProject = () => {
 
   if (isAuthenticated())
     return (
-      <>
-        <NavBar setIsLoggedIn={setIsLoggedIn} />
-      </>
+      <UserProvider>
+        <>
+          <NavBar setIsLoggedIn={setIsLoggedIn} />
+        </>
+      </UserProvider>
     );
   else
     return (

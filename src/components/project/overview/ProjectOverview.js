@@ -19,6 +19,7 @@ import {
   ListItemSecondaryAction
 } from "@material-ui/core";
 import YellowAlert from "../../../widgets/YellowAlert";
+import UserContext from "../../../context/UserContext";
 
 // const ReactDOM = require("react-dom");
 const ReactMarkdown = require("react-markdown");
@@ -67,6 +68,8 @@ const ProjectOverview = props => {
   console.log("Collabs", props.collaborators);
 
   return (
+    <UserContext>
+      {context => (
     <>
       <div style={{ display: "flex" }}>
         <div>
@@ -162,6 +165,7 @@ const ProjectOverview = props => {
                         secondary={`Primary Language: ${collaborator.primary_language}`}
                       />
                       <ListItemSecondaryAction>
+                        {context.user.id === props.project.owner_id || context.user.id === collaborator.id ?
                         <Button
                           size="small"
                           onClick={() =>
@@ -173,6 +177,8 @@ const ProjectOverview = props => {
                         >
                           Remove
                         </Button>
+                        : null
+                        }
                       </ListItemSecondaryAction>
                     </ListItem>
                   ))
@@ -183,6 +189,8 @@ const ProjectOverview = props => {
         </div>
       </div>
     </>
+    )}
+    </UserContext>
   );
 };
 
