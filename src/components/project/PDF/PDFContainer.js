@@ -9,7 +9,8 @@ export default props => {
     <section className="pdf-container">
       <section className="pdf-toolbar">
         <Button
-        style={{margin: "2em"}}
+          style={{ margin: "4em 2em 0em 6em" }}
+          size="large"
           variant="contained"
           color={"primary"}
           startIcon={<GetApp />}
