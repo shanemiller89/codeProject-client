@@ -5,6 +5,8 @@
   "dependencies": {
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
+    "@progress/kendo-drawing": "^1.6.0",
+    "@progress/kendo-react-pdf": "^3.6.0",
     "firebase": "^7.2.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",

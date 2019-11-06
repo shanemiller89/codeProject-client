@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import APIManager from "../../util/APIManager";
+import { Link } from "react-router-dom";
 import ProjectDetailNav from "./ProjectDetailNav";
 import { Button } from "@material-ui/core";
 import DeleteDialog from "../../widgets/DeleteDialog";
@@ -83,7 +84,6 @@ const Project = props => {
     });
   };
 
-
   const addERD = editedItem => {
     APIManager.put("projects/erd", editedItem).then(() => {
       getProject();
@@ -155,62 +155,66 @@ const Project = props => {
     });
   };
 
-
-
   useEffect(() => {
     getProject();
   }, []);
 
   return (
     <UserContext.Consumer>
-    {context => (
-    <>
-      <h1>{project.title}</h1>
-      {project.private === true ? <h2>Private</h2> : <h2>Public</h2>}
-      <h2>
-        Repo: <a href={project.repo}>{project.repo}</a>
-      </h2>
-      <ProjectEditForm project={project} editProject={editProject} />
-      {context.user.id === project.owner_id ?
-      <DeleteDialog
-        deletedItem="Project"
-        deleteFunction={deleteProject}
-        id={props.match.params.projectId}
-      />
-      : null}
-      {context.user.id === project.owner_id ?
-      project.private === true ? null : (
-        <CollaboratorInviteForm project={project} createInvite={createInvite} />
-      ) : null}
-      
-      <div style={{ marginLeft: "6em" }}>
-        <ProjectDetailNav
-          project={project}
-          technologies={technologies}
-          wireframes={wireframes}
-          tasks={tasks}
-          supplementals={supplementals}
-          collaborators={collaborators}
-          editProjectOverview={editProjectOverview}
-          editWireframeImage={editWireframeImage}
-          editTechnology={editTechnology}
-          editTask={editTask}
-          editTaskStatus={editTaskStatus}
-          editSupplemental={editSupplemental}
-          addTechnology={addTechnology}
-          addERD={addERD}
-          addWireframe={addWireframe}
-          addWireframeTitle={addWireframeTitle}
-          addTasks={addTasks}
-          addSupplemental={addSupplemental}
-          deleteWireframe={deleteWireframe}
-          deleteTask={deleteTask}
-          deleteSupplemental={deleteSupplemental}
-          deleteCollaborator={deleteCollaborator}
-          deleteTechnology={deleteTechnology}
-        />
-      </div>
-    </>
+      {context => (
+        <>
+          <h1>{project.title}</h1>
+          {project.private === true ? <h2>Private</h2> : <h2>Public</h2>}
+          <h2>
+            Repo: <a href={project.repo}>{project.repo}</a>
+          </h2>
+          <ProjectEditForm project={project} editProject={editProject} />
+          {context.user.id === project.owner_id ? (
+            <DeleteDialog
+              deletedItem="Project"
+              deleteFunction={deleteProject}
+              id={props.match.params.projectId}
+            />
+          ) : null}
+          {context.user.id === project.owner_id ? (
+            project.private === true ? null : (
+              <CollaboratorInviteForm
+                project={project}
+                createInvite={createInvite}
+              />
+            )
+          ) : null}
+          <Link to={`/projectPDF/${project.id}`}>
+            <Button>Export PDF</Button>
+          </Link>
+          <div style={{ marginLeft: "6em" }}>
+            <ProjectDetailNav
+              project={project}
+              technologies={technologies}
+              wireframes={wireframes}
+              tasks={tasks}
+              supplementals={supplementals}
+              collaborators={collaborators}
+              editProjectOverview={editProjectOverview}
+              editWireframeImage={editWireframeImage}
+              editTechnology={editTechnology}
+              editTask={editTask}
+              editTaskStatus={editTaskStatus}
+              editSupplemental={editSupplemental}
+              addTechnology={addTechnology}
+              addERD={addERD}
+              addWireframe={addWireframe}
+              addWireframeTitle={addWireframeTitle}
+              addTasks={addTasks}
+              addSupplemental={addSupplemental}
+              deleteWireframe={deleteWireframe}
+              deleteTask={deleteTask}
+              deleteSupplemental={deleteSupplemental}
+              deleteCollaborator={deleteCollaborator}
+              deleteTechnology={deleteTechnology}
+            />
+          </div>
+        </>
       )}
     </UserContext.Consumer>
   );
