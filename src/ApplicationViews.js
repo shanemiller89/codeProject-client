@@ -7,6 +7,7 @@ import Project from "./components/project/Project";
 
 import ProjectForm from "./components/project/ProjectForm";
 import CollaborationInvites from "./components/invites/CollaborationInvites";
+import ProjectPDFOverview from "./components/project/PDF/ProjectPDFOverview";
 
 const ApplicationViews = () => {
   return (
@@ -25,7 +26,7 @@ const ApplicationViews = () => {
           return <Profile {...props} />;
         }}
       />
-            <Route
+      <Route
         exact
         path="/collab_invites"
         render={props => {
@@ -40,17 +41,20 @@ const ApplicationViews = () => {
           return <ProjectList {...props} />;
         }}
       />
-              <Route
-          exact
-          path="/project/:projectId(\d+)"
-          render={props => {
-            return (
-              <Project
-                {...props}
-              />
-            );
-          }}
-        />
+      <Route
+        exact
+        path="/project/:projectId(\d+)"
+        render={props => {
+          return <Project {...props} />;
+        }}
+      />
+      <Route
+        exact
+        path="/projectPDF/:projectId(\d+)"
+        render={props => {
+          return <ProjectPDFOverview {...props} />;
+        }}
+      />
       <Route
         exact
         path="/project"

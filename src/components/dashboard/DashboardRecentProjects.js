@@ -68,6 +68,7 @@ const DashboardRecentProjects = props => {
           </RadioGroup>
         </FormControl>
       </div>
+
       {value === "personal" ? (
         props.projects.length === 0 ? (
           <div className={classes.alert}>
