@@ -79,9 +79,6 @@ const ProjectOverview = props => {
                 Overview
               </h1>
               <Paper elevation={3} className={classes.overview}>
-                {/* <Typography component="p">
-          {props.project.overview}
-        </Typography> */}
                 <ProjectOverviewEdit
                   project={props.project}
                   editProjectOverview={props.editProjectOverview}

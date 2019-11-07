@@ -7,6 +7,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import SearchRounded from '@material-ui/icons/SearchRounded';
+import Add from '@material-ui/icons/Add';
+
 
 
 import APIManager from "../../../util/APIManager";
@@ -69,7 +71,7 @@ const CollaboratorInviteForm = props => {
 
   return (
     <div>
-      <Button variant="contained" style={{background: "#ca3e47", color: "white"}} onClick={handleClickOpen}>
+      <Button variant="contained" startIcon={<Add />} style={{background: "#ca3e47", color: "white"}} onClick={handleClickOpen}>
         Add Collaborator
       </Button>
       <Dialog

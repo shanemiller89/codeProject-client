@@ -17,7 +17,8 @@ import { flexbox } from "@material-ui/system";
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 445
+    maxWidth: 445,
+    marginRight: "-10em"
   },
   media: {
     height: 300,
@@ -83,8 +84,8 @@ const ProjectCard = props => {
       </CardContent>
       {/* </CardActionArea> */}
       <CardActions>
-        <Link to={`/project/${props.project.id}`}>
-          <Button size="large" color="primary">
+        <Link style={{textDecoration: "none"}} to={`/project/${props.project.id}`}>
+          <Button size="large" color="secondary">
             Project Details
           </Button>
         </Link>

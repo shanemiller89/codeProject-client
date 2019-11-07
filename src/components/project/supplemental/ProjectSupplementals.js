@@ -8,6 +8,12 @@ import ProjectSupplementalCodes from "./ProjectSupplementalCodes";
 import ProjectSupplementalImages from "./ProjectSupplementalImages";
 import SupplementalFilter from "./SupplementalFilter";
 
+import Note from "@material-ui/icons/Note";
+import Code from "@material-ui/icons/Code";
+import Image from "@material-ui/icons/Image";
+
+
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2)
@@ -38,8 +44,8 @@ const ProjectSupplementals = props => {
       </div>
       <div className={classes.root} hidden={noteView}>
         <Paper className={classes.root}>
-          <Typography variant="h5" component="h3">
-            Notes
+          <Typography variant="h4" component="h3">
+            <Note style={{color: "#ca3e47"}}/>Notes
           </Typography>
           <ProjectSupplementalNotes
             project={props.project}
@@ -53,8 +59,8 @@ const ProjectSupplementals = props => {
       </div>
       <div className={classes.root} hidden={codeView}>
         <Paper className={classes.root}>
-          <Typography variant="h5" component="h3">
-            Code Snippets
+          <Typography variant="h4" component="h3">
+          <Code style={{color: "#ca3e47"}}/>Code Snippets
           </Typography>
           <ProjectSupplementalCodes
             project={props.project}
@@ -68,8 +74,8 @@ const ProjectSupplementals = props => {
       </div>
       <div className={classes.root} hidden={imageView}>
         <Paper className={classes.root}>
-          <Typography variant="h5" component="h3">
-            Images
+          <Typography variant="h4" component="h3">
+          <Image style={{color: "#ca3e47"}}/>Images
           </Typography>
           <ProjectSupplementalImages
             project={props.project}

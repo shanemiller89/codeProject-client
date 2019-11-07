@@ -12,6 +12,8 @@ import Link from "@material-ui/core/Link";
 import DashboardRecentProjects from "./DashboardRecentProjects";
 import DashboardRecentCollabRequest from "./DashboardRecentCoallabRequest";
 import DashboardRecentTasks from "./DashboardRecentTasks";
+import ViewQuilt from "@material-ui/icons/ViewQuilt";
+
 import YellowAlert from "../../widgets/YellowAlert";
 
 // const drawerWidth = 240;
@@ -47,7 +49,6 @@ const Dashboard = () => {
   const [recentTasks, setTasks] = useState([]);
   const [recentCollabTasks, setCollabTasks] = useState([]);
 
-
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -74,7 +75,7 @@ const Dashboard = () => {
       setTasks(tasks);
     });
   };
-  
+
   const getRecentCollabTasks = () => {
     APIManager.getAll("projecttasks/recentcollabtasks").then(tasks => {
       setCollabTasks(tasks);
@@ -94,12 +95,24 @@ const Dashboard = () => {
   return (
     <>
       <main className={classes.content}>
+        <div style={{ display: "flex", alignItems: "center", padding: "2em 0 0 2em" }}>
+          <ViewQuilt
+            style={{ color: "#ca3e47", fontSize: "9em" }}
+            fontSize="large"
+          />
+          <Typography component="h1" variant="h1">
+            Dashboard
+          </Typography>
+        </div>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="xl" className={classes.container}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={7} lg={8}>
               <Paper className={fixedHeightPaper}>
-                <DashboardRecentProjects projects={projects} collabProjects={collabProjects} />
+                <DashboardRecentProjects
+                  projects={projects}
+                  collabProjects={collabProjects}
+                />
               </Paper>
             </Grid>
             <Grid item xs={12} md={5} lg={4}>
@@ -109,7 +122,10 @@ const Dashboard = () => {
             </Grid>
             <Grid item xs={12}>
               <Paper className={classes.paper} style={{ height: 400 }}>
-                <DashboardRecentTasks recentTasks={recentTasks} recentCollabTasks={recentCollabTasks} />
+                <DashboardRecentTasks
+                  recentTasks={recentTasks}
+                  recentCollabTasks={recentCollabTasks}
+                />
               </Paper>
             </Grid>
           </Grid>

@@ -25,168 +25,186 @@ const Tasks = props => {
 
   return (
     <>
-      <div style={{display: "flex"}}>
+      <div style={{ display: "flex" }}>
         <TasksForm project={props.project} addTasks={props.addTasks} />
-        <TasksFilter 
-        setIncomingView={setIncomingView}
-        setInProgressView={setInProgressView}
-        setInReviewView={setInReviewView}
-        setCompletedView={setCompletedView}
+        <TasksFilter
+          setIncomingView={setIncomingView}
+          setInProgressView={setInProgressView}
+          setInReviewView={setInReviewView}
+          setCompletedView={setCompletedView}
         />
       </div>
       <div hidden={incomingView}>
+        <div>
+          <Paper elevation={3} style={{ padding: "1em", margin: "1em" }}>
         <Typography variant="h2" component="h3">
           Incoming
         </Typography>
-        <div>
-          <List>
-            {props.tasks.filter(tasks => tasks.task_type_id === 1).length ===
-            0 ? (
-              <YellowAlert message="You currently have no Incoming Tasks associated with this Project." />
-            ) : (
-              props.tasks
-                .filter(tasks => tasks.task_type_id === 1)
-                .map(task => (
-                  <ListItem key={task.id} divider>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <Assignment />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={
-                        <ReactMarkdown source={task.task} escapeHtml={false} />
-                      }
-                    />
-                    <ListItemSecondaryAction>
-                      <ProjectTasksFormatMenu
-                        task={task}
-                        deleteTask={props.deleteTask}
-                        editTask={props.editTask}
-                        editTaskStatus={props.editTaskStatus}
+            <List>
+              {props.tasks.filter(tasks => tasks.task_type_id === 1).length ===
+              0 ? (
+                <YellowAlert message="You currently have no Incoming Tasks associated with this Project." />
+              ) : (
+                props.tasks
+                  .filter(tasks => tasks.task_type_id === 1)
+                  .map(task => (
+                    <ListItem key={task.id} divider>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <Assignment />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={
+                          <ReactMarkdown
+                            source={task.task}
+                            escapeHtml={false}
+                          />
+                        }
                       />
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                ))
-            )}
-          </List>
+                      <ListItemSecondaryAction>
+                        <ProjectTasksFormatMenu
+                          task={task}
+                          deleteTask={props.deleteTask}
+                          editTask={props.editTask}
+                          editTaskStatus={props.editTaskStatus}
+                        />
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))
+              )}
+            </List>
+          </Paper>
         </div>
       </div>
       <div hidden={inProgessView}>
-        <Paper style={{padding: "1em", margin: "1em"}}>
-        <Typography variant="h2" component="h3">
-          In Progress
-        </Typography>
-        <div>
-          <List>
-            {props.tasks.filter(tasks => tasks.task_type_id === 2).length ===
-            0 ? (
-              <YellowAlert message="You currently have no In Progress Tasks associated with this Project." />
-            ) : (
-              props.tasks
-                .filter(tasks => tasks.task_type_id === 2)
-                .map(task => (
-                  <ListItem key={task.id} divider>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <Assignment />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={
-                        <ReactMarkdown source={task.task} escapeHtml={false} />
-                      }
-                    />
-                    <ListItemSecondaryAction>
-                      <ProjectTasksFormatMenu
-                        task={task}
-                        deleteTask={props.deleteTask}
-                        editTask={props.editTask}
-                        editTaskStatus={props.editTaskStatus}
+        <Paper elevation={3} style={{ padding: "1em", margin: "1em" }}>
+          <Typography variant="h2" component="h3">
+            In Progress
+          </Typography>
+          <div>
+            <List>
+              {props.tasks.filter(tasks => tasks.task_type_id === 2).length ===
+              0 ? (
+                <YellowAlert message="You currently have no In Progress Tasks associated with this Project." />
+              ) : (
+                props.tasks
+                  .filter(tasks => tasks.task_type_id === 2)
+                  .map(task => (
+                    <ListItem key={task.id} divider>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <Assignment />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={
+                          <ReactMarkdown
+                            source={task.task}
+                            escapeHtml={false}
+                          />
+                        }
                       />
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                ))
-            )}
-          </List>
-        </div>
+                      <ListItemSecondaryAction>
+                        <ProjectTasksFormatMenu
+                          task={task}
+                          deleteTask={props.deleteTask}
+                          editTask={props.editTask}
+                          editTaskStatus={props.editTaskStatus}
+                        />
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))
+              )}
+            </List>
+          </div>
         </Paper>
       </div>
       <div hidden={inReviewView}>
-        <Typography variant="h2" component="h3">
-          In Review
-        </Typography>
-        <div>
-          <List>
-            {props.tasks.filter(tasks => tasks.task_type_id === 3).length ===
-            0 ? (
-              <YellowAlert message="You currently have no In Review Tasks associated with this Project." />
-            ) : (
-              props.tasks
-                .filter(tasks => tasks.task_type_id === 3)
-                .map(task => (
-                  <ListItem key={task.id} divider>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <Assignment />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={
-                        <ReactMarkdown source={task.task} escapeHtml={false} />
-                      }
-                    />
-                    <ListItemSecondaryAction>
-                      <ProjectTasksFormatMenu
-                        task={task}
-                        deleteTask={props.deleteTask}
-                        editTask={props.editTask}
-                        editTaskStatus={props.editTaskStatus}
+        <Paper elevation={3} style={{ padding: "1em", margin: "1em" }}>
+          <Typography variant="h2" component="h3">
+            In Review
+          </Typography>
+          <div>
+            <List>
+              {props.tasks.filter(tasks => tasks.task_type_id === 3).length ===
+              0 ? (
+                <YellowAlert message="You currently have no In Review Tasks associated with this Project." />
+              ) : (
+                props.tasks
+                  .filter(tasks => tasks.task_type_id === 3)
+                  .map(task => (
+                    <ListItem key={task.id} divider>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <Assignment />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={
+                          <ReactMarkdown
+                            source={task.task}
+                            escapeHtml={false}
+                          />
+                        }
                       />
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                ))
-            )}
-          </List>
-        </div>
+                      <ListItemSecondaryAction>
+                        <ProjectTasksFormatMenu
+                          task={task}
+                          deleteTask={props.deleteTask}
+                          editTask={props.editTask}
+                          editTaskStatus={props.editTaskStatus}
+                        />
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))
+              )}
+            </List>
+          </div>
+        </Paper>
       </div>
       <div hidden={completedView}>
-        <Typography variant="h2" component="h3">
-          Completed
-        </Typography>
-        <div>
-          <List>
-            {props.tasks.filter(tasks => tasks.task_type_id === 4).length ===
-            0 ? (
-              <YellowAlert message="You currently have no Completed Tasks associated with this Project." />
-            ) : (
-              props.tasks
-                .filter(tasks => tasks.task_type_id === 4)
-                .map(task => (
-                  <ListItem key={task.id} divider>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <Assignment />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={
-                        <ReactMarkdown source={task.task} escapeHtml={false} />
-                      }
-                    />
-                    <ListItemSecondaryAction>
-                      <ProjectTasksFormatMenu
-                        task={task}
-                        deleteTask={props.deleteTask}
-                        editTask={props.editTask}
-                        editTaskStatus={props.editTaskStatus}
+        <Paper elevation={3} style={{ padding: "1em", margin: "1em" }}>
+          <Typography variant="h2" component="h3">
+            Completed
+          </Typography>
+          <div>
+            <List>
+              {props.tasks.filter(tasks => tasks.task_type_id === 4).length ===
+              0 ? (
+                <YellowAlert message="You currently have no Completed Tasks associated with this Project." />
+              ) : (
+                props.tasks
+                  .filter(tasks => tasks.task_type_id === 4)
+                  .map(task => (
+                    <ListItem key={task.id} divider>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <Assignment />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={
+                          <ReactMarkdown
+                            source={task.task}
+                            escapeHtml={false}
+                          />
+                        }
                       />
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                ))
-            )}
-          </List>
-        </div>
+                      <ListItemSecondaryAction>
+                        <ProjectTasksFormatMenu
+                          task={task}
+                          deleteTask={props.deleteTask}
+                          editTask={props.editTask}
+                          editTaskStatus={props.editTaskStatus}
+                        />
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))
+              )}
+            </List>
+          </div>
+        </Paper>
       </div>
     </>
   );

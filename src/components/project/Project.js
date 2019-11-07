@@ -7,7 +7,7 @@ import DeleteDialog from "../../widgets/DeleteDialog";
 import ProjectEditForm from "./ProjectEditForm";
 import CollaboratorInviteForm from "./collaborators/CollaboratorInviteForm";
 import UserContext from "../../context/UserContext";
-import DeveloperBoard from "@material-ui/icons/DeveloperBoard";
+import GetApp from "@material-ui/icons/GetApp";
 
 const Project = props => {
   const [project, setProject] = useState({});
@@ -240,6 +240,7 @@ const Project = props => {
                 >
                   <Button
                     variant="contained"
+                    startIcon={<GetApp />}
                     style={{
                       background: "#ca3e47",
                       color: "white"

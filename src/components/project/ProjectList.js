@@ -118,19 +118,19 @@ const ProjectList = () => {
             >
               <FormControlLabel
                 value="all"
-                control={<Radio color="primary" />}
+                control={<Radio color="secondary" />}
                 label="All"
                 labelPlacement="start"
               />
               <FormControlLabel
                 value="personal"
-                control={<Radio color="primary" />}
+                control={<Radio color="secondary" />}
                 label="Personal"
                 labelPlacement="start"
               />
               <FormControlLabel
                 value="collaborator"
-                control={<Radio color="primary" />}
+                control={<Radio color="secondary" />}
                 label="Collaborator"
                 labelPlacement="start"
               />
@@ -157,7 +157,7 @@ const ProjectList = () => {
         <Grid container spacing={5} style={{ marginLeft: "3em" }}>
           {collaboratorProjects.map(project => (
             <Grid key={project.id} item xs={4} spacing={5}>
-              <ProjectCard key={project.id} project={project} />
+              <ProjectCard key={project.id} project={project}/>
             </Grid>
           ))}
         </Grid>

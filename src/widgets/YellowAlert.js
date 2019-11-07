@@ -6,10 +6,10 @@ const YellowAlert = props => {
   return (    
       <Container
         style={{
-          background: "#fff3cd",
+          background: "#ffaaaa",
           borderRadius: ".25em",
           padding: "1em",
-          color: "#856404",
+          color: "#550000",
           textAlign: "center",
         }}
         maxWidth="xl"
