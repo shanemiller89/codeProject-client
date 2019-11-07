@@ -30,7 +30,7 @@ const DashboardRecentCollabRequest = props => {
 
   return (
     <React.Fragment>
-      <Typography color="textSecondary" component="h3" variant="h6">
+      <Typography style={{color: "#ca3e47"}} component="h3" variant="h6">
         Recent Pending Sent Invites
       </Typography>
       {props.invites.length === 0 ? (

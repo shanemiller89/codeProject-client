@@ -16,7 +16,7 @@ const ListItems = (props) => (
     <Link to="/">
       <ListItem button>
         <ListItemIcon>
-          <ViewQuilt fontSize="large" />
+          <ViewQuilt style={{color: "white"}} fontSize="large" />
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItem>
@@ -24,7 +24,7 @@ const ListItems = (props) => (
     <Link to="/projects">
       <ListItem button>
         <ListItemIcon>
-          <DeveloperBoard fontSize="large" />
+          <DeveloperBoard style={{color: "white"}} fontSize="large" />
         </ListItemIcon>
         <ListItemText primary="Projects" />
       </ListItem>
@@ -33,7 +33,7 @@ const ListItems = (props) => (
       <ListItem button>
           <ListItemIcon>
         <Badge badgeContent={props.invites} color="secondary">
-            <MailIcon fontSize="large" />
+            <MailIcon style={{color: "white"}} fontSize="large" />
         </Badge>
           </ListItemIcon>
         <ListItemText primary="Invites" />
@@ -42,7 +42,7 @@ const ListItems = (props) => (
     <Link to="/profile">
       <ListItem button>
         <ListItemIcon>
-          <AccountCircleIcon fontSize="large" />
+        <AccountCircleIcon style={{color: "white"}} fontSize="large" />
         </ListItemIcon>
         <ListItemText primary="Profile" />
       </ListItem>

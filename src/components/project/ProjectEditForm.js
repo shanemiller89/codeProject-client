@@ -88,7 +88,7 @@ const ProjectEditForm = props => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button style={{background: "#ca3e47", color: "white"}} variant="contained" color="primary" onClick={handleClickOpen}>
         Edit Project
       </Button>
       <Dialog

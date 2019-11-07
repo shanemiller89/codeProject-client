@@ -61,31 +61,31 @@ const TasksFilter = props => {
       >
         <FormControlLabel
           value="all"
-          control={<Radio color="primary" />}
+          control={<Radio color="secondary" />}
           label="All"
           labelPlacement="start"
         />
         <FormControlLabel
           value="incoming"
-          control={<Radio color="primary" />}
+          control={<Radio color="secondary" />}
           label="Incoming"
           labelPlacement="start"
         />
         <FormControlLabel
           value="inprogress"
-          control={<Radio color="primary" />}
+          control={<Radio color="secondary" />}
           label="In Progress"
           labelPlacement="start"
         />
         <FormControlLabel
           value="inreview"
-          control={<Radio color="primary" />}
+          control={<Radio color="secondary" />}
           label="In Review"
           labelPlacement="start"
         />
         <FormControlLabel
           value="completed"
-          control={<Radio color="primary" />}
+          control={<Radio color="secondary" />}
           label="Completed"
           labelPlacement="start"
         />

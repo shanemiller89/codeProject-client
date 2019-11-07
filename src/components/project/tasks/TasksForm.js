@@ -33,7 +33,7 @@ const TasksForm = (props) => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="contained" style={{background: "#ca3e47", color: "white", margin: "0 1em 1em 0"}} onClick={handleClickOpen}>
         Create Tasks
       </Button>
       <Dialog

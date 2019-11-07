@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import APIManager from "../../util/APIManager";
 import ProjectCard from "./ProjectCard";
+import DeveloperBoard from "@material-ui/icons/DeveloperBoard";
 
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -28,7 +29,20 @@ const useStyles = makeStyles({
     marginTop: "8em"
   },
   header: {
-    display: "flex"
+    display: "flex",
+    margin: "2em"
+  },
+  filter: {
+    margin: "1.5em 0 0 3em"
+  },
+  projectContainer: {
+    margin: "3em"
+  },
+  textColor: {
+    color: "#ca3e47"
+  },
+  simpleMargin: {
+    margin: "1em"
   }
 });
 
@@ -43,15 +57,15 @@ const ProjectList = () => {
   const changeView = () => {
     if (value === "all") {
       setPersonalView(false);
-      setCollaboratorView(false)
+      setCollaboratorView(false);
     }
     if (value === "personal") {
       setPersonalView(false);
-      setCollaboratorView(true)
+      setCollaboratorView(true);
     }
     if (value === "collaborator") {
       setPersonalView(true);
-      setCollaboratorView(false)
+      setCollaboratorView(false);
     }
   };
 
@@ -83,41 +97,51 @@ const ProjectList = () => {
   return (
     <>
       <div className={classes.header}>
-        <Typography color="textSecondary" component="h1" variant="h4">
-          Projects
-        </Typography>
-        <FormControl component="fieldset">
-          <RadioGroup
-            aria-label="position"
-            name="position"
-            value={value}
-            onChange={handleChange}
-            row
-          >
-            <FormControlLabel
-              value="all"
-              control={<Radio color="primary" />}
-              label="All"
-              labelPlacement="start"
-            />
-            <FormControlLabel
-              value="personal"
-              control={<Radio color="primary" />}
-              label="Personal"
-              labelPlacement="start"
-            />
-            <FormControlLabel
-              value="collaborator"
-              control={<Radio color="primary" />}
-              label="Collaborator"
-              labelPlacement="start"
-            />
-          </RadioGroup>
-        </FormControl>
+        <div>
+          <div style={{display: "flex", alignItems: "center"}}>
+            <DeveloperBoard style={{ color: "#ca3e47", fontSize: "9em" }} fontSize="large" />
+            <Typography component="h1" variant="h1">
+              Projects
+            </Typography>
+          </div>
+          <ProjectForm getMyProjects={getMyProjects} />
+        </div>
+        <div className={classes.filter}>
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Filter Projects</FormLabel>
+            <RadioGroup
+              aria-label="position"
+              name="position"
+              value={value}
+              onChange={handleChange}
+              row
+            >
+              <FormControlLabel
+                value="all"
+                control={<Radio color="primary" />}
+                label="All"
+                labelPlacement="start"
+              />
+              <FormControlLabel
+                value="personal"
+                control={<Radio color="primary" />}
+                label="Personal"
+                labelPlacement="start"
+              />
+              <FormControlLabel
+                value="collaborator"
+                control={<Radio color="primary" />}
+                label="Collaborator"
+                labelPlacement="start"
+              />
+            </RadioGroup>
+          </FormControl>
+        </div>
       </div>
-      <ProjectForm getMyProjects={getMyProjects} />
-      <div hidden={personalView}>
-        <h3>My Projects</h3>
+      <div className={classes.projectContainer} hidden={personalView}>
+        <Typography className={classes.simpleMargin} variant="h3">
+          <span className={classes.textColor}>Owner</span> Projects
+        </Typography>
         <Grid container spacing={5} style={{ marginLeft: "3em" }}>
           {myProjects.map(project => (
             <Grid key={project.id} item xs={4} spacing={5}>
@@ -126,8 +150,10 @@ const ProjectList = () => {
           ))}
         </Grid>
       </div>
-      <div hidden={collaboratorView}>
-        <h3>CollaboratorProjects</h3>
+      <div className={classes.projectContainer} hidden={collaboratorView}>
+        <Typography className={classes.simpleMargin} variant="h3">
+          <span className={classes.textColor}>Collaborator</span> Projects
+        </Typography>
         <Grid container spacing={5} style={{ marginLeft: "3em" }}>
           {collaboratorProjects.map(project => (
             <Grid key={project.id} item xs={4} spacing={5}>

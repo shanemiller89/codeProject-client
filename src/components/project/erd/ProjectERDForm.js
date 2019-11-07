@@ -45,7 +45,7 @@ const ProjectERDForm = props => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="contained" style={{background: "#ca3e47", color: "white", marginBottom: "1em"}} onClick={handleClickOpen}>
         {props.project.erd_image === "" ? "Add ERD" : "Change ERD"}
       </Button>
       <Dialog

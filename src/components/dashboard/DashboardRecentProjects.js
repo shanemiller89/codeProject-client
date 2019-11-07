@@ -42,7 +42,7 @@ const DashboardRecentProjects = props => {
   return (
     <React.Fragment>
       <div className={classes.header}>
-        <Typography color="textSecondary" component="h1" variant="h4">
+        <Typography style={{color: "#ca3e47"}} component="h1" variant="h4">
           Recent Projects
         </Typography>
         <FormControl component="fieldset">
@@ -55,13 +55,13 @@ const DashboardRecentProjects = props => {
           >
             <FormControlLabel
               value="personal"
-              control={<Radio color="primary" />}
+              control={<Radio color="secondary" />}
               label="Personal"
               labelPlacement="start"
             />
             <FormControlLabel
               value="collaborator"
-              control={<Radio color="primary" />}
+              control={<Radio color="secondary" />}
               label="Collaborator"
               labelPlacement="start"
             />

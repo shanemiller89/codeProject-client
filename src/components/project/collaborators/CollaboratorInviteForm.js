@@ -69,7 +69,7 @@ const CollaboratorInviteForm = props => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="contained" style={{background: "#ca3e47", color: "white"}} onClick={handleClickOpen}>
         Add Collaborator
       </Button>
       <Dialog

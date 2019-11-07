@@ -16,9 +16,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import useSimpleAuth from "../../hooks/useSimpleAuth";
-import  ListItems  from "./ListItems";
+import ListItems from "./ListItems";
 import Dashboard from "../dashboard/Dashboard";
-import DeveloperBoard from "@material-ui/icons/DeveloperBoard";
+import EmojiObjectsOutlined from "@material-ui/icons/EmojiObjectsOutlined";
 import UserContext from "../../context/UserContext";
 import ApplicationViews from "../../ApplicationViews";
 import { Avatar } from "@material-ui/core";
@@ -30,7 +30,8 @@ const useStyles = makeStyles(theme => ({
     display: "flex"
   },
   toolbar: {
-    paddingRight: 24 // keep right padding when drawer closed
+    paddingRight: 24, // keep right padding when drawer closed
+    background: "#313131"
   },
   toolbarIcon: {
     display: "flex",
@@ -65,6 +66,8 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   drawerPaper: {
+    background: "#414141",
+
     position: "relative",
     whiteSpace: "nowrap",
     width: drawerWidth,
@@ -74,6 +77,8 @@ const useStyles = makeStyles(theme => ({
     })
   },
   drawerPaperClose: {
+    background: "#414141",
+
     overflowX: "hidden",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
@@ -111,13 +116,16 @@ const useStyles = makeStyles(theme => ({
   logout: {
     display: "flex",
     flexDirection: "column"
+  },
+  logoutButton:{
+    color: "#ca3e47"
   }
 }));
 
 const NavBar = props => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -153,36 +161,39 @@ const NavBar = props => {
               >
                 <MenuIcon />
               </IconButton>
-              <DeveloperBoard fontSize="large" />
-              <Typography
-                component="h1"
-                variant="h6"
-                color="inherit"
-                noWrap
-                className={classes.title}
-              >
-                code.Project
-              </Typography>
-              {console.log("Context", context.user.user.username)}
-              <Avatar
-                src={context.user.profile_image}
-                alt={context.user.user.username}
-                className={classes.avatar}
-              />
-              <div className={classes.logout}>
-                {/* <Typography
+              <div style={{ display: "flex"}}>
+                <div>
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/codeproject-client.appspot.com/o/app_resources%2Fcode.Project%20(4).png?alt=media&token=9c8d24b1-0a3a-4221-a53b-6a0197ab74f3"
+                    alt="logo"
+                    style={{ height: 50, marginRight: "95em", marginTop: ".5em" }}
+                  />
+                </div>
+                <div style={{display: "flex"}}>
+                  <div>
+                    <Avatar
+                      src={context.user.profile_image}
+                      alt={context.user.user.username}
+                      className={classes.avatar}
+                    />
+                  </div>
+                  <div className={classes.logout}>
+                    <Typography
                   component="p"
                   variant="h6"
                   color="inherit"
-                > */}
-                  {context.user.user.username}
-                {/* </Typography> */}
-                <Button
-                  color="inherit"
-                  onClick={() => logout(props.setIsLoggedIn)}
                 >
-                  Logout
-                </Button>
+                    {context.user.user.username}
+                    </Typography>
+                    <Button
+                      color="inherit"
+                      className={classes.logoutButton}
+                      onClick={() => logout(props.setIsLoggedIn)}
+                    >
+                      Logout
+                    </Button>
+                  </div>
+                </div>
               </div>
             </Toolbar>
           </AppBar>
@@ -202,7 +213,9 @@ const NavBar = props => {
               </IconButton>
             </div>
             <Divider />
-            <List><ListItems invites={context.inviteLength}/></List>
+            <List>
+              <ListItems invites={context.inviteLength} />
+            </List>
           </Drawer>
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />

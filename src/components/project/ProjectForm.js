@@ -97,7 +97,7 @@ const ProjectForm = props => {
 
   return (
     <>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="contained" style={{background: "#ca3e47", color: "white", marginTop: "2em"}} onClick={handleClickOpen}>
         Create New Project
       </Button>
       <Dialog

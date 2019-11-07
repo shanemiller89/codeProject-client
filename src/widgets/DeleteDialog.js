@@ -19,7 +19,7 @@ const DeleteDialog = (props) => {
 
   return (
     <div>
-      <Button variant="contained" color="secondary" onClick={handleClickOpen}>
+      <Button variant="contained" style={{background: "#ca3e47", color: "white"}} onClick={handleClickOpen}>
         Delete {props.deletedItem}
       </Button>
       <Dialog

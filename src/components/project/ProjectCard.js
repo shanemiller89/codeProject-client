@@ -31,28 +31,15 @@ const ProjectCard = props => {
 
   return (
     <Card className={classes.card}>
-      {/* <CardActionArea> */}
-      {/* <CardMedia
-          className={classes.media}
-          image={props.project.project_image}
-          title={props.project.title}
-        /> */}
       {props.project.project_image === "" ? (
         <div>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <DeveloperBoard fontSize="large" style={{ fontSize: "19em" }} />
+            <DeveloperBoard
+              fontSize="large"
+              style={{ color: "#ca3e47", fontSize: "21em" }}
+            />
           </div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Typography
-              component="h1"
-              variant="h5"
-              color="inherit"
-              noWrap
-              className={classes.title}
-            >
-              Personal Project
-            </Typography>
-          </div>
+          <div style={{ display: "flex", justifyContent: "center" }}></div>
         </div>
       ) : (
         <div style={{ display: "flex", justifyContent: "center" }}>

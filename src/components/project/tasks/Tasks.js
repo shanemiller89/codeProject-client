@@ -13,6 +13,7 @@ import TasksForm from "./TasksForm";
 import YellowAlert from "../../../widgets/YellowAlert";
 import ProjectTasksFormatMenu from "./ProjectTasksFormatMenu";
 import TasksFilter from "./TasksFilter";
+import { Paper } from "@material-ui/core";
 
 const ReactMarkdown = require("react-markdown");
 
@@ -72,6 +73,7 @@ const Tasks = props => {
         </div>
       </div>
       <div hidden={inProgessView}>
+        <Paper style={{padding: "1em", margin: "1em"}}>
         <Typography variant="h2" component="h3">
           In Progress
         </Typography>
@@ -108,6 +110,7 @@ const Tasks = props => {
             )}
           </List>
         </div>
+        </Paper>
       </div>
       <div hidden={inReviewView}>
         <Typography variant="h2" component="h3">

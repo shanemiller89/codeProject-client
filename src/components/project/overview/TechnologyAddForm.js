@@ -46,7 +46,7 @@ const TechnologyAddForm = props => {
         aria-labelledby="form-dialog-title"
         maxWidth="xl"
       >
-        <DialogTitle id="form-dialog-title">Edit Technology</DialogTitle>
+        <DialogTitle id="form-dialog-title">Add Supplemental Technology</DialogTitle>
         <form onSubmit={submit}>
           <DialogContent>
             <TextField
@@ -55,9 +55,9 @@ const TechnologyAddForm = props => {
               required
               fullWidth
               style={{ width: "50em" }}
-              id="task"
+              id="technology"
               label="Technology"
-              name="task"
+              name="technology"
               onChange={e => setTechnology(e.target.value)}
             />
           </DialogContent>
