@@ -43,7 +43,7 @@ const ProjectSupplementals = props => {
       />
       </div>
       <div className={classes.root} hidden={noteView}>
-        <Paper className={classes.root}>
+        <Paper elevation={3} className={classes.root}>
           <Typography variant="h4" component="h3">
             <Note style={{color: "#ca3e47"}}/>Notes
           </Typography>
@@ -58,7 +58,7 @@ const ProjectSupplementals = props => {
         </Paper>
       </div>
       <div className={classes.root} hidden={codeView}>
-        <Paper className={classes.root}>
+        <Paper elevation={3} className={classes.root}>
           <Typography variant="h4" component="h3">
           <Code style={{color: "#ca3e47"}}/>Code Snippets
           </Typography>
@@ -73,7 +73,7 @@ const ProjectSupplementals = props => {
         </Paper>
       </div>
       <div className={classes.root} hidden={imageView}>
-        <Paper className={classes.root}>
+        <Paper elevation={3} className={classes.root}>
           <Typography variant="h4" component="h3">
           <Image style={{color: "#ca3e47"}}/>Images
           </Typography>

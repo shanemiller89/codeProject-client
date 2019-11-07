@@ -139,13 +139,13 @@ const ProjectEditForm = props => {
               >
                 <FormControlLabel
                   value="false"
-                  control={<Radio color="primary" />}
+                  control={<Radio color="secondary" />}
                   label="Public"
                   labelPlacement="start"
                 />
                 <FormControlLabel
                   value="true"
-                  control={<Radio color="primary" />}
+                  control={<Radio color="secondary" />}
                   label="Private"
                   labelPlacement="start"
                 />
@@ -158,7 +158,7 @@ const ProjectEditForm = props => {
                   checked={checked}
                   onChange={checkedToggle}
                   value="checked"
-                  color="primary"
+                  color="secondary"
                 />
               }
               label="Change logo or associated Image for this project?"
@@ -175,10 +175,10 @@ const ProjectEditForm = props => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={handleClose} style={{color: "#ca3e47"}}>
               Cancel
             </Button>
-            <Button type="submit" color="primary">
+            <Button type="submit" style={{color: "#ca3e47"}}>
               Submit
             </Button>
           </DialogActions>

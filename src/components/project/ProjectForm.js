@@ -211,7 +211,7 @@ const ProjectForm = props => {
                             checked={checked}
                             onChange={checkedToggle}
                             value="checked"
-                            color="primary"
+                            color="secondary"
                           />
                         }
                         label="Upload logo or associated Image for this project?"
@@ -249,8 +249,7 @@ const ProjectForm = props => {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    color="primary"
-                    style={{ marginTop: "1em" }}
+                    style={{ marginTop: "1em", background: "#ca3e47", color: "white" }}
                   >
                     Create New Project
                   </Button>

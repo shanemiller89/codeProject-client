@@ -110,14 +110,14 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: 10,
-    width: 45,
-    height: 45
+    width: 50,
+    height: 50
   },
   logout: {
     display: "flex",
     flexDirection: "column"
   },
-  logoutButton:{
+  logoutButton: {
     color: "#ca3e47"
   }
 }));
@@ -161,39 +161,33 @@ const NavBar = props => {
               >
                 <MenuIcon />
               </IconButton>
-              <div style={{ display: "flex"}}>
+              <div style={{ display: "flex" }}>
                 <div>
                   <img
                     src="https://firebasestorage.googleapis.com/v0/b/codeproject-client.appspot.com/o/app_resources%2Fcode.Project%20(4).png?alt=media&token=9c8d24b1-0a3a-4221-a53b-6a0197ab74f3"
                     alt="logo"
-                    style={{ height: 50, marginRight: "95em", marginTop: ".5em" }}
+                    style={{
+                      height: 50,
+                      marginRight: "85em",
+                      marginTop: ".5em"
+                    }}
                   />
                 </div>
-                <div style={{display: "flex"}}>
-                  <div>
-                    <Avatar
-                      src={context.user.profile_image}
-                      alt={context.user.user.username}
-                      className={classes.avatar}
-                    />
-                  </div>
-                  <div className={classes.logout}>
-                    <Typography
-                  component="p"
-                  variant="h6"
-                  color="inherit"
-                >
-                    {context.user.user.username}
-                    </Typography>
-                    <Button
-                      color="inherit"
-                      className={classes.logoutButton}
-                      onClick={() => logout(props.setIsLoggedIn)}
-                    >
-                      Logout
-                    </Button>
-                  </div>
+                <Avatar
+                  src={context.user.profile_image}
+                  alt={context.user.user.username}
+                  className={classes.avatar}
+                />
+                <div style={{margin: "1em 3em -1em 0em", fontSize: "1.5em"}}>
+                  {context.user.user.username}
                 </div>
+                <Button
+                  size="large"
+                  className={classes.logoutButton}
+                  onClick={() => logout(props.setIsLoggedIn)}
+                >
+                  Logout
+                </Button>
               </div>
             </Toolbar>
           </AppBar>

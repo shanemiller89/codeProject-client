@@ -6,22 +6,22 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Edit from "@material-ui/icons/Edit";
 
 
 const ProjectOverviewEdit = props => {
   const [open, setOpen] = useState(false);
   const [overview, setOverview] = useState("");
 
-
-  const submit = (e) => {
-      e.preventDefault()
-      const editedOverview = {
-        overview: overview,
-        id: props.project.id
-      };
-      props.editProjectOverview(editedOverview);
-      handleClose()
-    }
+  const submit = e => {
+    e.preventDefault();
+    const editedOverview = {
+      overview: overview,
+      id: props.project.id
+    };
+    props.editProjectOverview(editedOverview);
+    handleClose();
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -34,7 +34,13 @@ const ProjectOverviewEdit = props => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button
+        variant="contained"
+        size="small"
+        startIcon={<Edit />}
+        style={{ color: "white", background: "#ca3e47", marginLeft: "58em" }}
+        onClick={handleClickOpen}
+      >
         Edit
       </Button>
       <Dialog
@@ -43,11 +49,9 @@ const ProjectOverviewEdit = props => {
         aria-labelledby="form-dialog-title"
         maxWidth="xl"
       >
-        <DialogTitle id="form-dialog-title">Edit</DialogTitle>
+        <DialogTitle id="form-dialog-title">Edit Overview</DialogTitle>
         <form onSubmit={submit}>
           <DialogContent>
-            <DialogContentText>Edit Overview</DialogContentText>
-
             <TextField
               variant="outlined"
               margin="normal"
@@ -56,7 +60,7 @@ const ProjectOverviewEdit = props => {
               multiline
               helperText="Markdown is supported for the Project Overview Description. Otherwise, only spacing and line breaks will be rendered."
               rows="30"
-              style={{width: "50em"}}
+              style={{ width: "50em" }}
               id="overview"
               label="Project Overview Description"
               name="overview"
@@ -78,4 +82,4 @@ const ProjectOverviewEdit = props => {
   );
 };
 
-export default ProjectOverviewEdit
+export default ProjectOverviewEdit;
