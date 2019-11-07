@@ -222,10 +222,10 @@ const Registration = props => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="secondary">
+          <Button onClick={handleClose} style={{color: "#414141"}}>
             Cancel
           </Button>
-          <Button type="submit" color="secondary">
+          <Button type="submit" style={{color: "#414141"}}>
             Register
           </Button>
         </DialogActions>

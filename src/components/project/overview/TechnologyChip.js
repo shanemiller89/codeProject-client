@@ -25,14 +25,16 @@ const TechnologyChip = props => {
       <Chip
         key={props.technology.id}
         className={props.classes_chips}
-        color={
-          props.technology.technology_type_id === 1 ? "primary" : "secondary"
+        style={
+          props.technology.technology_type_id === 1
+            ? { background: "#ca3e47", color: "white" }
+            : { background: "#414141", color: "white" }
         }
         size="medium"
         label={props.technology.technology}
-        icon={<Code />}
+        icon={<Code style={{color: "white"}}/>}
         onDelete={handleClick}
-        deleteIcon={<MoreHoriz />}
+        deleteIcon={<MoreHoriz style={{color: "white"}} />}
       />
       <Menu
         id="simple-menu"

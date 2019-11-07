@@ -21,11 +21,11 @@ const ProjectSupplementalImageListItem = props => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="contained" style={{background: "#414141", color: "white"}} onClick={handleClickOpen}>
         <img
           alt="placeholder"
           src={props.image.supplemental_image}
-          style={{ width: 250, height: 250 }}
+          style={{ width: 250, height: 250, }}
         />
       </Button>
       <Dialog
@@ -36,7 +36,7 @@ const ProjectSupplementalImageListItem = props => {
         maxWidth="xl"
       >
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} style={{color: "#414141"}}>
             Cancel
           </Button>
         </DialogActions>

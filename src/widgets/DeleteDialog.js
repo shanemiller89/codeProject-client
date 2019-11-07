@@ -24,7 +24,7 @@ const DeleteDialog = props => {
       <Button
         variant="contained"
         startIcon={<Delete />}
-        style={{ background: "#ca3e47", color: "white" }}
+        style={{ background: "#414141", color: "white" }}
         onClick={handleClickOpen}
       >
         Delete {props.deletedItem}
@@ -42,12 +42,12 @@ const DeleteDialog = props => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} style={{color: "#414141"}}>
             Cancel
           </Button>
           <Button
             onClick={() => props.deleteFunction(props.id)}
-            color="primary"
+            style={{color: "#414141"}}
             autoFocus
           >
             Delete

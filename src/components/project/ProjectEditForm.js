@@ -87,7 +87,7 @@ const ProjectEditForm = props => {
   return (
     <div>
       <Button
-        style={{ background: "#ca3e47", color: "white" }}
+        style={{ background: "#414141", color: "white" }}
         variant="contained"
         color="primary"
         startIcon={<Edit />}
@@ -175,10 +175,10 @@ const ProjectEditForm = props => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} style={{color: "#ca3e47"}}>
+            <Button onClick={handleClose} style={{color: "#414141"}}>
               Cancel
             </Button>
-            <Button type="submit" style={{color: "#ca3e47"}}>
+            <Button type="submit" style={{color: "#414141"}}>
               Submit
             </Button>
           </DialogActions>

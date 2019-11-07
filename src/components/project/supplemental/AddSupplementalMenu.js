@@ -25,7 +25,7 @@ const AddSupplementalMenu = props => {
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"
-        style={{background: "#ca3e47", color: "white", margin: "0 1em 1em 0"}}
+        style={{background: "#414141", color: "white", margin: "0 1em 1em 0"}}
         onClick={handleClick}
       >
         Add Supplemental

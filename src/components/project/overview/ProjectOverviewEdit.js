@@ -38,7 +38,7 @@ const ProjectOverviewEdit = props => {
         variant="contained"
         size="small"
         startIcon={<Edit />}
-        style={{ color: "white", background: "#ca3e47", marginLeft: "58em" }}
+        style={{ color: "white", background: "#414141", marginLeft: "58em" }}
         onClick={handleClickOpen}
       >
         Edit
@@ -69,10 +69,10 @@ const ProjectOverviewEdit = props => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={handleClose} style={{color: "#414141"}}>
               Cancel
             </Button>
-            <Button type="submit" color="primary">
+            <Button type="submit" style={{color: "#414141"}}>
               Submit
             </Button>
           </DialogActions>

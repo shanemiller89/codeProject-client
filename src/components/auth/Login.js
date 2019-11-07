@@ -147,7 +147,7 @@ const Login = props => {
               type="submit"
               fullWidth
               variant="contained"
-              style={{background: "#ca3e47", color: "white"}}
+              style={{background: "#414141", color: "white"}}
               className={classes.submit}
             >
               Sign In

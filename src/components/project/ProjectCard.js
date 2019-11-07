@@ -74,10 +74,10 @@ const ProjectCard = props => {
         <Typography variant="h6" component="h4">
           Primary Technology:{" "}
           <Chip
-            color="primary"
+            style={{ background: "#ca3e47", color: "white" }}
             size="small"
             label={props.project.technologies[0].technology}
-            icon={<Code />}
+            icon={<Code style={{color: "white"}}/>}
           />
           {/* <span className="primaryLanguage">{props.project.technologies[0].technology}</span> */}
         </Typography>
@@ -85,7 +85,7 @@ const ProjectCard = props => {
       {/* </CardActionArea> */}
       <CardActions>
         <Link style={{textDecoration: "none"}} to={`/project/${props.project.id}`}>
-          <Button size="large" color="secondary">
+          <Button size="large" style={{color: "#414141"}}>
             Project Details
           </Button>
         </Link>

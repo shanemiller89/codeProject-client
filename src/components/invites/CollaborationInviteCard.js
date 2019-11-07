@@ -61,10 +61,10 @@ const CollaborationInviteCard = props => {
             {props.invite.project.title}
           </Typography>
           <Chip
-            color="primary"
+            style={{ background: "#ca3e47", color: "white" }}
             size="medium"
             label={props.invite.project.technologies[0].technology}
-            icon={<Code />}
+            icon={<Code style={{color: "white"}}/>}
           />
         </div>
         <div className={classes.owner}>
@@ -84,7 +84,7 @@ const CollaborationInviteCard = props => {
         <Button onClick ={handleDecline} size="large" color="secondary">
           Decline
         </Button>
-        <Button onClick={handleAccept} size="large" color="primary">
+        <Button onClick={handleAccept} size="large" style={{color: "414141"}}>
           Accept
         </Button>
       </CardActions>

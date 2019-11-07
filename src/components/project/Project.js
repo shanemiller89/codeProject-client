@@ -242,7 +242,7 @@ const Project = props => {
                     variant="contained"
                     startIcon={<GetApp />}
                     style={{
-                      background: "#ca3e47",
+                      background: "#414141",
                       color: "white"
                     }}
                   >

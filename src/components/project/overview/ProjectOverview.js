@@ -104,7 +104,7 @@ const ProjectOverview = props => {
                 </div>
                 <Paper elevation={3} className={classes.technologies}>
                   <Typography variant="h6" component="h5">
-                    Primary Technology:
+                    Primary Technology
                     {props.technologies
                       .filter(technology => technology.technology_type_id === 1)
                       .map(technology => (
@@ -116,23 +116,25 @@ const ProjectOverview = props => {
                       ))}
                   </Typography>
                   <br />
-                  <Typography variant="h6" component="h5">
-                    Supplemental Technologies:
+                  <div style={{display: "flex", alignItems: "center"}}>
+                    <Typography variant="h6" component="h5">
+                      Supplemental Technologies
+                    </Typography>
                     <TechnologyAddForm
                       project={props.project}
                       addTechnology={props.addTechnology}
                     />
-                    {props.technologies
-                      .filter(technology => technology.technology_type_id === 2)
-                      .map(technology => (
-                        <TechnologyChip
-                          technology={technology}
-                          editTechnology={props.editTechnology}
-                          classes_chips={classes.chips}
-                          deleteTechnology={props.deleteTechnology}
-                        />
-                      ))}
-                  </Typography>
+                  </div>
+                  {props.technologies
+                    .filter(technology => technology.technology_type_id === 2)
+                    .map(technology => (
+                      <TechnologyChip
+                        technology={technology}
+                        editTechnology={props.editTechnology}
+                        classes_chips={classes.chips}
+                        deleteTechnology={props.deleteTechnology}
+                      />
+                    ))}
                 </Paper>
               </div>
               <br />

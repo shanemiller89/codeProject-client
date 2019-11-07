@@ -97,7 +97,7 @@ const ProjectForm = props => {
 
   return (
     <>
-      <Button variant="contained" style={{background: "#ca3e47", color: "white", marginTop: "2em"}} onClick={handleClickOpen}>
+      <Button variant="contained" style={{background: "#414141", color: "white", marginTop: "2em"}} onClick={handleClickOpen}>
         Create New Project
       </Button>
       <Dialog
@@ -108,7 +108,7 @@ const ProjectForm = props => {
         maxWidth="xl"
       >
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} style={{color: "#414141"}}>
             Cancel
           </Button>
         </DialogActions>
@@ -249,7 +249,7 @@ const ProjectForm = props => {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    style={{ marginTop: "1em", background: "#ca3e47", color: "white" }}
+                    style={{ marginTop: "1em", background: "#414141", color: "white" }}
                   >
                     Create New Project
                   </Button>

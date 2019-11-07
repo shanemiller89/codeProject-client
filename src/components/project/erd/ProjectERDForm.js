@@ -45,7 +45,7 @@ const ProjectERDForm = props => {
 
   return (
     <div>
-      <Button variant="contained" style={{background: "#ca3e47", color: "white", marginBottom: "1em"}} onClick={handleClickOpen}>
+      <Button variant="contained" style={{background: "#414141", color: "white", marginBottom: "1em"}} onClick={handleClickOpen}>
         {props.project.erd_image === "" ? "Add ERD" : "Change ERD"}
       </Button>
       <Dialog
@@ -70,10 +70,10 @@ const ProjectERDForm = props => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={handleClose} style={{color: "#414141"}}>
               Cancel
             </Button>
-            <Button type="submit" color="primary">
+            <Button type="submit" style={{color: "#414141"}}>
               Submit
             </Button>
           </DialogActions>

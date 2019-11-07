@@ -75,7 +75,7 @@ const CollaboratorInviteForm = props => {
       <Button
         variant="contained"
         startIcon={<Add />}
-        style={{ background: "#ca3e47", color: "white" }}
+        style={{ background: "#414141", color: "white" }}
         onClick={handleClickOpen}
       >
         Add Collaborator
@@ -186,13 +186,13 @@ const CollaboratorInviteForm = props => {
             </div>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClear} style={{ color: "#ca3e47" }}>
+            <Button onClick={handleClear} style={{ color: "#414141" }}>
               Clear Selected Collaborator
             </Button>
-            <Button onClick={handleClose} style={{ color: "#ca3e47" }}>
+            <Button onClick={handleClose} style={{ color: "#414141" }}>
               Cancel
             </Button>
-            <Button type="submit" style={{ color: "#ca3e47" }}>
+            <Button type="submit" style={{ color: "#414141" }}>
               Submit
             </Button>
           </DialogActions>

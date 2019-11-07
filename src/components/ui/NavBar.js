@@ -183,6 +183,7 @@ const NavBar = props => {
                 </div>
                 <Button
                   size="large"
+                  style={{color: "#ca3e47"}}
                   className={classes.logoutButton}
                   onClick={() => logout(props.setIsLoggedIn)}
                 >
