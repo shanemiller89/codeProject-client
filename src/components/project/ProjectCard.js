@@ -17,7 +17,8 @@ import { flexbox } from "@material-ui/system";
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 445
+    maxWidth: 445,
+    marginRight: "-10em"
   },
   media: {
     height: 300,
@@ -31,28 +32,15 @@ const ProjectCard = props => {
 
   return (
     <Card className={classes.card}>
-      {/* <CardActionArea> */}
-      {/* <CardMedia
-          className={classes.media}
-          image={props.project.project_image}
-          title={props.project.title}
-        /> */}
       {props.project.project_image === "" ? (
         <div>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <DeveloperBoard fontSize="large" style={{ fontSize: "19em" }} />
+            <DeveloperBoard
+              fontSize="large"
+              style={{ color: "#ca3e47", fontSize: "21em" }}
+            />
           </div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Typography
-              component="h1"
-              variant="h5"
-              color="inherit"
-              noWrap
-              className={classes.title}
-            >
-              Personal Project
-            </Typography>
-          </div>
+          <div style={{ display: "flex", justifyContent: "center" }}></div>
         </div>
       ) : (
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -86,18 +74,18 @@ const ProjectCard = props => {
         <Typography variant="h6" component="h4">
           Primary Technology:{" "}
           <Chip
-            color="primary"
+            style={{ background: "#ca3e47", color: "white" }}
             size="small"
             label={props.project.technologies[0].technology}
-            icon={<Code />}
+            icon={<Code style={{color: "white"}}/>}
           />
           {/* <span className="primaryLanguage">{props.project.technologies[0].technology}</span> */}
         </Typography>
       </CardContent>
       {/* </CardActionArea> */}
       <CardActions>
-        <Link to={`/project/${props.project.id}`}>
-          <Button size="large" color="primary">
+        <Link style={{textDecoration: "none"}} to={`/project/${props.project.id}`}>
+          <Button size="large" style={{color: "#414141"}}>
             Project Details
           </Button>
         </Link>

@@ -6,10 +6,8 @@ import "firebase/storage";
 
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
+import Edit from "@material-ui/icons/Edit";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import {
   Dialog,
@@ -57,7 +55,7 @@ const ProjectEditForm = props => {
           project_image: imageUrl
         };
         props.editProject(editProject, props.project.id);
-        handleClose()
+        handleClose();
       });
   };
 
@@ -70,7 +68,7 @@ const ProjectEditForm = props => {
       project_image: project_image
     };
     props.editProject(editProject, props.project.id);
-    handleClose()
+    handleClose();
   };
 
   const handleClickOpen = () => {
@@ -79,7 +77,7 @@ const ProjectEditForm = props => {
     setRepo(props.project.repo);
     setValue(props.project.private);
     setProjectImage(props.project.project_image);
-    console.log("Boolean", props.project.private)
+    console.log("Boolean", props.project.private);
   };
 
   const handleClose = () => {
@@ -88,7 +86,14 @@ const ProjectEditForm = props => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button
+        style={{ background: "#414141", color: "white" }}
+        variant="contained"
+        color="primary"
+        startIcon={<Edit />}
+
+        onClick={handleClickOpen}
+      >
         Edit Project
       </Button>
       <Dialog
@@ -134,13 +139,13 @@ const ProjectEditForm = props => {
               >
                 <FormControlLabel
                   value="false"
-                  control={<Radio color="primary" />}
+                  control={<Radio color="secondary" />}
                   label="Public"
                   labelPlacement="start"
                 />
                 <FormControlLabel
                   value="true"
-                  control={<Radio color="primary" />}
+                  control={<Radio color="secondary" />}
                   label="Private"
                   labelPlacement="start"
                 />
@@ -153,7 +158,7 @@ const ProjectEditForm = props => {
                   checked={checked}
                   onChange={checkedToggle}
                   value="checked"
-                  color="primary"
+                  color="secondary"
                 />
               }
               label="Change logo or associated Image for this project?"
@@ -170,10 +175,10 @@ const ProjectEditForm = props => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={handleClose} style={{color: "#414141"}}>
               Cancel
             </Button>
-            <Button type="submit" color="primary">
+            <Button type="submit" style={{color: "#414141"}}>
               Submit
             </Button>
           </DialogActions>

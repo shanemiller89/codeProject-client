@@ -25,7 +25,7 @@ const AddSupplementalMenu = props => {
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"
-        color="primary"
+        style={{background: "#414141", color: "white", margin: "0 1em 1em 0"}}
         onClick={handleClick}
       >
         Add Supplemental
@@ -52,22 +52,6 @@ const AddSupplementalMenu = props => {
           addSupplemental={props.addSupplemental}
           handleCloseMenu={handleClose}
         />
-        {/* <ProjectTasksEditForm
-          task={props.task}
-          editTask={props.editTask}
-          handleCloseMenu={handleClose}
-        />
-        <ProjectTasksTypeForm
-          task={props.task}
-          editTaskStatus={props.editTaskStatus}
-          handleCloseMenu={handleClose}
-        />
-        <MenuItem onClick={() => props.deleteTask(props.task.id)}>
-          <ListItemIcon>
-            <Delete fontSize="small" />
-          </ListItemIcon>
-          Delete
-        </MenuItem> */}
       </Menu>
     </div>
   );

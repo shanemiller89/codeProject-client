@@ -5,10 +5,14 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import Person from "@material-ui/icons/Person";
+import Equalizer from "@material-ui/icons/Equalizer";
+
+
 import { Avatar } from "@material-ui/core";
 import UserContext from "../../context/UserContext";
-import APIManager from "../../util/APIManager"
+import APIManager from "../../util/APIManager";
 
 // const drawerWidth = 240;
 
@@ -46,8 +50,6 @@ const Profile = () => {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-
-
   const getMyProjects = () => {
     APIManager.getAll("projects/owner").then(projects => {
       setMyProjects(projects.length);
@@ -70,9 +72,17 @@ const Profile = () => {
       {context => (
         <>
           <main className={classes.content}>
-            <Typography gutterBottom variant="h2">
-              User Profile
-            </Typography>
+            <div
+              style={{ display: "flex", alignItems: "center", padding: "2em" }}
+            >
+              <AccountCircleIcon
+                style={{ color: "#ca3e47", fontSize: "9em" }}
+                fontSize="large"
+              />
+              <Typography component="h1" variant="h1">
+                User Profile
+              </Typography>
+            </div>
             <div className={classes.appBarSpacer} />
             <Container maxWidth="xl" className={classes.container}>
               <Grid container spacing={6}>
@@ -84,35 +94,46 @@ const Profile = () => {
                   {/* <Paper className={fixedHeightPaper}></Paper> */}
                 </Grid>
                 <Grid item xs={12} md={8} lg={9}>
-                  <Paper className={fixedHeightPaper}>
+                  <Paper elevation={3} className={fixedHeightPaper}>
+                    <div style={{display: "flex", alignItems: "center"}}>
+                    <Person style={{ color: "#ca3e47", fontSize: "4em" }} />
                     <Typography gutterBottom variant="h3">
                       {context.user.user.username}
                     </Typography>
+                    </div>
                     <Typography gutterBottom variant="body1">
                       <strong>{"Full Name: "}</strong>
                       {context.user.user.first_name}{" "}
                       {context.user.user.last_name}
                     </Typography>
+                    <br/>
                     <Typography gutterBottom variant="body1">
                       <strong>{"Primary Language: "}</strong>
                       {context.user.primary_language}
                     </Typography>
+                    <br/>
                     <Typography gutterBottom variant="body1">
                       <strong>{"Github: "}</strong>
-                      {context.user.github}
+                      <a href={context.user.github} style={{color: "#ca3e47"}}>{context.user.github}</a>
                     </Typography>
                   </Paper>
                 </Grid>
                 <Grid item xs={12}>
-                  <Paper className={classes.paper} style={{ height: 240 }}>
+                  <Paper elevation={3} className={classes.paper} style={{ height: 240 }}>
+                  <div style={{display: "flex", alignItems: "center"}}>
+                    <Equalizer style={{ color: "#ca3e47", fontSize: "4em" }} />
                     <Typography gutterBottom variant="h3">
                       Stats
                     </Typography>
+                    </div>
                     <Typography gutterBottom variant="h4">
-                      {"Total Personal Projects: "}{myProjects}
+                      {"Total Personal Projects: "}
+                      {myProjects}
                     </Typography>
+                    <br/>
                     <Typography gutterBottom variant="h4">
-                      {"Total Collaborator Projects: "}{collaboratorProjects}
+                      {"Total Collaborator Projects: "}
+                      {collaboratorProjects}
                     </Typography>
                   </Paper>
                 </Grid>

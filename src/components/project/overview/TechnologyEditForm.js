@@ -42,7 +42,7 @@ const TechnologyEditForm = (props) => {
         <ListItemIcon>
           <Edit fontSize="small" />
         </ListItemIcon>
-        Edit Task
+        Edit Technology
       </MenuItem>
       <Dialog
         open={open}
@@ -60,18 +60,18 @@ const TechnologyEditForm = (props) => {
               required
               fullWidth
               style={{width: "50em"}}
-              id="task"
+              id="technology"
               label="Technology"
-              name="task"
+              name="technology"
               onChange={e => setTechnology(e.target.value)}
               value={technology.technology}
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={handleClose} style={{color: "#414141"}}>
               Cancel
             </Button>
-            <Button type="submit" color="primary">
+            <Button type="submit" style={{color: "#414141"}}>
               Submit
             </Button>
           </DialogActions>

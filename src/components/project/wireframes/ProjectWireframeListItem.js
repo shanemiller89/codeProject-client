@@ -21,7 +21,7 @@ const ProjectWireframeListItem = props => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="outlined" style={{color: "#414141"}} onClick={handleClickOpen}>
         <img
           alt="placeholder"
           src={props.wireframe.wireframe_image}
@@ -36,7 +36,7 @@ const ProjectWireframeListItem = props => {
         maxWidth="xl"
       >
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} style={{color: "#414141"}}>
             Cancel
           </Button>
         </DialogActions>

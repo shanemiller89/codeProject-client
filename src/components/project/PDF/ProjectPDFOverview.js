@@ -41,7 +41,7 @@ const ProjectPDFOverview = props => {
             <Typography
               style={{
                 color: "white",
-                background: "#3f51b5",
+                background: "#ca3e47",
                 borderRadius: 6,
                 padding: 5
               }}
@@ -61,7 +61,7 @@ const ProjectPDFOverview = props => {
             <Typography
               style={{
                 color: "white",
-                background: "#3f51b5",
+                background: "#ca3e47",
                 borderRadius: 6,
                 padding: 5
               }}
@@ -81,7 +81,7 @@ const ProjectPDFOverview = props => {
             <Typography
               style={{
                 color: "white",
-                background: "#3f51b5",
+                background: "#ca3e47",
                 borderRadius: 6,
                 padding: 5
               }}
@@ -99,7 +99,7 @@ const ProjectPDFOverview = props => {
                 <Typography
                   style={{
                     color: "white",
-                    background: "#3f51b5",
+                    background: "#ca3e47",
                     borderRadius: 6,
                     padding: 5
                   }}
@@ -141,7 +141,7 @@ const ProjectPDFOverview = props => {
                 <Typography
                   style={{
                     color: "white",
-                    background: "#3f51b5",
+                    background: "#ca3e47",
                     borderRadius: 6,
                     padding: 5
                   }}

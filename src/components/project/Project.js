@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import APIManager from "../../util/APIManager";
 import { Link } from "react-router-dom";
 import ProjectDetailNav from "./ProjectDetailNav";
-import { Button } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import DeleteDialog from "../../widgets/DeleteDialog";
 import ProjectEditForm from "./ProjectEditForm";
 import CollaboratorInviteForm from "./collaborators/CollaboratorInviteForm";
 import UserContext from "../../context/UserContext";
+import GetApp from "@material-ui/icons/GetApp";
 
 const Project = props => {
   const [project, setProject] = useState({});
@@ -163,30 +164,94 @@ const Project = props => {
     <UserContext.Consumer>
       {context => (
         <>
-          <h1>{project.title}</h1>
-          {project.private === true ? <h2>Private</h2> : <h2>Public</h2>}
-          <h2>
-            Repo: <a href={project.repo}>{project.repo}</a>
-          </h2>
-          <ProjectEditForm project={project} editProject={editProject} />
-          {context.user.id === project.owner_id ? (
-            <DeleteDialog
-              deletedItem="Project"
-              deleteFunction={deleteProject}
-              id={props.match.params.projectId}
-            />
-          ) : null}
-          {context.user.id === project.owner_id ? (
-            project.private === true ? null : (
-              <CollaboratorInviteForm
-                project={project}
-                createInvite={createInvite}
-              />
-            )
-          ) : null}
-          <Link to={`/projectPDF/${project.id}`}>
-            <Button>Export PDF</Button>
-          </Link>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "3em"
+            }}
+          >
+            <div>
+              <Typography gutterBottom variant="h1">
+                {project.title}
+              </Typography>
+
+              {project.private === true ? (
+                <div
+                  style={{
+                    border: "2px solid #ca3e47",
+                    borderRadius: 5,
+                    color: "#ca3e47",
+                    width: 70,
+                    fontSize: 18,
+                    padding: 5
+                  }}
+                >
+                  Private
+                </div>
+              ) : (
+                <div
+                  style={{
+                    border: "2px solid #ca3e47",
+                    borderRadius: 5,
+                    color: "#ca3e47",
+                    width: 65,
+                    fontSize: 18,
+                    padding: 5
+                  }}
+                >
+                  Public
+                </div>
+              )}
+              <h2>
+                Repo:{" "}
+                <a style={{ color: "#ca3e47" }} href={project.repo}>
+                  {project.repo}
+                </a>
+              </h2>
+            </div>
+            <div>
+              <div style={{ margin: "1em" }}>
+                <ProjectEditForm project={project} editProject={editProject} />
+              </div>
+              <div style={{ margin: "1em" }}>
+                {context.user.id === project.owner_id ? (
+                  <DeleteDialog
+                    deletedItem="Project"
+                    deleteFunction={deleteProject}
+                    id={props.match.params.projectId}
+                  />
+                ) : null}
+              </div>
+              <div style={{ margin: "1em" }}>
+                {context.user.id === project.owner_id ? (
+                  project.private === true ? null : (
+                    <CollaboratorInviteForm
+                      project={project}
+                      createInvite={createInvite}
+                    />
+                  )
+                ) : null}
+              </div>
+              <div style={{ margin: "1em" }}>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  to={`/projectPDF/${project.id}`}
+                >
+                  <Button
+                    variant="contained"
+                    startIcon={<GetApp />}
+                    style={{
+                      background: "#414141",
+                      color: "white"
+                    }}
+                  >
+                    Export PDF
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
           <div style={{ marginLeft: "6em" }}>
             <ProjectDetailNav
               project={project}

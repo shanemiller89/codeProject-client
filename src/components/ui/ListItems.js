@@ -13,36 +13,36 @@ import { Badge } from "@material-ui/core";
 
 const ListItems = (props) => (
   <div>
-    <Link to="/">
+    <Link style={{color: "#ca3e47", textDecoration: "none"}} to="/">
       <ListItem button>
         <ListItemIcon>
-          <ViewQuilt fontSize="large" />
+          <ViewQuilt style={{color: "white"}} fontSize="large" />
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItem>
     </Link>
-    <Link to="/projects">
+    <Link style={{color: "#ca3e47", textDecoration: "none"}} to="/projects">
       <ListItem button>
         <ListItemIcon>
-          <DeveloperBoard fontSize="large" />
+          <DeveloperBoard style={{color: "white"}} fontSize="large" />
         </ListItemIcon>
         <ListItemText primary="Projects" />
       </ListItem>
     </Link>
-    <Link to="/collab_invites">
+    <Link style={{color: "#ca3e47", textDecoration: "none"}} to="/collab_invites">
       <ListItem button>
           <ListItemIcon>
         <Badge badgeContent={props.invites} color="secondary">
-            <MailIcon fontSize="large" />
+            <MailIcon style={{color: "white"}} fontSize="large" />
         </Badge>
           </ListItemIcon>
         <ListItemText primary="Invites" />
       </ListItem>
     </Link>
-    <Link to="/profile">
+    <Link style={{color: "#ca3e47", textDecoration: "none"}} to="/profile">
       <ListItem button>
         <ListItemIcon>
-          <AccountCircleIcon fontSize="large" />
+        <AccountCircleIcon style={{color: "white"}} fontSize="large" />
         </ListItemIcon>
         <ListItemText primary="Profile" />
       </ListItem>

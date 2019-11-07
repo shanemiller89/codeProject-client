@@ -6,7 +6,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import SearchRounded from '@material-ui/icons/SearchRounded';
+import SearchRounded from "@material-ui/icons/SearchRounded";
+import Add from "@material-ui/icons/Add";
+import Group from "@material-ui/icons/Group";
 
 
 import APIManager from "../../../util/APIManager";
@@ -20,7 +22,8 @@ import {
   List,
   Radio,
   Paper,
-  InputAdornment
+  InputAdornment,
+  Typography
 } from "@material-ui/core";
 
 const CollaboratorInviteForm = props => {
@@ -69,7 +72,12 @@ const CollaboratorInviteForm = props => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button
+        variant="contained"
+        startIcon={<Add />}
+        style={{ background: "#414141", color: "white" }}
+        onClick={handleClickOpen}
+      >
         Add Collaborator
       </Button>
       <Dialog
@@ -98,7 +106,7 @@ const CollaboratorInviteForm = props => {
                       <InputAdornment position="start">
                         <SearchRounded />
                       </InputAdornment>
-                    ),
+                    )
                   }}
                 />
                 <TextField
@@ -116,16 +124,21 @@ const CollaboratorInviteForm = props => {
                 />
               </div>
               <div>
+                <div style={{ display: "flex", alignItems: "center", marginLeft: "2em" }}>
+                  <Group style={{ color: "#ca3e47", fontSize: "2em" }} />
+                  <Typography gutterBottom variant="h6">
+                    User Search Results
+                  </Typography>
+                </div>
                 <Paper
-                elevation={3}
-                style={{
-                  height: 325,
-                  width: 700,
-                  marginLeft: "1.5em",
-                  overflow: "auto"
-                }}
+                  elevation={3}
+                  style={{
+                    height: 325,
+                    width: 700,
+                    marginLeft: "1.5em",
+                    overflow: "auto"
+                  }}
                 >
-                <h3>User Search Results</h3>
                   <List>
                     {coders.map(coder => (
                       <ListItem key={coder.id} divider>
@@ -140,7 +153,23 @@ const CollaboratorInviteForm = props => {
                             }}
                           />
                         </ListItemAvatar>
-                        <ListItemText primary={<strong>{coder.user.username}</strong>} secondary={`Primary Language: ${coder.primary_language}`} />
+                        <div>
+                          <ListItemText
+                            primary={<strong>{coder.user.username}</strong>}
+                            secondary={`Primary Language: ${coder.primary_language}`}
+                          />
+                          <ListItemText
+                            secondary={
+                              <a
+                                href={coder.github}
+                                rel="noopener noreferrer"
+                                style={{ color: "#ca3e47" }}
+                              >
+                                Github
+                              </a>
+                            }
+                          />
+                        </div>
                         <ListItemSecondaryAction>
                           <Button
                             onClick={e => setCollaborator(coder.id)}
@@ -157,13 +186,13 @@ const CollaboratorInviteForm = props => {
             </div>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClear} color="primary">
+            <Button onClick={handleClear} style={{ color: "#414141" }}>
               Clear Selected Collaborator
             </Button>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={handleClose} style={{ color: "#414141" }}>
               Cancel
             </Button>
-            <Button type="submit" color="primary">
+            <Button type="submit" style={{ color: "#414141" }}>
               Submit
             </Button>
           </DialogActions>

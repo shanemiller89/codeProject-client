@@ -43,19 +43,19 @@ const SupplementalFilter = (props) => {
       <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
         <FormControlLabel
           value="all"
-          control={<Radio color="primary" />}
+          control={<Radio color="secondary" />}
           label="All"
           labelPlacement="start"
         />
         <FormControlLabel
           value="notes"
-          control={<Radio color="primary" />}
+          control={<Radio color="secondary" />}
           label="Notes"
           labelPlacement="start"
         />
         <FormControlLabel
           value="codes"
-          control={<Radio color="primary" />}
+          control={<Radio color="secondary" />}
           label="Code Snippets"
           labelPlacement="start"
         />

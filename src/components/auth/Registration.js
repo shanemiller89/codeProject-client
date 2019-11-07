@@ -96,7 +96,7 @@ const Registration = props => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button color="secondary" onClick={handleClickOpen}>
         Register New Account
       </Button>
       <Dialog
@@ -104,10 +104,13 @@ const Registration = props => {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Register</DialogTitle>
+        <DialogTitle id="form-dialog-title">
+          <div style={{height: 75, margin: "0 0 0 3em"}}>
+          <img alt="reg header" src="https://firebasestorage.googleapis.com/v0/b/codeproject-client.appspot.com/o/app_resources%2Fcodeproject_inverted.png?alt=media&token=1d3aa07c-af4b-4b34-8000-c8068797da5d"/>
+          </div>
+          </DialogTitle>
           <form onSubmit={disabled ? submit : submitWithImage}>
         <DialogContent>
-          <DialogContentText>Register a New Account</DialogContentText>
           <TextField
             variant="outlined"
             margin="dense"
@@ -219,10 +222,10 @@ const Registration = props => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} style={{color: "#414141"}}>
             Cancel
           </Button>
-          <Button type="submit" color="primary">
+          <Button type="submit" style={{color: "#414141"}}>
             Register
           </Button>
         </DialogActions>

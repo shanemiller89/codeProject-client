@@ -97,7 +97,7 @@ const ProjectForm = props => {
 
   return (
     <>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="contained" style={{background: "#414141", color: "white", marginTop: "2em"}} onClick={handleClickOpen}>
         Create New Project
       </Button>
       <Dialog
@@ -108,7 +108,7 @@ const ProjectForm = props => {
         maxWidth="xl"
       >
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} style={{color: "#414141"}}>
             Cancel
           </Button>
         </DialogActions>
@@ -211,7 +211,7 @@ const ProjectForm = props => {
                             checked={checked}
                             onChange={checkedToggle}
                             value="checked"
-                            color="primary"
+                            color="secondary"
                           />
                         }
                         label="Upload logo or associated Image for this project?"
@@ -249,8 +249,7 @@ const ProjectForm = props => {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    color="primary"
-                    style={{ marginTop: "1em" }}
+                    style={{ marginTop: "1em", background: "#414141", color: "white" }}
                   >
                     Create New Project
                   </Button>

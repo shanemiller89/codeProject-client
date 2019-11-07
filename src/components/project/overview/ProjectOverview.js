@@ -74,18 +74,17 @@ const ProjectOverview = props => {
         <>
           <div style={{ display: "flex" }}>
             <div>
-              <h1>
-                <Description />
-                Overview
-              </h1>
-              <Paper elevation={3} className={classes.overview}>
-                {/* <Typography component="p">
-          {props.project.overview}
-        </Typography> */}
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <Description style={{ color: "#ca3e47", fontSize: "3em" }} />
+                <Typography gutterBottom variant="h4">
+                  Overview
+                </Typography>
                 <ProjectOverviewEdit
                   project={props.project}
                   editProjectOverview={props.editProjectOverview}
                 />
+              </div>
+              <Paper elevation={3} className={classes.overview}>
                 <div>
                   <ReactMarkdown
                     source={props.project.overview}
@@ -97,13 +96,15 @@ const ProjectOverview = props => {
             </div>
             <div>
               <div>
-                <h1>
-                  <Computer />
-                  Technologies
-                </h1>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <Computer style={{ color: "#ca3e47", fontSize: "3em" }} />
+                  <Typography gutterBottom variant="h4">
+                    Technologies
+                  </Typography>
+                </div>
                 <Paper elevation={3} className={classes.technologies}>
                   <Typography variant="h6" component="h5">
-                    Primary Technology:
+                    Primary Technology
                     {props.technologies
                       .filter(technology => technology.technology_type_id === 1)
                       .map(technology => (
@@ -115,27 +116,35 @@ const ProjectOverview = props => {
                       ))}
                   </Typography>
                   <br />
-                  <Typography variant="h6" component="h5">
-                    Supplemental Technologies:
-                    <TechnologyAddForm project={props.project} addTechnology={props.addTechnology}/>
-                    {props.technologies
-                      .filter(technology => technology.technology_type_id === 2)
-                      .map(technology => (
-                        <TechnologyChip
-                          technology={technology}
-                          editTechnology={props.editTechnology}
-                          classes_chips={classes.chips}
-                          deleteTechnology={props.deleteTechnology}
-                        />
-                      ))}
-                  </Typography>
+                  <div style={{display: "flex", alignItems: "center"}}>
+                    <Typography variant="h6" component="h5">
+                      Supplemental Technologies
+                    </Typography>
+                    <TechnologyAddForm
+                      project={props.project}
+                      addTechnology={props.addTechnology}
+                    />
+                  </div>
+                  {props.technologies
+                    .filter(technology => technology.technology_type_id === 2)
+                    .map(technology => (
+                      <TechnologyChip
+                        technology={technology}
+                        editTechnology={props.editTechnology}
+                        classes_chips={classes.chips}
+                        deleteTechnology={props.deleteTechnology}
+                      />
+                    ))}
                 </Paper>
               </div>
+              <br />
               <div>
-                <h1>
-                  <Group />
-                  Collaborators
-                </h1>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <Group style={{ color: "#ca3e47", fontSize: "3em" }} />
+                  <Typography gutterBottom variant="h4">
+                    Collaborators
+                  </Typography>
+                </div>
                 <Paper elevation={3} className={classes.collaborators}>
                   <List>
                     {props.project.private === true ? (
