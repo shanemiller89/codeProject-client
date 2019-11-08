@@ -73,6 +73,11 @@ And your ready to go!
 
 ## Technologies Used
 
++ React JS
++ Firebase
++ Material UI
++ Django Rest Framework
+
 ## Author
 
 Shane Miller
