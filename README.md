@@ -1,68 +1,79 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# code.Project
 
-## Available Scripts
+code.Project is a resource allocation tool for project planning purpose specifically for software developers.
 
-In the project directory, you can run:
+Users may Add Private and Public Projects depending whether collaborators will be involved.
 
-### `yarn start`
+Users may add Overviews, Technologies Used, the ERD for the project, wireframes, as well as supplemental notes, code snippets, and images. A basic Project board is also provided. PDF Export capabilites are also supported, so a user may export all the details of a project, and share as a PDF.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Users may invite others to be collaborators of the app, who have similar CRUD capailites so they may add and edit details as planning progresses.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Install Instructions
 
-### `yarn test`
+Clone the repo down.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+git@github.com:shanemiller89/codeProject-client.git
+```
 
-### `yarn build`
+cd into the newly created directory and run:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+npm install
+```
+To set up images support, set up a [firebase](https://firebase.google.com/) account and create the following files
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```
+src/confif/firebase.js
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+From the side menu, click the ***Storage*** menu item, and create file bucket. Once created, click the Rules tab and change the config to the following:
 
-### `yarn eject`
+```
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write;
+    }
+  }
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Then click the gear icon in the side Menu and look for ***Firebase SDK Snippet***. Cick the Config Radio Button and copy the cofig below. Should look something like this:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+const firebaseConfig = {
+  apiKey: "{ Your Key }",
+  authDomain: "app.firebaseapp.com",
+  databaseURL: "https://app.firebaseio.com",
+  projectId: "app-client",
+  storageBucket: "app-client.appspot.com",
+  messagingSenderId: "{ Your Id }",
+  appId: "{ Your Id }"
+};
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Paste this into the firebase.js file you created above.
 
-## Learn More
+Download the associated API [here](https://github.com/shanemiller89/codeProject-API), and follow install instructions.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Now just run:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+npm start
+```
 
-### Code Splitting
+And your ready to go!
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Entity Relationship Diagram
 
-### Analyzing the Bundle Size
+![alt text](https://firebasestorage.googleapis.com/v0/b/codeproject-client.appspot.com/o/app_resources%2FcodeProject-ERD%20(1).png?alt=media&token=0d88e89c-ba62-4459-b83c-db9f070bc65e "ERD")
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## Technologies Used
 
-### Making a Progressive Web App
+## Author
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Shane Miller
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
