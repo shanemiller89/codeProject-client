@@ -24,7 +24,7 @@ npm install
 To set up images support, set up a [firebase](https://firebase.google.com/) account and create the following files
 
 ```
-src/confif/firebase.js
+src/util/firebaseConfig.js
 ```
 
 From the side menu, click the ***Storage*** menu item, and create file bucket. Once created, click the Rules tab and change the config to the following:
